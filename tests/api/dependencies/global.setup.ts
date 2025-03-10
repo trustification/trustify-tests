@@ -5,15 +5,15 @@ import { AxiosInstance } from "axios";
 
 import { ADVISORY_FILES, SBOM_FILES } from "../../common/constants";
 import { UploadSbomResponse } from "../client";
-import { test } from "../fixtures";
+import { test as setup } from "../fixtures";
 
-test.describe("Ingest initial data", () => {
-  test.skip(
+setup.describe("Ingest initial data", () => {
+  setup.skip(
     process.env.SKIP_INGESTION === "true",
     "Skipping global.setup data ingestion"
   );
 
-  test("Upload files", async ({ axios }) => {
+  setup("Upload files", async ({ axios }) => {
     await uploadSboms(axios, SBOM_FILES);
     await uploadAdvisories(axios, ADVISORY_FILES);
   });
