@@ -57,10 +57,13 @@ For API tests:
 
 There are come preconfigured commands you can use:
 
-| Variable              | Description                                       |
-| --------------------- | ------------------------------------------------- |
-| npm run test          | Execute tests                                     |
-| npm run test:ui:trace | Execute tests and take screenshots                |
-| npm run test:ui:host  | Opens the Playwright UI in the browser of your OS |
+| Variable              | Description                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| npm run test          | Execute tests                                                                     |
+| npm run test:ui:trace | Execute tests and take screenshots                                                |
+| npm run test:ui:host  | Opens the Playwright UI in the browser of your OS                                 |
+| npm run test:api      | Execute API test                                                                  |
+| npm run openapi       | Generate API client code from config/openapi.yaml                                 |
+| npm run format:fix    | Reformat source code according using prettier (use before commiting code changes) |
 
 You can also execute any playwright or [playwright-bdd](https://vitalets.github.io/playwright-bdd) command directly in your terminal.
