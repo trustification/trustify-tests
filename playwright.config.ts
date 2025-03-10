@@ -2,8 +2,8 @@ import { defineConfig, devices } from "@playwright/test";
 import { defineBddConfig } from "playwright-bdd";
 
 const testDir = defineBddConfig({
-  features: ["tests/features/@*/*.feature"],
-  steps: ["tests/features/**/*.step.ts", "tests/steps/**/*.ts"],
+  features: ["tests/**/features/@*/*.feature"],
+  steps: ["tests/**/features/**/*.step.ts", "tests/**/steps/**/*.ts"],
 });
 
 /**
@@ -50,7 +50,7 @@ export default defineConfig({
         ...devices["Desktop Chrome"],
         ...DESKTOP_CONFIG,
       },
-      dependencies: ["setup-data"],
+      dependencies: ["setup-ui-data"],
     },
 
     {
@@ -59,7 +59,7 @@ export default defineConfig({
         ...devices["Desktop Firefox"],
         ...DESKTOP_CONFIG,
       },
-      dependencies: ["setup-data"],
+      dependencies: ["setup-ui-data"],
     },
 
     {
@@ -68,22 +68,49 @@ export default defineConfig({
         ...devices["Desktop Safari"],
         ...DESKTOP_CONFIG,
       },
-      dependencies: ["setup-data"],
+      dependencies: ["setup-ui-data"],
     },
 
     {
-      name: "setup-data",
-      testDir: "./tests/dependencies",
-      testMatch: /global\.setup\.ts/,
-      teardown: "cleanup-data",
+      name: "setup-ui-data",
+      testDir: "./tests/ui/dependencies",
+      testMatch: "*.setup.ts",
+      teardown: "cleanup-ui-data",
       use: {
         ...DESKTOP_CONFIG,
       },
     },
     {
-      name: "cleanup-data",
-      testDir: "./tests/dependencies",
-      testMatch: /global\.teardown\.ts/,
+      name: "cleanup-ui-data",
+      testDir: "./tests/ui/dependencies",
+      testMatch: "*.teardown.ts",
+      use: {
+        ...DESKTOP_CONFIG,
+      },
+    },
+
+    {
+      name: "api",
+      testDir: "./tests/api/features",
+      testMatch: /.*\.ts/,
+      use: {
+        baseURL: process.env.TRUSTIFY_URL,
+      },
+      dependencies: ["setup-api-data"],
+    },
+    {
+      name: "setup-api-data",
+      testDir: "./tests/api/dependencies",
+      testMatch: "*.setup.ts",
+      teardown: "cleanup-api-data",
+      use: {
+        ...DESKTOP_CONFIG,
+      },
+    },
+    {
+      name: "cleanup-api-data",
+      testDir: "./tests/api/dependencies",
+      testMatch: "*.teardown.ts",
       use: {
         ...DESKTOP_CONFIG,
       },
