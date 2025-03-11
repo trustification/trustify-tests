@@ -1,21 +1,21 @@
 import path from "path";
-import { expect, Page, test } from "@playwright/test";
+import { expect, Page, test as setup } from "@playwright/test";
 import { login } from "../helpers/Auth";
 import { ADVISORY_FILES, SBOM_FILES } from "../../common/constants";
 
-test.describe("Ingest initial data", () => {
-  test.skip(
+setup.describe("Ingest initial data", () => {
+  setup.skip(
     process.env.SKIP_INGESTION === "true",
     "Skipping global.setup data ingestion"
   );
 
-  test("Upload files", async ({ page, baseURL }) => {
+  setup("Upload files", async ({ page, baseURL }) => {
     await login(page);
 
     await page.goto(baseURL!);
     await page.getByRole("link", { name: "Upload" }).click();
 
-    test.setTimeout(120_000);
+    setup.setTimeout(120_000);
     await uploadSboms(page, SBOM_FILES);
     await uploadAdvisories(page, ADVISORY_FILES);
   });
