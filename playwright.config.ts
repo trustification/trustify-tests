@@ -15,7 +15,6 @@ const testDir = defineBddConfig({
 
 const DESKTOP_CONFIG = {
   viewport: { height: 961, width: 1920 },
-  ignoreHTTPSErrors: true,
 };
 
 /**
@@ -40,6 +39,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+
+    ignoreHTTPSErrors: true,
   },
 
   /* Configure projects for major browsers */
@@ -93,9 +94,6 @@ export default defineConfig({
       name: "api",
       testDir: "./tests/api/features",
       testMatch: /.*\.ts/,
-      use: {
-        baseURL: process.env.TRUSTIFY_URL,
-      },
       dependencies: ["setup-api-data"],
     },
     {
@@ -103,17 +101,11 @@ export default defineConfig({
       testDir: "./tests/api/dependencies",
       testMatch: "*.setup.ts",
       teardown: "cleanup-api-data",
-      use: {
-        ...DESKTOP_CONFIG,
-      },
     },
     {
       name: "cleanup-api-data",
       testDir: "./tests/api/dependencies",
       testMatch: "*.teardown.ts",
-      use: {
-        ...DESKTOP_CONFIG,
-      },
     },
 
     /* Test against mobile viewports. */
