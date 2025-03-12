@@ -1,5 +1,6 @@
 import { createBdd } from "playwright-bdd";
 import { expect } from "playwright/test";
+import { DetailsPage } from "../../helpers/DetailsPage";
 import { ToolbarTable } from "../../helpers/ToolbarTable";
 
 export const { Given, When, Then } = createBdd();
@@ -25,14 +26,17 @@ Then("{string} is visible", async ({ page }, fieldName) => {
 });
 
 Then(
-  "{string} button is clicked and file corresponds to SBOM {string}",
-  async ({ page }, buttonName, sbomName) => {
+  "{string} action is invoked and downloaded filename is {string}",
+  async ({ page }, actionName, expectedFilename) => {
     const downloadPromise = page.waitForEvent("download");
-    await page.getByRole("button", { name: buttonName }).click();
+
+    const detailsPage = new DetailsPage(page);
+    detailsPage.clickOnPageAction(actionName);
+
     const download = await downloadPromise;
 
     const filename = download.suggestedFilename();
-    expect(filename).toEqual(`${sbomName}.json`);
+    expect(filename).toEqual(expectedFilename);
   }
 );
 

@@ -29,11 +29,12 @@ Feature: SBOM Explorer - View SBOM details
 
     Scenario Outline: Downloading SBOM file
         Given User visits SBOM details Page of "<sbomName>"
-        Then "Download" button is clicked and file corresponds to SBOM "<sbomName>"
+        Then "Download SBOM" action is invoked and downloaded filename is "<expectedSbomFilename>"
+        Then "Download License Report" action is invoked and downloaded filename is "<expectedLicenseFilename>"
 
         Examples:
-            | sbomName    |
-            | quarkus-bom |
+            | sbomName    | expectedSbomFilename | expectedLicenseFilename     |
+            | quarkus-bom | quarkus-bom.json     | quarkus-bom_licenses.tar.gz |
 
     Scenario Outline: View list of SBOM Packages
         Given User visits SBOM details Page of "<sbomName>"
