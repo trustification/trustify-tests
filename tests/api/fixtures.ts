@@ -129,12 +129,14 @@ type ApiClientFixture = {
 };
 
 export const test = base.extend<ApiClientFixture>({
-  axios: async ({ baseURL, context }, use) => {
+  axios: async ({ baseURL, ignoreHTTPSErrors }, use) => {
     const axiosInstance = axios.create({
       baseURL,
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: false,
-      }),
+      httpsAgent: ignoreHTTPSErrors
+        ? new https.Agent({
+            rejectUnauthorized: false,
+          })
+        : undefined,
     });
 
     if (process.env.TRUSTIFY_AUTH_ENABLED === "true") {
@@ -143,13 +145,15 @@ export const test = base.extend<ApiClientFixture>({
 
     await use(axiosInstance);
   },
-  client: async ({ baseURL }, use) => {
+  client: async ({ baseURL, ignoreHTTPSErrors }, use) => {
     const client = createClient({
       baseURL,
       throwOnError: true,
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: false,
-      }),
+      httpsAgent: ignoreHTTPSErrors
+        ? new https.Agent({
+            rejectUnauthorized: false,
+          })
+        : undefined,
     });
 
     if (process.env.TRUSTIFY_AUTH_ENABLED === "true") {
