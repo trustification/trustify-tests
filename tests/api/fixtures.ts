@@ -1,6 +1,7 @@
 import { Client, createClient } from "@hey-api/client-axios";
 import { test as base, expect } from "@playwright/test";
 import axios, { AxiosInstance } from "axios";
+import https from "https";
 
 import { logger } from "../common/constants";
 
@@ -128,8 +129,15 @@ type ApiClientFixture = {
 };
 
 export const test = base.extend<ApiClientFixture>({
-  axios: async ({ baseURL }, use) => {
-    const axiosInstance = axios.create({ baseURL });
+  axios: async ({ baseURL, ignoreHTTPSErrors }, use) => {
+    const axiosInstance = axios.create({
+      baseURL,
+      httpsAgent: ignoreHTTPSErrors
+        ? new https.Agent({
+            rejectUnauthorized: false,
+          })
+        : undefined,
+    });
 
     if (process.env.TRUSTIFY_AUTH_ENABLED === "true") {
       await initAxiosInstance(axiosInstance, baseURL);
@@ -137,10 +145,15 @@ export const test = base.extend<ApiClientFixture>({
 
     await use(axiosInstance);
   },
-  client: async ({ baseURL }, use) => {
+  client: async ({ baseURL, ignoreHTTPSErrors }, use) => {
     const client = createClient({
       baseURL,
       throwOnError: true,
+      httpsAgent: ignoreHTTPSErrors
+        ? new https.Agent({
+            rejectUnauthorized: false,
+          })
+        : undefined,
     });
 
     if (process.env.TRUSTIFY_AUTH_ENABLED === "true") {
