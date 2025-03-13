@@ -14,6 +14,7 @@ setup.describe("Ingest initial data", () => {
   );
 
   setup("Upload files", async ({ axios }) => {
+    setup.setTimeout(120_000);
     await uploadSboms(axios, SBOM_FILES);
     await uploadAdvisories(axios, ADVISORY_FILES);
   });
