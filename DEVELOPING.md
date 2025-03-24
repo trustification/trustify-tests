@@ -1,63 +1,72 @@
-# Developing trustify-ui-tests
-This document describes how to setup your environment to run the trustify-ui-tests on your local environment
+# Developing `trustify-tests`
+
+This document describes how to setup your environment to run the `trustify-tests`
+on your local environment.
 
 ## System Requirements
-Playwright is officially [supported](https://playwright.dev/docs/intro#system-requirements) to,
-- Windows 10+, Windows Server 2016+ or Windows Subsystem for Linux (WSL).
-- macOS 13 Ventura, or macOS 14 Sonoma.
-- Debian 11, Debian 12, Ubuntu 20.04 or Ubuntu 22.04, Ubuntu 24.04, on x86-64 and arm64 architecture.
 
-To run Playwright on [unsupported Linux distributions](https://github.com/microsoft/playwright/issues/26482) like Fedora, The playwright can be configured on docker and the tests can be executed from the client (local machine).
+Playwright is officially [supported](https://playwright.dev/docs/intro#system-requirements)
+to:
 
-Create compose.yaml file with the below content and make sure to update the Playwright [version](https://hub.docker.com/r/microsoft/playwright)
-```
-services:
-  playwright:
-    image: mcr.microsoft.com/playwright:<version>-jammy
-    restart: always
-    container_name: "playwright"
-    init: true
-    ipc: host
-    ports:
-      - '5000:5000'
-    command:
-      [
-        "/bin/sh",
-        -c,
-        "cd /home/pwuser && npx -y playwright@<version> run-server --port 5000"
-      ]
-    network_mode: host
-```
-Example compose.yaml using playwright version 1.46.0 and port 5000
+- Windows 10+, Windows Server 2016+ or Windows Subsystem for Linux (WSL)
+- macOS 13 Ventura, or later
+- Debian 12, Ubuntu 22.04, Ubuntu 24.04, on x86-64 and arm64 architecture
 
+To run Playwright on [unsupported Linux distributions](https://github.com/microsoft/playwright/issues/26482)
+like Fedora, Playwright can be configured on docker/podman and the tests can be
+executed from the client (local machine). To do this, follow the section below.
+
+## Running Playwright as Docker/Podman Container
+
+First, clean-install the requirements:
+
+```shell
+npm ci
 ```
-services:
-  playwright:
-    image: mcr.microsoft.com/playwright:v1.46.0-jammy
-    restart: always
-    container_name: "playwright"
-    init: true
-    ipc: host
-    ports:
-      - '5000:5000'
-    command:
-      [
-        "/bin/sh",
-        -c,
-        "cd /home/pwuser && npx -y playwright@1.46.0 run-server --port 5000"
-      ]
-    network_mode: host
+
+Then, get the Playwright version (it is important that client and server
+versions of Playwright must match, otherwise you get `<ws unexpected response>
+ws://localhost:5000/ 428 Precondition Required`-like error when you try to run
+tests):
+
+```shell
+export PLAYWRIGHT_VERSION="v$(npx playwright --version | cut -d' ' -f2)"
 ```
-Run the compose.yaml file using podman-compose command
-``` 
-podman-compose -f compose.yaml up
+
+By default, Playwright is listening on port `5000` (the default value of
+`PLAYWRIGHT_PORT` from `etc/playwright-compose/.env`). You can override this
+value if it is already taken by the system or other application:
+
+```shell
+export PLAYWRIGHT_PORT=<your choice of port number>
 ```
-The output for the above command following the container in Ready state would be,
+
+Then, start the Playwright service (you can override `etc/playwright-compose/.env`
+by exporting environment variables with your own values as demonstrated above or
+you can just pass to `{docker,podman}-compose` your own `.env` file via
+`--env-file <env_file>` CLI option):
+
+```shell
+podman-compose -f etc/playwright-compose/compose.yaml up
+```
+
+After a while, the container should be in `Ready` state and you should see the
+output (replace `5000` by the value of `PLAYWRIGHT_PORT`):
+
 ```
 Listening on ws://127.0.0.1:5000/
 ```
 
-Now the user can execute the Playwright tests using the below command
+Now you can execute the Playwright tests (again, replace `5000` by the value of
+`PLAYWRIGHT_PORT`):
+
+```shell
+TRUSTIFY_URL=http://localhost:8080 PW_TEST_CONNECT_WS_ENDPOINT=ws://localhost:5000/ npm run test
 ```
-TRUSTIFY_URL=http://localhost:8080 PW_TEST_CONNECT_WS_ENDPOINT=ws://localhost:5000/ npx playwright test
+
+When you are finished with testing, you can shut down the container by `Ctrl+C`
+and:
+
+```shell
+podman-compose -f etc/playwright-compose/compose.yaml down
 ```
