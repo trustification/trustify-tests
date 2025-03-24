@@ -2,21 +2,24 @@ import { createBdd } from "playwright-bdd";
 import { expect } from "playwright/test";
 import { DetailsPage } from "../../helpers/DetailsPage";
 import { ToolbarTable } from "../../helpers/ToolbarTable";
+import { SearchPage } from "../../helpers/SearchPage";
 
 export const { Given, When, Then } = createBdd();
 
 const PACKAGE_TABLE_NAME = "Package table";
+const VULN_TABLE_NAME = "Vulnerability table";
 
 Given(
+  "An ingested {string} SBOM {string} is available",
+  async ({ page }, sbomName) => {
+    const searchPage = new SearchPage(page);
+    searchPage.dedicatedSearch("SBOMs", sbomName);
+  }
+);
+
+When(
   "User visits SBOM details Page of {string}",
   async ({ page }, sbomName) => {
-    await page.goto("/");
-    await page.getByRole("link", { name: "SBOMs" }).click();
-
-    await page.getByPlaceholder("Search").click();
-    await page.getByPlaceholder("Search").fill(sbomName);
-    await page.getByPlaceholder("Search").press("Enter");
-
     await page.getByRole("link", { name: sbomName, exact: true }).click();
   }
 );
@@ -76,5 +79,79 @@ Then(
   async ({ page }, columnName, expectedValue) => {
     const toolbarTable = new ToolbarTable(page, PACKAGE_TABLE_NAME);
     await toolbarTable.verifyColumnContainsText(columnName, expectedValue);
+  }
+);
+
+Given(
+  "An ingested {string} SBOM {string} containing Vulnerabilities",
+  async ({ page }, sbomName) => {
+    const searchPage = new SearchPage(page);
+    searchPage.dedicatedSearch("SBOMs", sbomName);
+    const element = await page.locator(
+      "xpath=(//tr[contains(.,{sbomName})]/td[@data-label='Vulnerabilities']/div)[1]"
+    );
+    await expect(element, "SBOM have no vulnerabilities").toHaveText(
+      /^(?!0$).+/
+    );
+  }
+);
+
+When("User Clicks on Vulnerabilities Tab Action", async ({ page }) => {
+  await page.getByLabel("Tab action").click();
+});
+
+Then("Vulnerability Popup menu appears with message", async ({ page }) => {
+  await page.getByText("Any found vulnerabilities").isVisible();
+  await page.getByLabel("Close").click();
+});
+
+Then(
+  "Vulnerability Risk Profile circle should be visible",
+  async ({ page }) => {
+    await page.locator("//div[contains(@class, 'chart')]").isVisible();
+  }
+);
+
+Then(
+  "Vulnerability Risk Profile shows summary of vulnerabilities",
+  async ({ page }) => {
+    const detailsPage = new DetailsPage(page);
+    detailsPage.verifyVulnerabilityPanelcount();
+  }
+);
+
+Then(
+  "SBOM Name {string} should be visible inside the tab",
+  async ({ page }, sbomName) => {
+    const panelSbomName = await page.locator(
+      "xpath=//section[@id='refVulnerabilitiesSection']//dt[contains(.,'Name')]/following-sibling::dd"
+    );
+    await panelSbomName.isVisible();
+    await expect(sbomName).toHaveText(await panelSbomName.innerText());
+  }
+);
+
+Then("SBOM Version should be visible inside the tab", async ({ page }) => {
+  const panelSBOMVersion = await page.locator(
+    "xpath=//section[@id='refVulnerabilitiesSection']//dt[contains(.,'Version')]/following-sibling::dd"
+  );
+  await panelSBOMVersion.isVisible();
+});
+
+Then(
+  "SBOM Creation date should be visible inside the tab",
+  async ({ page }) => {
+    const panelSBOMVersion = await page.locator(
+      "xpath=//section[@id='refVulnerabilitiesSection']//dt[contains(.,'Creation date')]/following-sibling::dd"
+    );
+    await panelSBOMVersion.isVisible();
+  }
+);
+
+Then(
+  "List of related Vulnerabilities should be sorted by {string} in descending order",
+  async ({ page }, columnName) => {
+    const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
+    toolbarTable.verifyTableIsSortedBy(columnName, false);
   }
 );

@@ -37,7 +37,8 @@ Feature: SBOM Explorer - View SBOM details
             | quarkus-bom | quarkus-bom.json     | quarkus-bom_licenses.tar.gz |
 
     Scenario Outline: View list of SBOM Packages
-        Given User visits SBOM details Page of "<sbomName>"
+        Given An ingested <sbomType> SBOM <sbomName> is available
+        When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Packages"
         # confirms its visible for all tabs
         Then The page title is "<sbomName>"
@@ -57,3 +58,21 @@ Feature: SBOM Explorer - View SBOM details
         Examples:
             | sbomName    | packageName |
             | quarkus-bom | jdom        |
+
+    Scenario Outline: View <sbomType> SBOM Vulnerabilities
+        Given An ingested "<sbomType>" SBOM "<sbomName>" containing Vulnerabilities is available
+        When User visits SBOM details Page of "<sbomName>"
+        When User selects the Tab "Vulnerabilities"
+        When User Clicks on Vulnerabilities Tab Action
+        Then Vulnerability Popup menu appears with message
+        Then Vulnerability Risk Profile circle should be visible
+        Then Vulnerability Risk Profile shows summary of vulnerabilities
+        Then SBOM Name "<sbomName>" should be visible inside the tab
+        Then SBOM Version should be visible inside the tab
+        Then SBOM Creation date should be visible inside the tab
+        Then List of related Vulnerabilities should be sorted by CVSS in descending order
+
+        Examples:
+        | sbomType | sbomName |
+        | CycloneDX | fedora |
+        | SPDX | quarkus-bom |
