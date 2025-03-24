@@ -174,15 +174,15 @@ Feature: SBOM Explorer - View SBOM details
       | SPDX |
 
   Scenario Outline: View <sbomType> SBOM Vulnerabilities
-    Given there is ingested <sbomType> SBOM which is affected by Vulnerabilities
-    When user visits SBOM details page
-    And user selects Vulnerabilities tab
+    Given An ingested <sbomType> SBOM containing Vulnerabilities
+    When User visits SBOM details page
+    And Selects Vulnerabilities tab
     Then Vulnerability Risk Profile circle should be visible
     And Vulnerability Risk Profile shows summary of vulnerabilities
     And SBOM Name should be visible inside the tab
     And SBOM Version should be visible inside the tab
     And SBOM Creation date should be visible inside the tab
-    And list of related Vulnerabilities should be sorted by CVSS in descending order
+    And List of related Vulnerabilities should be sorted by CVSS in descending order
 
     Examples:
       | sbomType |
