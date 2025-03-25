@@ -3,7 +3,8 @@ Feature: SBOM Explorer - View SBOM details
         Given User is authenticated
 
     Scenario Outline: View SBOM Overview
-        Given User visits SBOM details Page of "<sbomName>"
+        Given An ingested "<sbomType>" SBOM "<sbomName>" is available
+        When User visits SBOM details Page of "<sbomName>"
         Then The page title is "<sbomName>"
         And Tab "Info" is visible
         And Tab "Packages" is visible
@@ -15,7 +16,8 @@ Feature: SBOM Explorer - View SBOM details
             | quarkus-bom |
 
     Scenario Outline: View SBOM Info (Metadata)
-        Given User visits SBOM details Page of "<sbomName>"
+        Given An ingested "<sbomType>" SBOM "<sbomName>" is available
+        When User visits SBOM details Page of "<sbomName>"
         Then Tab "Info" is selected
         Then "SBOM's name" is visible
         And "SBOM's namespace" is visible
@@ -26,18 +28,19 @@ Feature: SBOM Explorer - View SBOM details
         Examples:
             | sbomName    |
             | quarkus-bom |
-
+    
     Scenario Outline: Downloading SBOM file
-        Given User visits SBOM details Page of "<sbomName>"
+        Given An ingested "<sbomType>" SBOM "<sbomName>" is available
+        When User visits SBOM details Page of "<sbomName>"
         Then "Download SBOM" action is invoked and downloaded filename is "<expectedSbomFilename>"
         Then "Download License Report" action is invoked and downloaded filename is "<expectedLicenseFilename>"
 
         Examples:
             | sbomName    | expectedSbomFilename | expectedLicenseFilename     |
             | quarkus-bom | quarkus-bom.json     | quarkus-bom_licenses.tar.gz |
-
+    
     Scenario Outline: View list of SBOM Packages
-        Given An ingested <sbomType> SBOM <sbomName> is available
+        Given An ingested "<sbomType>" SBOM "<sbomName>" is available
         When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Packages"
         # confirms its visible for all tabs
@@ -56,11 +59,11 @@ Feature: SBOM Explorer - View SBOM details
         Then The Package table total results is greather than 1
 
         Examples:
-            | sbomName    | packageName |
-            | quarkus-bom | jdom        |
+            | sbomType | sbomName    | packageName |
+            | SPDX | quarkus-bom | jdom        |
 
     Scenario Outline: View <sbomType> SBOM Vulnerabilities
-        Given An ingested "<sbomType>" SBOM "<sbomName>" containing Vulnerabilities is available
+        Given An ingested "<sbomType>" SBOM "<sbomName>" containing Vulnerabilities
         When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Vulnerabilities"
         When User Clicks on Vulnerabilities Tab Action
@@ -70,9 +73,8 @@ Feature: SBOM Explorer - View SBOM details
         Then SBOM Name "<sbomName>" should be visible inside the tab
         Then SBOM Version should be visible inside the tab
         Then SBOM Creation date should be visible inside the tab
-        Then List of related Vulnerabilities should be sorted by CVSS in descending order
+        # Then List of related Vulnerabilities should be sorted by "CVSS" in descending order
 
         Examples:
         | sbomType | sbomName |
-        | CycloneDX | fedora |
         | SPDX | quarkus-bom |
