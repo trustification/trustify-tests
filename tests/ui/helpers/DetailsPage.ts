@@ -13,8 +13,8 @@ export class DetailsPage {
 
   async selectTab(tabName: string) {
     const tab = this.page.locator("button[role='tab']", { hasText: tabName });
-    expect(tab).toBeVisible();
-    tab.click();
+    await expect(tab).toBeVisible();
+    await tab.click();
   }
 
   async clickOnPageAction(actionName: string) {
@@ -41,36 +41,36 @@ export class DetailsPage {
     await expect(this.page.getByRole("tab", { name: tabName })).toHaveCount(0);
   }
 
+  //Wait for Loading Spinner to detach from the DOM
   async waitForData() {
-    await expect(this.page.getByLabel("Contents")).toHaveCount(0, {
-      timeout: 5000,
-    });
+    const spinner = this.page.getByLabel("Contents");
+    await spinner.waitFor({ state: "detached" });
   }
 
+  //Verifies the Page loads with data
   async verifyDataAvailable() {
-    const rows = await this.page
-      .locator("xpath=//div[(.='No data available to be shown here.')]")
-      .count();
-    await expect(rows, "No data available - Verify the data load").toEqual(0);
+    await expect(
+      this.page.locator(
+        `xpath=//div[(.='No data available to be shown here.')]`
+      )
+    ).toHaveCount(0);
   }
 
+  //Verifies the Vulnerability counts from summary to table
   async verifyVulnerabilityPanelcount() {
-    const pieVulnSevLabel =
-      "xpath=//*[name()='svg']/*[name()='g']//*[name()='tspan']";
-    const totalVuln =
-      "xpath=//*[name()='svg']/*[name()='text']//*[name()='tspan'][1]";
+    const pieVulnSevLabel = `xpath=//*[name()='svg']/*[name()='g']//*[name()='tspan']`;
+    const totalVuln = `xpath=//*[name()='svg']/*[name()='text']//*[name()='tspan'][1]`;
 
     const panelVulnSev = await this.getCountFromLabels(pieVulnSevLabel, ":");
     const sumPanelVulnSev = Object.values(panelVulnSev).reduce(
       (sum, value) => sum + value,
       0
     );
-    const totalVulnPanel = await this.page.locator(totalVuln).innerText();
+    const totalVulnPanel = await this.page.locator(totalVuln).textContent();
     const tableVulnSev = await this.getCVSSCountFromVulnTable();
     var mismatch = false;
-
     await expect(
-      parseInt(totalVulnPanel, 10),
+      parseInt(totalVulnPanel!, 10),
       "Total Vulnerabilities count {totalVuln} mismatches with sum of individual {sumOfVulnSev}"
     ).toEqual(sumPanelVulnSev);
 
@@ -82,9 +82,16 @@ export class DetailsPage {
         }
       }
     }
-    await expect(mismatch, "Panel count mismatches to table count");
+    await expect(mismatch, "Panel count mismatches to table count").not.toBe(
+      true
+    );
   }
 
+  /**
+   * Get all the Elements matching to the @param labelLocator and retrieves the textContext of each element
+   * Splits the text with @param delimiter
+   * @returns the mutable object { [key: 0th_element ]: 1st_element }
+   */
   async getCountFromLabels(
     labelLocator: string,
     delimiter: string
@@ -92,8 +99,8 @@ export class DetailsPage {
     const elements = await this.page.locator(labelLocator).all();
     const vulnLabelCount = {};
     for (const element of elements) {
-      const innerText = await element.innerText();
-      const labelArr = await innerText?.split(delimiter);
+      const innerText = await element.textContent();
+      const labelArr = await innerText!.split(delimiter);
       vulnLabelCount[labelArr[0].trim().toString()] = parseInt(
         labelArr[1].trim(),
         10
@@ -101,6 +108,11 @@ export class DetailsPage {
     }
     return vulnLabelCount;
   }
+
+  /**
+   * Retrieves the CVSS value from each row of Vulnerability table
+   * @returns Count of each CVSS type in { [key: severity ]: count }
+   */
 
   async getCVSSCountFromVulnTable(): Promise<{ [key: string]: number }> {
     var nextPage = true;
@@ -113,19 +125,21 @@ export class DetailsPage {
       Critical: 0,
     };
     const nextButton = await this.page.locator(
-      "xpath=(//section[@id='refVulnerabilitiesSection']//button[@data-action='next'])[1]"
+      `xpath=(//section[@id='refVulnerabilitiesSection']//button[@data-action='next'])[1]`
     );
 
-    await this.page
-      .getByLabel("Vulnerabilities within the")
-      .locator("#pagination-id-top-toggle")
-      .click();
-    await this.page.getByRole("menuitem", { name: "100 per page" }).click();
+    const noOfRows = await this.page.locator(
+      `xpath=//section[@id="refVulnerabilitiesSection"]//button[@id="pagination-id-top-toggle"]`
+    );
+    if (await noOfRows.isEnabled()) {
+      noOfRows.click();
+      await this.page.getByRole("menuitem", { name: "100 per page" }).click();
+    }
 
     while (nextPage) {
       const cvssLocator = await this.page
         .locator(
-          "xpath=//table[@aria-label='Vulnerability table']//td[@data-label='CVSS']"
+          `xpath=//table[@aria-label='Vulnerability table']//td[@data-label='CVSS']`
         )
         .all();
       for (const cvss of cvssLocator) {
