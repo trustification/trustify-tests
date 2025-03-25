@@ -1,9 +1,7 @@
 import { PurlService } from "../client";
 import { expect, test } from "../fixtures";
 
-const opensslPurl = [
-  "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src"
-]
+const opensslPurl = ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src"];
 
 const opensslPurlAliases = [
   "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-aarch64-baseos-aus-source-rpms",
@@ -20,21 +18,18 @@ const opensslPurlAliases = [
   "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-ppc64le-baseos-e4s-source-rpms",
   "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-i686-baseos-eus-source-rpms",
   "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-aarch64-baseos-eus-source-rpms",
-  "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-x86_64-baseos-aus-source-rpms"
+  "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-x86_64-baseos-aus-source-rpms",
 ];
 
 // TODO: Rename when we get an appropriate SBOM with CPE aliases.
-const componentCpe = [
-  "cpe:/a:redhat:quarkus:2.13:*:el8:*"
-];
+const componentCpe = ["cpe:/a:redhat:quarkus:2.13:*:el8:*"];
 
-const componentCpeAliases = [
-  
-];
+const componentCpeAliases = [];
 
 test("Alias / Get aliases by pURL", async ({ axios }) => {
-  
-  var urlEncodedPurl = encodeURIComponent("pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src");
+  var urlEncodedPurl = encodeURIComponent(
+    "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src"
+  );
 
   const vanillaResponse = await axios.get(
     `/api/v2/analysis/component/${urlEncodedPurl}`
@@ -43,17 +38,16 @@ test("Alias / Get aliases by pURL", async ({ axios }) => {
   expect(vanillaResponse.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
-        purl: expect.arrayContaining(
-          opensslPurl.concat(opensslPurlAliases)
-        )
+        purl: expect.arrayContaining(opensslPurl.concat(opensslPurlAliases)),
       }),
     ])
   );
 });
 
 test("Alias / Get aliases by pURL alias", async ({ axios }) => {
-  
-  var urlEncodedPurlAlias = encodeURIComponent("pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-aarch64-baseos-aus-source-rpms");
+  var urlEncodedPurlAlias = encodeURIComponent(
+    "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-aarch64-baseos-aus-source-rpms"
+  );
 
   const vanillaResponse = await axios.get(
     `/api/v2/analysis/component/${urlEncodedPurlAlias}`
@@ -62,9 +56,7 @@ test("Alias / Get aliases by pURL alias", async ({ axios }) => {
   expect(vanillaResponse.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
-        purl: expect.arrayContaining(
-          opensslPurl.concat(opensslPurlAliases)
-        )
+        purl: expect.arrayContaining(opensslPurl.concat(opensslPurlAliases)),
       }),
     ])
   );
@@ -81,29 +73,21 @@ test("Alias / Get aliases by CPE", async ({ axios }) => {
   expect(vanillaResponse.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
-        cpe: expect.arrayContaining(
-          componentCpe.concat(componentCpeAliases)
-        )
+        cpe: expect.arrayContaining(componentCpe.concat(componentCpeAliases)),
       }),
     ])
   );
 });
 
-test.skip("Alias / Get aliases by CPE alias", async ({ axios }) => {
-});
+test.skip("Alias / Get aliases by CPE alias", async ({ axios }) => {});
 
 test("Alias / Get aliases by query", async ({ axios }) => {
-
-  const vanillaResponse = await axios.get(
-    `/api/v2/analysis/component?q=rhel`
-  );
+  const vanillaResponse = await axios.get(`/api/v2/analysis/component?q=rhel`);
 
   expect(vanillaResponse.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
-        purl: expect.arrayContaining(
-          opensslPurlAliases
-        ),
+        purl: expect.arrayContaining(opensslPurlAliases),
       }),
     ])
   );
