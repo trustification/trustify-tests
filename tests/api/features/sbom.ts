@@ -1,7 +1,6 @@
 import { expect, test } from "../fixtures";
-import { SbomService } from "../client";
 
-test.skip("List first 10 sboms by name - vanilla", async ({ axios }) => {
+test("List first 10 sboms by name - vanilla", async ({ axios }) => {
   const vanillaResponse = await axios.get(
     "/api/v2/sbom?limit=10&offset=0&sort=name:asc"
   );

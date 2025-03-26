@@ -17,11 +17,11 @@ test("Variant of / CDX / Binary image has ancestors that include index image / G
 }) => {
   const urlEncodedBinaryImagePurl = encodeURIComponent(cdxBinaryImagePurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedBinaryImagePurl}?ancestors=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([cdxBinaryImagePurl]),
@@ -41,11 +41,11 @@ test("Variant of / CDX / Index image has descendants that include binary image /
 }) => {
   const urlEncodedIndexImagePurl = encodeURIComponent(cdxIndexImagePurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedIndexImagePurl}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([cdxIndexImagePurl]),
@@ -65,11 +65,11 @@ test("Variant of / SPDX / Binary image has ancestors that include index image / 
 }) => {
   const urlEncodedBinaryImagePurl = encodeURIComponent(spdxBinaryImagePurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedBinaryImagePurl}?ancestors=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxBinaryImagePurl]),
@@ -89,11 +89,11 @@ test("Variant of / SPDX / Index image has descendants that include binary image 
 }) => {
   const urlEncodedIndexImagePurl = encodeURIComponent(spdxIndexImagePurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedIndexImagePurl}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxIndexImagePurl]),

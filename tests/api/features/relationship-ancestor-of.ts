@@ -16,11 +16,11 @@ test("Ancestor of / CDX / Upstream component has descendants that include downst
 }) => {
   const urlEncodedUpstreamPurl = encodeURIComponent(cdxUpstreamPurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedUpstreamPurl}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([cdxUpstreamPurl]),
@@ -39,11 +39,11 @@ test("Ancestor of / CDX / Upstream component has descendants that include downst
 test.skip("Ancestor of / CDX / Upstream component has descendants that include downstream component / Get with query", async ({
   axios,
 }) => {
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component?q=${query}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([cdxUpstreamPurl]),
@@ -63,11 +63,11 @@ test("Ancestor of / CDX / Downstream component has ancestors that include upstre
 }) => {
   const urlEncodedDownstreamPurl = encodeURIComponent(cdxDownstreamPurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedDownstreamPurl}?ancestors=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([cdxDownstreamPurl]),
@@ -86,11 +86,11 @@ test("Ancestor of / CDX / Downstream component has ancestors that include upstre
 test.skip("Ancestor of / CDX / Downstream component has ancestors that include upstream component / Get with query", async ({
   axios,
 }) => {
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component?q=${query}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([cdxDownstreamPurl]),
@@ -110,11 +110,11 @@ test("Ancestor of / SPDX / Upstream component has descendants that include downs
 }) => {
   const urlEncodedUpstreamPurl = encodeURIComponent(spdxUpstreamPurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedUpstreamPurl}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxUpstreamPurl]),
@@ -133,11 +133,11 @@ test("Ancestor of / SPDX / Upstream component has descendants that include downs
 test.skip("Ancestor of / SPDX / Upstream component has descendants that include downstream component / Get with query", async ({
   axios,
 }) => {
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component?q=${query}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxUpstreamPurl]),
@@ -157,11 +157,11 @@ test("Ancestor of / SPDX / Downstream component has ancestors that include upstr
 }) => {
   const urlEncodedDownstreamPurl = encodeURIComponent(spdxDownstreamPurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedDownstreamPurl}?ancestors=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxDownstreamPurl]),
@@ -180,11 +180,11 @@ test("Ancestor of / SPDX / Downstream component has ancestors that include upstr
 test.skip("Ancestor of / SPDX / Downstream component has ancestors that include upstream component / Get with query", async ({
   axios,
 }) => {
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component?q=${query}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxDownstreamPurl]),

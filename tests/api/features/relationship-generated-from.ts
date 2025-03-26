@@ -16,11 +16,11 @@ test("Generated from / CDX / Source has descendants that include binaries / Get 
 }) => {
   const urlEncodedSourcePurl = encodeURIComponent(cdxSourcePurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedSourcePurl}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([cdxSourcePurl]),
@@ -41,11 +41,11 @@ test("Generated from / CDX / Binary has ancestors that include the source / Get 
 }) => {
   const urlEncodedBinaryPurl = encodeURIComponent(cdxBinaryPurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedBinaryPurl}?ancestors=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([cdxBinaryPurl]),
@@ -66,11 +66,11 @@ test("Generated from / SPDX / Source has descendants that include binaries / Get
 }) => {
   const urlEncodedSourcePurl = encodeURIComponent(spdxSourcePurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedSourcePurl}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxSourcePurl]),
@@ -91,11 +91,11 @@ test("Generated from / SPDX / Binary has ancestors that include the source / Get
 }) => {
   const urlEncodedBinaryPurl = encodeURIComponent(spdxBinaryPurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedBinaryPurl}?ancestors=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxBinaryPurl]),

@@ -15,16 +15,23 @@ const spdxComponentPurl =
 // const spdxDocumentId = "https://www.redhat.com/rhel-9.2-eus.spdx.json";
 
 // Effectively tests TC-2048 / TC-2049 - Denote relationship between Product SBOM and other SBOM.
+test.skip("Product-Component / CDX / Product SBOM provides information from component SBOM / Get with pURL", async ({
+  axios,
+}) => {});
+test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with pURL", async ({
+  axios,
+}) => {});
+
 test("Product-Component / CDX / Product SBOM provides information from component SBOM / Get with CPE", async ({
   axios,
 }) => {
   const urlEncodedProductCpe = encodeURIComponent(cdxProductCpeNoSpecialChars);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedProductCpe}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         cpe: expect.arrayContaining([cdxProductCpe]),
@@ -45,16 +52,32 @@ test("Product-Component / CDX / Product SBOM provides information from component
   );
 });
 
+test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with CPE", async ({
+  axios,
+}) => {});
+
+test.skip("Product-Component / CDX / Product SBOM provides information from product SBOM / Get with query", async ({
+  axios,
+}) => {});
+
+test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with query", async ({
+  axios,
+}) => {});
+
+test.skip("Product-Component / SPDX / Product SBOM provides information from component SBOM / Get with pURL", async ({
+  axios,
+}) => {});
+
 test("Product-Component / SPDX / Product SBOM provides information from component SBOM / Get with CPE", async ({
   axios,
 }) => {
   const urlEncodedProductCpe = encodeURIComponent(spdxProductCpeNoSpecialChars);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedProductCpe}?descendants=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         cpe: expect.arrayContaining([spdxProductCpe]),
@@ -75,11 +98,11 @@ test.skip("Product-Component / SPDX / Component SBOM provides information from p
 }) => {
   const urlEncodedComponentPurl = encodeURIComponent(spdxComponentPurl);
 
-  const vanillaResponse = await axios.get(
+  const response = await axios.get(
     `/api/v2/analysis/component/${urlEncodedComponentPurl}?ancestors=10`
   );
 
-  expect(vanillaResponse.data.items).toEqual(
+  expect(response.data.items).toEqual(
     expect.arrayContaining([
       expect.objectContaining({
         purl: expect.arrayContaining([spdxComponentPurl]),
@@ -94,3 +117,15 @@ test.skip("Product-Component / SPDX / Component SBOM provides information from p
     ])
   );
 });
+
+test.skip("Product-Component / SPDX / Component SBOM provides information from product SBOM / Get with CPE", async ({
+  axios,
+}) => {});
+
+test.skip("Product-Component / SPDX / Product SBOM provides information from product SBOM / Get with query", async ({
+  axios,
+}) => {});
+
+test.skip("Product-Component / SPDX / Component SBOM provides information from product SBOM / Get with query", async ({
+  axios,
+}) => {});
