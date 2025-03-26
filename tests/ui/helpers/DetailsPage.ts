@@ -43,8 +43,8 @@ export class DetailsPage {
 
   //Wait for Loading Spinner to detach from the DOM
   async waitForData() {
-    const spinner = this.page.getByLabel("Contents");
-    await spinner.waitFor({ state: "detached" });
+    const spinner = this.page.locator(`xpath=//table`);
+    await spinner.waitFor({ state: "visible", timeout: 50000 });
   }
 
   //Verifies the Page loads with data
@@ -62,7 +62,7 @@ export class DetailsPage {
     const totalVuln = `xpath=//*[name()='svg']/*[name()='text']//*[name()='tspan'][1]`;
 
     const panelVulnSev = await this.getCountFromLabels(pieVulnSevLabel, ":");
-    const sumPanelVulnSev = Object.values(panelVulnSev).reduce(
+    const sumPanelVulnSev = await Object.values(panelVulnSev).reduce(
       (sum, value) => sum + value,
       0
     );
@@ -71,7 +71,7 @@ export class DetailsPage {
     var mismatch = false;
     await expect(
       parseInt(totalVulnPanel!, 10),
-      `Total Vulnerabilities count ${totalVuln} mismatches with sum of individual ${sumPanelVulnSev}. Individual values are ${panelVulnSev}`
+      `Total Vulnerabilities count ${totalVulnPanel} mismatches with sum of individual ${sumPanelVulnSev}`
     ).toEqual(sumPanelVulnSev);
 
     for (const severity in tableVulnSev) {
