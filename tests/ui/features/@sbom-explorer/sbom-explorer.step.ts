@@ -13,7 +13,7 @@ Given(
   "An ingested {string} SBOM {string} is available",
   async ({ page }, _sbomType, sbomName) => {
     const searchPage = new SearchPage(page);
-    searchPage.dedicatedSearch("SBOMs", sbomName);
+    await searchPage.dedicatedSearch("SBOMs", sbomName);
   }
 );
 
@@ -34,7 +34,7 @@ Then(
     const downloadPromise = page.waitForEvent("download");
 
     const detailsPage = new DetailsPage(page);
-    detailsPage.clickOnPageAction(actionName);
+    await detailsPage.clickOnPageAction(actionName);
 
     const download = await downloadPromise;
 
@@ -47,7 +47,7 @@ Then(
   "The Package table is sorted by {string}",
   async ({ page }, columnName) => {
     const toolbarTable = new ToolbarTable(page, PACKAGE_TABLE_NAME);
-    toolbarTable.verifyTableIsSortedBy(columnName);
+    await toolbarTable.verifyTableIsSortedBy(columnName);
   }
 );
 

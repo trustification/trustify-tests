@@ -71,7 +71,7 @@ export class DetailsPage {
     var mismatch = false;
     await expect(
       parseInt(totalVulnPanel!, 10),
-      "Total Vulnerabilities count {totalVuln} mismatches with sum of individual {sumOfVulnSev}"
+      `Total Vulnerabilities count ${totalVuln} mismatches with sum of individual ${sumPanelVulnSev}. Individual values are ${panelVulnSev}`
     ).toEqual(sumPanelVulnSev);
 
     for (const severity in tableVulnSev) {
