@@ -41,7 +41,7 @@ Scenario: Verify the files on downloaded CycloneDX SBOM license ZIP
 Scenario: Verify the headers on CycloneDX SBOM package License CSV file
 	Given User extracted the CycloneDX SBOM license compressed file
 	When User Opens the package license information file
-	Then The file should have the following headers - name, namespace, group, version, package reference, license id, license name, license expression and alternate package reference
+	Then The file should have the following headers - SBOM name, SBOM id, package name, package group, package version, package purl, package cpe and license
 
 Scenario: Verify the headers on CycloneDX SBOM License reference CSV file
 	Given User extracted the CycloneDX SBOM license compressed file
@@ -55,96 +55,101 @@ Scenario: Verify the contents on CycloneDX SBOM license reference CSV file
 Scenario: Verify the license information for a package on the CycloneDX SBOM with single license id
 	Given User is on SBOM license information file
 	When User selects a package with Single license id
-	Then "name" column should match "metadata.component.name" from SBOM
-	And "group" column should match "metadata.component.group" from SBOM
-	And "version" column should match "metadata.component.version" from SBOM
-	And "package reference" column should match "components.purl" from SBOM
-	And "license id" column should match "components.license.id" from SBOM
-	And The columns "namespace", "license name", "license expression", "alternate package reference" should be empty
+	Then "SBOM name" column should match "metadata.component.name" from SBOM
+	And "SBOM id" column should match "serialNumber" from SBOM
+	And "package name" column should match "components.name" from SBOM
+	And "package group" column should match "components.group" from SBOM
+	And "package version" column should match "components.version" from SBOM
+	And "package purl" column should match "components.purl" from SBOM
+	And "license" column should match "components.license.id" from SBOM
+	And "package cpe" column should be empty
 
 Scenario: Verify the license information for a package on the CycloneDX SBOM with single license id with alternate package reference
 	Given User is on SBOM license information file
 	When User selects a package with Single license id with cpe information
-	Then "name" column should match "metadata.component.name" from SBOM
-	And "group" column should match "metadata.component.group" from SBOM
-	And "version" column should match metadata.component.version from SBOM
-	And "package reference" column should match "components.purl" from SBOM
-	And "license id" column should match "components.license.id" from SBOM
-	And "alternate package reference" column should match "components.cpe" from SBOM
-	And The columns "namespace", "license name", "license expression" should be empty
+	Then "SBOM name" column should match "metadata.component.name" from SBOM
+	And "SBOM id" column should match "serialNumber" from SBOM
+	And "package name" column should match "components.name" from SBOM
+	And "package group" column should match "components.group" from SBOM
+	And "package version" column should match "components.version" from SBOM
+	And "package purl" column should match "components.purl" from SBOM
+	And "license" column should match "components.license.id" from SBOM
+	And "package cpe" column should match "components.cpe" from SBOM
 
 Scenario: Verify the license information for a package on the CycloneDX SBOM with single license name
 	Given User is on SBOM license information file
 	When User selects a package with Single license name
-	Then "name" column should match "metadata.component.name" from SBOM
-	And "group" column should match "metadata.component.group" from SBOM
-	And "version" column should match metadata.component.version from SBOM
-	And "package reference" column should match "components.purl" from SBOM
-	And "license name" column should match "components.license.name" from SBOM
-	And The columns "namespace", "license id", "license expression", "alternate package reference" should be empty
+	Then "SBOM name" column should match "metadata.component.name" from SBOM
+	And "SBOM id" column should match "serialNumber" from SBOM
+	And "package name" column should match "components.name" from SBOM
+	And "package group" column should match "components.group" from SBOM
+	And "package version" column should match "components.version" from SBOM
+	And "package purl" column should match "components.purl" from SBOM
+	And "license" column should match "components.license.name" from SBOM
+	And "package cpe" column should be empty
 
 Scenario: Verify the license information for a package on the CycloneDX SBOM with single license name with alternate package reference
 	Given User is on SBOM license information file
 	When User selects a package with Single license id with cpe information
-	Then "name" column should match "metadata.component.name" from SBOM
-	And "group" column should match "metadata.component.group" from SBOM
-	And "version" column should match metadata.component.version from SBOM
-	And "package reference" column should match "components.purl" from SBOM
-	And "license name" column should match "components.license.name" from SBOM
-	And "alternate package reference" column should match "components.cpe" from SBOM
-	And The columns "namespace", "license id", "license expression" should be empty
+	Then "SBOM name" column should match "metadata.component.name" from SBOM
+	And "SBOM id" column should match "serialNumber" from SBOM
+	And "package name" column should match "components.name" from SBOM
+	And "package group" column should match "components.group" from SBOM
+	And "package version" column should match "components.version" from SBOM
+	And "package purl" column should match "components.purl" from SBOM
+	And "license" column should match "components.license.name" from SBOM
+	And "package cpe" column should match "components.cpe" from SBOM
 
-Scenario: Verify the license information for a package on the CycloneDX SBOM with single license expression
+Scenario: Verify the license information for a package on the CycloneDX SBOM with single license Expression
 	Given User is on SBOM license information file
 	When User selects a package with Single license name
-	Then "name" column should match "metadata.component.name" from SBOM
-	And "group" column should match "metadata.component.group" from SBOM
-	And "version" column should match metadata.component.version from SBOM
-	And "package reference" column should match "components.purl" from SBOM
-	And "license expression" column should match "components.license.name" from SBOM
-	And The columns "namespace", "license id", "license name", "alternate package reference" should be empty
+	Then "SBOM name" column should match "metadata.component.name" from SBOM
+	And "SBOM id" column should match "serialNumber" from SBOM
+	And "package name" column should match "components.name" from SBOM
+	And "package group" column should match "components.group" from SBOM
+	And "package version" column should match "components.version" from SBOM
+	And "package purl" column should match "components.purl" from SBOM
+	And "license" column should match "components.license.expression" from SBOM
+	And "package cpe" column should be empty
 
-Scenario: Verify the license information for a package on the CycloneDX SBOM with single license expression with alternate package reference
+Scenario: Verify the license information for a package on the CycloneDX SBOM with single license Expression with alternate package reference
 	Given User is on SBOM license information file
-	When User selects a package with Single license name
-	Then "name" column should match "metadata.component.name" from SBOM
-	And "group" column should match "metadata.component.group" from SBOM
-	And "version" column should match metadata.component.version from SBOM
-	And "package reference" column should match "components.purl" from SBOM
-	And "license expression" column should match "components.license.name" from SBOM
-	And "alternate package reference" column should match "components.cpe" from SBOM
-	And The columns "namespace", "license id", "license name" should be empty
+	When User selects a package with Single license id with cpe information
+	Then "SBOM name" column should match "metadata.component.name" from SBOM
+	And "SBOM id" column should match "serialNumber" from SBOM
+	And "package name" column should match "components.name" from SBOM
+	And "package group" column should match "components.group" from SBOM
+	And "package version" column should match "components.version" from SBOM
+	And "package purl" column should match "components.purl" from SBOM
+	And "license" column should match "components.license.expression" from SBOM
+	And "package cpe" column should match "components.cpe" from SBOM
 
 Scenario: Verify the license information for a package on the CycloneDX SBOM with multiple license ids
 	Given User is on SBOM license information file
 	When User selects a package with multiple license sections
 	Then The report should have multiple rows for the same package corresponding to each license section
-	And Values on columns "name", "group", "version", "package reference" should be same for all the rows from SBOM
-	And "license id" for each row should match the value from the components.license.id field of the corresponding license section
-	And The columns "namespace", "license name", "license expression", "alternate package reference" should be empty
+	And Values on columns "SBOM name", "SBOM id", "package name", "package group", "package version", "package purl" should be same for all the rows from SBOM
+	And Value on "license" column on each row should match the value from the components.license.id field of the corresponding license section
 
 Scenario: Verify the license information for a package on the CycloneDX SBOM with multiple license names
 	Given User is on SBOM license information file
 	When User selects a package with multiple license sections
 	Then The report should have multiple rows for the same package corresponding to each license section
-	And Values on columns "name", "group", "version", "package reference", "alternate package reference" should be same for all the rows from SBOM
-	And "license id" for each row should match the value from the components.license.id field of the corresponding license section
-	And The columns "namespace", "license name", "license expression" should be empty
+	And Values on columns "SBOM name", "SBOM id", "package name", "package group", "package version", "package purl" should be same for all the rows from SBOM
+	And Value on "license" column on each row should match the value from the components.license.name field of the corresponding license section
 
 Scenario: Verify the license information for a package on the CycloneDX SBOM with license id and license name
 	Given User is on SBOM license information file
 	When User selects a package with multiple license sections
 	Then The report should have multiple rows for the same package corresponding to each license section
-	And Values on columns "name", "group", "version", "package reference" should be same for all the rows from SBOM
-	And Column "license id" should match "components.license.id" on one row and on the same row license.name column should be empty
-	And Column "license name" should match the "components.license.name" on another row and on the same row license.id column should be empty
-	And The columns "namespace","license expression", "alternate package reference" should be empty
+	And Values on columns "SBOM name", "SBOM id", "package name", "package group", "package version", "package purl" should be same for all the rows from SBOM
+	And Value on "license" column on each row should match the value from the components.license.id and components.license.name field of the corresponding license section
 
 Scenario: Verify CycloneDX SBOM level license information on license export
 	Given User is on SBOM license information file
-	Then "name" column should match "metadata.component.name" from SBOM
-	And "group" column should match "metadata.component.group" from SBOM
-	And "version" column should match "metadata.component.version" from SBOM
-	And "package reference" column should match "metadata.component.purl" from SBOM
-	And "license id" column should match "metadata.component.licenses.license.id" from SBOM
-	And The columns "namespace", "license name", "license expression", "alternate package reference" should be empty
+	When User selects a package with Single license id with cpe information
+	Then "SBOM name" column should match "metadata.component.name" from SBOM
+	And "SBOM id" column should match "serialNumber" from SBOM
+	And "package name", "package group", "package version" and "package purl" columns should be empty
+	And "license" column should match "component.license.expression" from SBOM
+	And "package cpe" column should match "component.cpe" from SBOM
