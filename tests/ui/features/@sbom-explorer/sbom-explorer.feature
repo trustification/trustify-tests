@@ -78,3 +78,22 @@ Feature: SBOM Explorer - View SBOM details
         Examples:
         | sbomType | sbomName |
         | SPDX | quarkus-bom |
+
+    Scenario Outline: Pagination of <sbomType> SBOM Vulnerabilities
+        Given An ingested "<sbomType>" SBOM "<sbomName>" containing Vulnerabilities
+        When User visits SBOM details Page of "<sbomName>"
+        When User selects the Tab "Vulnerabilities"
+        Then Pagination of Vulnerabilities list works
+        Examples:
+        | sbomType | sbomName |
+        | SPDX | quarkus-bom |
+
+  Scenario Outline: View paginated list of <sbomType> SBOM Packages
+        Given An ingested "<sbomType>" SBOM "<sbomName>" is available
+        When User visits SBOM details Page of "<sbomName>"
+        When User selects the Tab "Packages"
+        Then Pagination of Packages list works
+        @only
+        Examples:
+        | sbomType | sbomName |
+        | SPDX | quarkus-bom |

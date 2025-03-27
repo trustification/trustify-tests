@@ -43,8 +43,8 @@ export class DetailsPage {
 
   //Wait for Loading Spinner to detach from the DOM
   async waitForData() {
-    const spinner = this.page.locator(`xpath=//table`);
-    await spinner.waitFor({ state: "visible", timeout: 50000 });
+    const spinner = this.page.locator(`xpath=(//table//tbody)[1]`);
+    await spinner.waitFor({ state: "visible", timeout: 5000 });
   }
 
   //Verifies the Page loads with data
@@ -68,7 +68,7 @@ export class DetailsPage {
     );
     const totalVulnPanel = await this.page.locator(totalVuln).textContent();
     const tableVulnSev = await this.getCVSSCountFromVulnTable();
-    var mismatch = false;
+    let mismatch = false;
     await expect(
       parseInt(totalVulnPanel!, 10),
       `Total Vulnerabilities count ${totalVulnPanel} mismatches with sum of individual ${sumPanelVulnSev}`
@@ -115,7 +115,7 @@ export class DetailsPage {
    */
 
   async getCVSSCountFromVulnTable(): Promise<{ [key: string]: number }> {
-    var nextPage = true;
+    let nextPage = true;
     const counts = {
       Unknown: 0,
       None: 0,
