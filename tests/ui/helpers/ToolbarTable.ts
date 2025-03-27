@@ -1,5 +1,4 @@
 import { expect, Page } from "@playwright/test";
-
 export class ToolbarTable {
   private _page: Page;
   private _tableName: string;
@@ -63,10 +62,13 @@ export class ToolbarTable {
     const perPageValues = [10, 20, 50, 100];
     const totalRows = await this.getTotalRowsFromPagination(parentElem);
     for (const value of perPageValues) {
+      const firstPage = this._page.getByRole("button", {
+        name: "Go to first page",
+      });
+      if (await firstPage.isEnabled()) {
+        await firstPage.click();
+      }
       let expectedPagecount = Math.trunc(totalRows / value);
-      console.log(value);
-      console.log(totalRows);
-      console.log(expectedPagecount);
       let remainingRows = totalRows % value;
       if (remainingRows > 0) {
         expectedPagecount += 1;
@@ -106,6 +108,12 @@ export class ToolbarTable {
    * @returns total row count from pagination dropdown
    */
   async getTotalRowsFromPagination(parentElem: string): Promise<number> {
+    const tableError = this._page.locator(`xpath=(//tbody[@aria-label="Table error"])[1]`);
+    if (await tableError.isVisible()) {
+      await expect(tableError, "No Data available").not.toBeVisible();
+    }
+    const progressBar = this._page.getByRole('progressbar', { name: 'Contents' });
+    await progressBar.waitFor({ state: "hidden", timeout: 5000 });
     const pagination = this._page.locator(parentElem);
     const totalResultsText = await pagination.locator(`xpath=//button//b[not(contains (.,'-'))]`).textContent();
     return parseInt(totalResultsText!.trim(), 10);
@@ -126,8 +134,7 @@ export class ToolbarTable {
    * @param rowsCount Number of rows
    */
   async verifyPerPageToRowCount(rowsCount: number) {
-    const table = this.getTable();
-    const rows = await table.locator(`xpath=//tbody/tr`);
+    const rows = await this._page.locator(`xpath=//section[not(@hidden)]/table//tbody/tr`);
     const tabRows = await rows.count();
     // Bug: https://issues.redhat.com/browse/TC-2353
     await expect(tabRows).toEqual(rowsCount);
@@ -148,24 +155,18 @@ export class ToolbarTable {
   ) {
     const section = this._page.locator(parentElem);
     const nextButton = await section.getByLabel("Go to next page");
-    const firstPage = this._page.getByRole("button", {
-      name: "Go to first page",
-    });
     let expMinCount = 1;
     let expMaxCount = perPageRows;
     if (pageCount === 1) {
       expMaxCount = remainingRows;
     }
-    if (await firstPage.isEnabled()) {
-      await firstPage.click();
-    }
-    for (let i = 0; i < pageCount; i++) {
-      await this.verifyPerPageToRowCount(perPageRows);
+    for (let i = 1; i < pageCount; i++) {
       await this.verifyRowsCounterPagination(
         parentElem,
         expMinCount,
         expMaxCount
       );
+      await this.verifyPerPageToRowCount(perPageRows);
       await nextButton.isEnabled();
       await nextButton.click();
       expMinCount += perPageRows;
