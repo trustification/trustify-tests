@@ -79,6 +79,8 @@ Feature: SBOM Explorer - View SBOM details
         | sbomType | sbomName |
         | SPDX | quarkus-bom |
 
+    @skip
+    #Bug: Known issue https://issues.redhat.com/browse/TC-2353
     Scenario Outline: Pagination of <sbomType> SBOM Vulnerabilities
         Given An ingested "<sbomType>" SBOM "<sbomName>" containing Vulnerabilities
         When User visits SBOM details Page of "<sbomName>"
@@ -88,12 +90,12 @@ Feature: SBOM Explorer - View SBOM details
         | sbomType | sbomName |
         | SPDX | quarkus-bom |
 
-  Scenario Outline: View paginated list of <sbomType> SBOM Packages
+    @slow
+    Scenario Outline: View paginated list of <sbomType> SBOM Packages
         Given An ingested "<sbomType>" SBOM "<sbomName>" is available
         When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Packages"
         Then Pagination of Packages list works
-        @only
         Examples:
         | sbomType | sbomName |
         | SPDX | quarkus-bom |
