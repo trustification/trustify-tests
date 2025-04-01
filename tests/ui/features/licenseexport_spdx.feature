@@ -64,7 +64,7 @@ Scenario: Verify the license information for a package with single license with 
 	Given User is on SBOM license information file
 	When User selects a package with Single license with cpe information
 	Then "SBOM name" column should match "name" from SBOM
-	And "SBOM id" column should match "namespace" from SBOM
+	And "SBOM id" column should match "documentNamespace" from SBOM
 	And "package name" column should match "packages.name" from SBOM
 	And "package group" column should match "packages.group" from SBOM
 	And "package version" column should match "packages.versionInfo" from SBOM
