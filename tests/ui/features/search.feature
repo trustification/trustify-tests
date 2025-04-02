@@ -35,14 +35,13 @@ Scenario Outline: User toggles the <types> tab and manipulates the list
 	|Vulnerabilities|
 	|Advisories|
 
-
 Scenario Outline: Download Links on the <types> Search Result list
 	When User navigates to Search Results page
 	And Clicks on <types> tab
 	Then <types> list should be listed
 	And Download menu for <type> should be available at the end of the rows
 
-    Examples:
+	Examples:
 	|types|type|
 	|SBOMs|SBOM|
 	|Advisories|Advisory|
