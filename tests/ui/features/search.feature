@@ -71,6 +71,7 @@ Scenario Outline: User searches for a specific <type>
 	And user presses Enter
 	And user switches to the <types> tab
 	Then the <types> list should display the specific <type-name>
+	And columns for <type> results should be visible
 	And the user should be able to filter <types>
 	And user clicks on the "<type>" name
 	And the user should be navigated to the specific "<type>" page
