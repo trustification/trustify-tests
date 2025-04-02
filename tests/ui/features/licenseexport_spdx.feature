@@ -41,7 +41,7 @@ Scenario: Verify the files on downloaded SPDX SBOM license ZIP
 Scenario: Verify the headers on SPDX SBOM package License CSV file
 	Given User extracted the SPDX SBOM license compressed file
 	When User Opens the package license information file
-	Then The file should have the following headers - name, namespace, group, version, package reference, license id, license name, license expression and alternate package reference
+	Then The file should have the following headers - SBOM name, SBOM id, package name, package group, package version, package purl, package cpe and license
 
 Scenario: Verify the headers on SPDX SBOM License reference CSV file
 	Given User extracted the SPDX SBOM license compressed file
@@ -51,39 +51,35 @@ Scenario: Verify the headers on SPDX SBOM License reference CSV file
 Scenario: Verify the license information for a package with single license
 	Given User is on SBOM license information file
 	When User selects a package with Single license information
-	Then "name" column should match "name" from SBOM
-	And "namespace" column should match "documentNamespace" from SBOM
-	And "package reference" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" type purl from SBOM
-	And "license expression" column should match "packages.licenseDeclared" from SBOM
-	And The columns "group", "version", "license id", "license name", "alternate package reference" should be empty
+	Then "SBOM name" column should match "name" from SBOM
+	And "SBOM id" column should match "namespace" from SBOM
+	And "package name" column should match "packages.name" from SBOM
+	And "package group" column should match "packages.group" from SBOM
+	And "package version" column should match "packages.versionInfo" from SBOM
+	And "package purl" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" purl from SBOM
+	And "license" column should match "packages.licenseDeclared" from SBOM
+	And "package cpe" column should be empty
 
 Scenario: Verify the license information for a package with single license with alternate package reference referenceLocator
 	Given User is on SBOM license information file
-	When User selects a package with Single license information
-	Then "name" column should match "name" from SBOM
-	And "namespace" column should match "documentNamespace" from SBOM
-	And "package reference" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" purl from SBOM
-	And "license expression" column should match "packages.licenseDeclared" from SBOM
-	And "alternate package reference" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" type cpe from SBOM json
-	And The columns "group", "version", "license id", "license name" should be empty
-
-Scenario: Verify the license information for a package with multiple licenses with alternate package reference referenceLocator
-	Given User is on SBOM license information file
-	When User selects a package with Single license information
-	Then "name" column should match "name" from SBOM
-	And "namespace" column should match "documentNamespace" from SBOM
-	And "package reference" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" purl from SBOM
-	And "license expression" column should match the whole value of "packages.licenseDeclared" from SBOM in a single row
-	And "alternate package reference" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" type cpe from SBOM json
-	And The columns "group", "version", "license id", "license name" should be empty
+	When User selects a package with Single license with cpe information
+	Then "SBOM name" column should match "name" from SBOM
+	And "SBOM id" column should match "documentNamespace" from SBOM
+	And "package name" column should match "packages.name" from SBOM
+	And "package group" column should match "packages.group" from SBOM
+	And "package version" column should match "packages.versionInfo" from SBOM
+	And "package purl" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" purl from SBOM
+	And "license" column should match "packages.licenseDeclared" from SBOM
+	And "package cpe" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" type cpe from SBOM json
 
 Scenario: Verify SPDX SBOM level license information on license export
 	Given User is on SBOM license information file
-	Then "name" column should match "name" from SBOM
-	And "namespace" column should match "documentNamespace" from SBOM
-	And "license expression" column should match the whole value from "packages.licenseDeclared" in a single row of the SBOM information under packages section
-	And "alternate package reference" column should contain the value of "packages.externalRefs.referenceLocator" field for cpe "packages.externalRefs.referenceType" from SBOM json
-	And The columns "group", "version", "package reference", "license id", "license name" should be empty
+	When User selects a package with Single license with cpe information
+	Then "SBOM name" column should match "name" from SBOM
+	And "SBOM id" column should match "namespace" from SBOM
+	And "package name", "package group", "package version" and "package purl" columns should be empty
+	And "license" column should match the whole value from "packages.licenseDeclared" in a single row of the SBOM information under packages section
+	And "package cpe" column should match "packages.externalRefs.referenceLocator" of "packages.externalRefs.referenceType" type cpe from SBOM json
 
 Scenario: Verify the contents on SPDX SBOM license reference CSV file
 	Given User is on license reference file
