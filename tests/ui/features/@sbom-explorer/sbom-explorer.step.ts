@@ -156,20 +156,14 @@ Then(
   }
 );
 
-Then(
-  "Pagination of Vulnerabilities list works",
-  async( { page } ) => {
-    const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
-    const vulnTableTopPagination = `xpath=//div[@id="vulnerability-table-pagination-top"]`;
-    await toolbarTable.verifyPagination(vulnTableTopPagination);
-  }
-);
+Then("Pagination of Vulnerabilities list works", async ({ page }) => {
+  const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
+  const vulnTableTopPagination = `xpath=//div[@id="vulnerability-table-pagination-top"]`;
+  await toolbarTable.verifyPagination(vulnTableTopPagination);
+});
 
-Then(
-  "Pagination of Packages list works",
-  async( { page } ) => {
-    const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
-    const vulnTableTopPagination = `xpath=//div[@id="package-table-pagination-top"]`;
-    await toolbarTable.verifyPagination(vulnTableTopPagination);
-  }
-);
+Then("Pagination of Packages list works", async ({ page }) => {
+  const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
+  const vulnTableTopPagination = `xpath=//div[@id="package-table-pagination-top"]`;
+  await toolbarTable.verifyPagination(vulnTableTopPagination);
+});

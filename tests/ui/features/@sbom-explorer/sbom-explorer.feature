@@ -79,8 +79,7 @@ Feature: SBOM Explorer - View SBOM details
         | sbomType | sbomName |
         | SPDX | quarkus-bom |
 
-    @skip
-    #Bug: Known issue https://issues.redhat.com/browse/TC-2353
+    @slow
     Scenario Outline: Pagination of <sbomType> SBOM Vulnerabilities
         Given An ingested "<sbomType>" SBOM "<sbomName>" containing Vulnerabilities
         When User visits SBOM details Page of "<sbomName>"

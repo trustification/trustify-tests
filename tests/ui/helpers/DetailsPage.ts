@@ -137,14 +137,11 @@ export class DetailsPage {
     }
 
     while (nextPage) {
-      const cvssLocator = await this.page
-        .locator(
-          `xpath=//table[@aria-label='Vulnerability table']//td[@data-label='CVSS']`
-        )
-        .all();
-      for (const cvss of cvssLocator) {
-        const severity = await cvss.innerText();
-        counts[severity] = counts[severity] ? counts[severity] + 1 : 1;
+      for (let cvssType in counts) {
+        let cvssLocator = await this.page
+          .locator(`xpath=//td[@data-label='CVSS']//div[.='${cvssType}']`)
+          .all();
+        counts[cvssType] = await cvssLocator.length;
       }
       nextPage = await nextButton.isEnabled();
       if (nextPage) {

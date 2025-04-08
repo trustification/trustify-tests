@@ -59,10 +59,11 @@ export class ToolbarTable {
    * And bottom section `//div[@id="vulnerability-table-pagination-bottom"]`
    */
   async verifyPagination(parentElem: string) {
+    const section = this._page.locator(parentElem);
     const perPageValues = [10, 20, 50, 100];
     const totalRows = await this.getTotalRowsFromPagination(parentElem);
     for (const value of perPageValues) {
-      const firstPage = this._page.getByRole("button", {
+      const firstPage = section.getByRole("button", {
         name: "Go to first page",
       });
       if (await firstPage.isEnabled()) {
@@ -73,7 +74,7 @@ export class ToolbarTable {
       if (remainingRows > 0) {
         expectedPagecount += 1;
       }
-      await this.selectPerPage( parentElem, value + " per page");
+      await this.selectPerPage(parentElem, value + " per page");
       const actualPageCount =
         await this.getTotalPagesFromNavigation(parentElem);
       await expect(actualPageCount, "Page count mismatches").toEqual(
@@ -108,14 +109,20 @@ export class ToolbarTable {
    * @returns total row count from pagination dropdown
    */
   async getTotalRowsFromPagination(parentElem: string): Promise<number> {
-    const tableError = this._page.locator(`xpath=(//tbody[@aria-label="Table error"])[1]`);
+    const tableError = this._page.locator(
+      `xpath=(//tbody[@aria-label="Table error"])[1]`
+    );
     if (await tableError.isVisible()) {
       await expect(tableError, "No Data available").not.toBeVisible();
     }
-    const progressBar = this._page.getByRole('progressbar', { name: 'Contents' });
+    const progressBar = this._page.getByRole("gridcell", {
+      name: "Loading...",
+    });
     await progressBar.waitFor({ state: "hidden", timeout: 5000 });
     const pagination = this._page.locator(parentElem);
-    const totalResultsText = await pagination.locator(`xpath=//button//b[not(contains (.,'-'))]`).textContent();
+    const totalResultsText = await pagination
+      .locator(`xpath=//button//b[not(contains (.,'-'))]`)
+      .textContent();
     return parseInt(totalResultsText!.trim(), 10);
   }
 
@@ -134,7 +141,9 @@ export class ToolbarTable {
    * @param rowsCount Number of rows
    */
   async verifyPerPageToRowCount(rowsCount: number) {
-    const rows = await this._page.locator(`xpath=//section[not(@hidden)]/table//tbody/tr`);
+    const rows = await this._page.locator(
+      `xpath=//section[not(@hidden)]//div/table//tbody/tr`
+    );
     const tabRows = await rows.count();
     // Bug: https://issues.redhat.com/browse/TC-2353
     await expect(tabRows).toEqual(rowsCount);
@@ -169,6 +178,10 @@ export class ToolbarTable {
       await this.verifyPerPageToRowCount(perPageRows);
       await nextButton.isEnabled();
       await nextButton.click();
+      const progressBar = this._page.getByRole("gridcell", {
+        name: "Loading...",
+      });
+      await progressBar.waitFor({ state: "hidden", timeout: 5000 });
       expMinCount += perPageRows;
       if (i === pageCount - 1) {
         expMaxCount = expMaxCount + remainingRows;
