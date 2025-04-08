@@ -60,13 +60,14 @@ export class DetailsPage {
   async verifyVulnerabilityPanelcount() {
     const pieVulnSevLabel = `xpath=//*[name()='svg']/*[name()='g']//*[name()='tspan']`;
     const totalVuln = `xpath=//*[name()='svg']/*[name()='text']//*[name()='tspan'][1]`;
-
+    const totalVulnElement = this.page.locator(totalVuln);
+    await totalVulnElement.waitFor({ state: "visible", timeout: 5000 });
+    const totalVulnPanel = await totalVulnElement.textContent();
     const panelVulnSev = await this.getCountFromLabels(pieVulnSevLabel, ":");
     const sumPanelVulnSev = await Object.values(panelVulnSev).reduce(
       (sum, value) => sum + value,
       0
     );
-    const totalVulnPanel = await this.page.locator(totalVuln).textContent();
     const tableVulnSev = await this.getCVSSCountFromVulnTable();
     let mismatch = false;
     await expect(
@@ -77,7 +78,9 @@ export class DetailsPage {
     for (const severity in tableVulnSev) {
       if (panelVulnSev[severity] !== undefined) {
         if (panelVulnSev[severity] !== tableVulnSev[severity]) {
-          console.log("{severity} count mismatch");
+          console.log(
+            `${severity} count mismatch. Summary panel count ${panelVulnSev[severity]}, Rows count ${tableVulnSev[severity]}`
+          );
           mismatch = true;
         }
       }
@@ -141,7 +144,7 @@ export class DetailsPage {
         let cvssLocator = await this.page
           .locator(`xpath=//td[@data-label='CVSS']//div[.='${cvssType}']`)
           .all();
-        counts[cvssType] = await cvssLocator.length;
+        counts[cvssType] += await cvssLocator.length;
       }
       nextPage = await nextButton.isEnabled();
       if (nextPage) {
