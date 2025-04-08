@@ -96,11 +96,11 @@ export class DetailsPage {
     labelLocator: string,
     delimiter: string
   ): Promise<{ [key: string]: number }> {
-    const elements = await this.page.locator(labelLocator).all();
-    const vulnLabelCount = {};
-    for (const element of elements) {
-      const innerText = await element.textContent();
-      const labelArr = await innerText!.split(delimiter);
+    let elements = await this.page.locator(labelLocator).all();
+    let vulnLabelCount = {};
+    for (let element of elements) {
+      let innerText = await element.textContent();
+      let labelArr = await innerText!.split(delimiter);
       vulnLabelCount[labelArr[0].trim().toString()] = parseInt(
         labelArr[1].trim(),
         10

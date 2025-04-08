@@ -75,6 +75,10 @@ export class ToolbarTable {
         expectedPagecount += 1;
       }
       await this.selectPerPage(parentElem, value + " per page");
+      const progressBar = this._page.getByRole("gridcell", {
+        name: "Loading...",
+      });
+      await progressBar.waitFor({ state: "hidden", timeout: 5000 });
       const actualPageCount =
         await this.getTotalPagesFromNavigation(parentElem);
       await expect(actualPageCount, "Page count mismatches").toEqual(
@@ -141,9 +145,8 @@ export class ToolbarTable {
    * @param rowsCount Number of rows
    */
   async verifyPerPageToRowCount(rowsCount: number) {
-    const rows = await this._page.locator(
-      `xpath=//section[not(@hidden)]//div/table//tbody/tr`
-    );
+    const table = this.getTable();
+    const rows = await table.locator(`xpath=//tbody/tr`);
     const tabRows = await rows.count();
     // Bug: https://issues.redhat.com/browse/TC-2353
     await expect(tabRows).toEqual(rowsCount);
