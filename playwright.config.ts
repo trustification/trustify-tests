@@ -95,6 +95,9 @@ export default defineConfig({
       testDir: "./tests/api/features",
       testMatch: /.*\.ts/,
       dependencies: ["setup-api-data"],
+      use: {
+        ignoreHTTPSErrors: true,
+      },
     },
     {
       name: "setup-api-data",
