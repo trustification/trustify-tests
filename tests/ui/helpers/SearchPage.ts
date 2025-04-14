@@ -55,4 +55,29 @@ export class SearchPage {
     await this.page.getByPlaceholder("Search").press("Enter");
     await detailsPage.verifyDataAvailable();
   }
+
+  async clickOnPageAction(actionName: string) {
+    await this.page.getByRole("button", { name: "Actions" }).click();
+    await this.page.getByRole("menuitem", { name: actionName }).click();
+  }
+
+  async verifyPageHeader(header: string) {
+    await expect(this.page.getByRole("heading")).toContainText(header);
+  }
+
+  async open() {
+    await this.page.goto("/search");
+  } 
+
+  async typeInSearchBox(searchText: string) {
+    await this.page.locator("#autocomplete-search").locator('[aria-label="Search input"]').fill(searchText);
+  }
+
+  async autoFillIsVisible() {
+    await expect(this.page.locator("#autocomplete-search").locator(".pf-v5-c-menu")).toBeVisible();
+  }
+
+  async autoFillIsNotVisible() {
+    await expect(this.page.locator("#autocomplete-search").locator(".pf-v5-c-menu")).not.toBeVisible();
+  }
 }

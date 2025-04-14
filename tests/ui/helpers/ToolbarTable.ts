@@ -449,6 +449,23 @@ export class ToolbarTable {
     }
   }
 
+  async verifyDownloadLink(type: string) {
+    const table = this.getTable();
+    await table.locator('[aria-label="Kebab toggle"]').first().click();
+    if (type === "SBOMs") {
+      await expect(table.locator("text=Download SBOM")).toBeVisible();
+      await expect(table.locator("text=Download License Report")).toBeVisible();
+    }else {
+      await expect(table.locator("text=Download")).toBeVisible();
+    }
+  }
+
+
+  async verifyTableHasUpToRows(rows: number) {
+    const table = this.getTable();
+    await expect(table.locator("tbody tr").count()).toBeLessThanOrEqual(rows);
+  }
+
   private getTable() {
     return this._page.locator(`table[aria-label="${this._tableName}"]`);
   }

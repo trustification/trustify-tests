@@ -154,3 +154,4 @@ export class DetailsPage {
     return counts;
   }
 }
+
