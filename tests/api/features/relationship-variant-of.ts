@@ -8,9 +8,9 @@ const cdxBinaryImagePurl =
 const cdxIndexImagePurl =
   "pkg:oci/openshift-ose-console@sha256:94a0d7feec34600a858c8e383ee0e8d5f4a077f6bbc327dcad8762acfcf40679";
 const spdxBinaryImagePurl =
-  "pkg:oci/ubi9-container@sha256:d4c5d9c980678267b81c3c197a4a0dd206382111c912875a6cdffc6ca319b769?arch=aarch64&repository_url=registry.redhat.io/ubi9&tag=9.2-755.1697625012";
+  "pkg:oci/flowlogs-pipeline@sha256:df416b77ce2e24110e23c0d0478e916fcf249a889f4be855e1834d0dd5d51af1?arch=amd64&repository_url=quay.io/redhat-user-workloads/ocp-network-observab-tenant/netobserv-operator/flowlogs-pipeline";
 const spdxIndexImagePurl =
-  "pkg:oci/ubi9-container@sha256:2f168398c538b287fd705519b83cd5b604dc277ef3d9f479c28a2adb4d830a49?repository_url=registry.redhat.io/ubi9&tag=9.2-755.1697625012";
+  "pkg:oci/flowlogs-pipeline@sha256:df416b77ce2e24110e23c0d0478e916fcf249a889f4be855e1834d0dd5d51af1?repository_url=quay.io/redhat-user-workloads/ocp-network-observab-tenant/netobserv-operator/flowlogs-pipeline";
 
 test("Variant of / CDX / Binary image has ancestors that include index image / Get with pURL", async ({
   axios,

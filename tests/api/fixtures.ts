@@ -29,10 +29,11 @@ const getToken = async (baseURL?: string) => {
 
   // Discover token endpoint
   const oidcConfigResponse = await axios.get(
-    `${authUrl}/.well-known/openid-configuration`, {
+    `${authUrl}/.well-known/openid-configuration`,
+    {
       httpsAgent: new https.Agent({
         rejectUnauthorized: false,
-      })
+      }),
     }
   );
   const tokenServiceURL = oidcConfigResponse.data["token_endpoint"];
@@ -61,8 +62,8 @@ export const discoverTokenEndpoint = async (
   const indexPage = await axios.get<string>(baseURL, {
     maxRedirects: 0,
     httpsAgent: new https.Agent({
-            rejectUnauthorized: false,
-          })
+      rejectUnauthorized: false,
+    }),
   });
 
   const matcher = indexPage.data.match(/window._env="([^"]+)"/);

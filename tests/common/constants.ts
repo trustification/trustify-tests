@@ -33,7 +33,8 @@ export const SBOM_FILES = [
   "RHEL-8.10.0.Z.MAIN+EUS.json.bz2",
   "rhel-9.2-eus.cdx.json.bz2",
   "rhel-9.2-eus.spdx.json.bz2",
-  "spdx-ancestor-of-example.json.bz2"
+  "spdx-ancestor-of-example.json.bz2",
+  "example_container_index.json.bz2",
 ];
 
 export const ADVISORY_FILES = [
