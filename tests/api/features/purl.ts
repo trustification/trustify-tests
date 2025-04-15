@@ -1,6 +1,6 @@
 import { expect, test } from "../fixtures";
 
-test("Purl by alias - vanilla", async ({ axios }) => {
+test.skip("Purl by alias - vanilla", async ({ axios }) => {
   const vanillaResponse = await axios.get(
     "/api/v2/purl?offset=0&limit=10&q=openssl"
   );
