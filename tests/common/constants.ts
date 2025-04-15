@@ -24,6 +24,16 @@ export const SBOM_FILES = [
   "ubi8-minimal-8.8-1072.1697626218.json.bz2",
   "ubi9-9.3-782.json.bz2",
   "ubi9-minimal-9.3-1361.json.bz2",
+  "example_component_quarkus.json.bz2",
+  "example_product_quarkus.json.bz2",
+  "openshift-ose-console-cdx.json.bz2",
+  "openssl-3.0.7-18.el9_2.cdx_1.6.sbom.json.bz2",
+  "openssl-3.0.7-18.el9_2.spdx.json.bz2",
+  "RHEL-8.10.0.Z_curl@7.61.1-34.el8_10.2.json.bz2",
+  "RHEL-8.10.0.Z.MAIN+EUS.json.bz2",
+  "rhel-9.2-eus.cdx.json.bz2",
+  "rhel-9.2-eus.spdx.json.bz2",
+  "spdx-ancestor-of-example.json.bz2"
 ];
 
 export const ADVISORY_FILES = [
