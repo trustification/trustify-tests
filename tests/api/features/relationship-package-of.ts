@@ -15,12 +15,9 @@ const spdxComponentPurl =
 // const spdxDocumentId = "https://www.redhat.com/rhel-9.2-eus.spdx.json";
 
 // Effectively tests TC-2048 / TC-2049 - Denote relationship between Product SBOM and other SBOM.
-test.skip("Product-Component / CDX / Product SBOM provides information from component SBOM / Get with pURL", async ({
-  axios,
-}) => {});
-test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with pURL", async ({
-  axios,
-}) => {});
+// TODO: test.skip("Product-Component / CDX / Product SBOM provides information from component SBOM / Get with pURL", async ({ axios,}) => {});
+
+// TODO: test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with pURL", async ({ axios }) => {});
 
 test("Product-Component / CDX / Product SBOM provides information from component SBOM / Get with CPE", async ({
   axios,
@@ -52,21 +49,13 @@ test("Product-Component / CDX / Product SBOM provides information from component
   );
 });
 
-test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with CPE", async ({
-  axios,
-}) => {});
+// TODO: test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with CPE", async ({ axios }) => {});
 
-test.skip("Product-Component / CDX / Product SBOM provides information from product SBOM / Get with query", async ({
-  axios,
-}) => {});
+// TODO: test.skip("Product-Component / CDX / Product SBOM provides information from product SBOM / Get with query", async ({ axios }) => {});
 
-test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with query", async ({
-  axios,
-}) => {});
+// TODO: test.skip("Product-Component / CDX / Component SBOM provides information from product SBOM / Get with query", async ( axios }) => {});
 
-test.skip("Product-Component / SPDX / Product SBOM provides information from component SBOM / Get with pURL", async ({
-  axios,
-}) => {});
+// TODO: test.skip("Product-Component / SPDX / Product SBOM provides information from component SBOM / Get with pURL", async ({ axios }) => {});
 
 test("Product-Component / SPDX / Product SBOM provides information from component SBOM / Get with CPE", async ({
   axios,
@@ -118,14 +107,8 @@ test.skip("Product-Component / SPDX / Component SBOM provides information from p
   );
 });
 
-test.skip("Product-Component / SPDX / Component SBOM provides information from product SBOM / Get with CPE", async ({
-  axios,
-}) => {});
+// TODO: test.skip("Product-Component / SPDX / Component SBOM provides information from product SBOM / Get with CPE", async ({ axios }) => {});
 
-test.skip("Product-Component / SPDX / Product SBOM provides information from product SBOM / Get with query", async ({
-  axios,
-}) => {});
+// TODO: test.skip("Product-Component / SPDX / Product SBOM provides information from product SBOM / Get with query", async ({ axios }) => {});
 
-test.skip("Product-Component / SPDX / Component SBOM provides information from product SBOM / Get with query", async ({
-  axios,
-}) => {});
+// TODO: test.skip("Product-Component / SPDX / Component SBOM provides information from product SBOM / Get with query", async ({ axios }) => {});

@@ -75,7 +75,7 @@ test("Alias / Get aliases by CPE", async ({ axios }) => {
   );
 });
 
-test.skip("Alias / Get aliases by CPE alias", async ({ axios }) => {});
+// TODO: test.skip("Alias / Get aliases by CPE alias", async ({ axios }) => {});
 
 test.skip("Alias / Get aliases by query", async ({ axios }) => {
   const response = await axios.get(`/api/v2/analysis/component?q=rhel`);
