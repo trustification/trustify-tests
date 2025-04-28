@@ -22,8 +22,20 @@ export class DetailsPage {
     await this.page.getByRole("menuitem", { name: actionName }).click();
   }
 
+  async clickOnPageButton(buttonName: string) {
+    await this.page.getByRole("button", { name: buttonName }).click();
+  }  
+
   async verifyPageHeader(header: string) {
     await expect(this.page.getByRole("heading")).toContainText(header);
+  }
+
+  async verifyButtonIsVisible(button: string) {
+    await expect(this.page.getByRole('button', { name: button })).toBeVisible();
+  }
+
+  async verifyPanelIsVisible(panel: string) {
+    await expect(this.page.locator('.pf-v5-c-card__title-text').filter({ hasText: panel }).first()).toBeVisible();
   }
 
   async verifyTabIsSelected(tabName: string) {
