@@ -1,0 +1,162 @@
+import { createBdd } from "playwright-bdd";
+import { ToolbarTable } from "../../helpers/ToolbarTable";
+import { SearchPage } from "../../helpers/SearchPage";
+import { expect } from "@playwright/test";
+
+export const { Given, When, Then } = createBdd();
+
+// const SBOM_TABLE_NAME = "Sbom table";
+// const ADVISORY_TABLE_NAME = "Advisory table";
+
+// Given(
+//   "User visits Vulnerability details Page of {string}",
+//   async ({ page }, vulnerabilityID) => {
+//     const searchPage = new SearchPage(page);
+//     await searchPage.dedicatedSearch("Vulnerabilities", vulnerabilityID);
+//     await page.getByRole("link", { name: vulnerabilityID }).click();
+//   }
+// );
+
+// Vulnerability Search
+When(
+  "User searches for an advisory named {string} in the general search bar",
+  async ({ page }, item) => {
+    const searchPage = new SearchPage(page);
+    await searchPage.generalSearch("Advisories", item);
+  }
+);
+
+When(
+  "User searches for {string} in the dedicated search bar",
+  async ({ page }, advisoryID) => {
+    const searchPage = new SearchPage(page);
+    await searchPage.dedicatedSearch("Advisories", advisoryID);
+  }
+);
+
+Then(
+  "The advisory {string} shows in the results",
+  async ({ page }, advisoryID) => {
+    await expect(
+      page.getByRole("gridcell").filter({ hasText: advisoryID })
+    ).toBeVisible();
+  }
+);
+
+// // Vulnerability Explorer
+// Then(
+//   "The severity is {string} and the CVSS score is {string}",
+//   async ({ page }, severityDescription, severityScore) => {
+//     const severity = `${severityDescription}(${severityScore})`;
+//     await expect(page.getByText(severity).first()).toBeVisible();
+//   }
+// );
+
+// Then(
+//   "The description begins with {string}",
+//   async ({ page }, descriptionBeginsWith) => {
+//     await expect(
+//       page.getByRole("paragraph").filter({ hasText: descriptionBeginsWith })
+//     ).toBeVisible();
+//   }
+// );
+
+// Then(
+//   "The Reserved date is {string}, the Published date is {string} and Last modified date is {string}",
+//   async ({ page }, dateReserved, datePublished, dateLastModified) => {
+//     await expect(
+//       page
+//         .locator(".pf-v5-c-description-list > div:nth-child(1)")
+//         .filter({ hasText: "Reserved" })
+//         .filter({ hasText: dateReserved })
+//         .first()
+//     ).toBeVisible();
+//     await expect(
+//       page
+//         .locator(".pf-v5-c-description-list > div:nth-child(2)")
+//         .filter({ hasText: "Published date" })
+//         .filter({ hasText: datePublished })
+//         .first()
+//     ).toBeVisible();
+//     await expect(
+//       page
+//         .locator(".pf-v5-c-description-list > div:nth-child(3)")
+//         .filter({ hasText: "Last modified" })
+//         .filter({ hasText: dateLastModified })
+//         .first()
+//     ).toBeVisible();
+//   }
+// );
+
+// // SBOMS
+
+// Then("The SBOMs table is sorted by {string}", async ({ page }, columnName) => {
+//   const toolbarTable = new ToolbarTable(page, SBOM_TABLE_NAME);
+//   await toolbarTable.verifyTableIsSortedBy(columnName);
+// });
+
+// Then(
+//   "The SBOMs table total results is {int}",
+//   async ({ page }, totalResults) => {
+//     const toolbarTable = new ToolbarTable(page, SBOM_TABLE_NAME);
+//     await toolbarTable.verifyPaginationHasTotalResults(totalResults);
+//   }
+// );
+
+// Then(
+//   "The SBOMs table total results is greather than {int}",
+//   async ({ page }, totalResults) => {
+//     const toolbarTable = new ToolbarTable(page, SBOM_TABLE_NAME);
+//     await toolbarTable.verifyPaginationHasTotalResultsGreatherThan(
+//       totalResults
+//     );
+//   }
+// );
+
+// Then(
+//   "The {string} column of the SBOM table contains {string}",
+//   async ({ page }, columnName, expectedValue) => {
+//     const toolbarTable = new ToolbarTable(page, SBOM_TABLE_NAME);
+//     await toolbarTable.verifyColumnContainsText(columnName, expectedValue);
+//   }
+// );
+
+// // Advisories
+
+// Then("User selects the Tabs {string}", async ({ page }, tabName) => {
+//   await page.getByText(tabName).click();
+// });
+
+// Then(
+//   "The Advisory table is sorted by {string}",
+//   async ({ page }, columnName) => {
+//     const toolbarTable = new ToolbarTable(page, ADVISORY_TABLE_NAME);
+//     await toolbarTable.verifyTableIsSortedBy(columnName);
+//   }
+// );
+
+// Then(
+//   "The Advisory table total results is {int}",
+//   async ({ page }, totalResults) => {
+//     const toolbarTable = new ToolbarTable(page, ADVISORY_TABLE_NAME);
+//     await toolbarTable.verifyPaginationHasTotalResults(totalResults);
+//   }
+// );
+
+// Then(
+//   "The Advisory table total results is greather than {int}",
+//   async ({ page }, totalResults) => {
+//     const toolbarTable = new ToolbarTable(page, ADVISORY_TABLE_NAME);
+//     await toolbarTable.verifyPaginationHasTotalResultsGreatherThan(
+//       totalResults
+//     );
+//   }
+// );
+
+// Then(
+//   "The {string} column of the Advisory table contains {string}",
+//   async ({ page }, columnName, expectedValue) => {
+//     const toolbarTable = new ToolbarTable(page, ADVISORY_TABLE_NAME);
+//     await toolbarTable.verifyColumnContainsText(columnName, expectedValue);
+//   }
+// );

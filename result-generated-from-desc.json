@@ -1,0 +1,1199 @@
+{
+  "items": [
+    {
+      "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+      "node_id": "SPDXRef-SRPM",
+      "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src"],
+      "cpe": [],
+      "name": "openssl",
+      "version": "3.0.7-18.el9_2",
+      "published": "2006-08-14 02:34:56+00",
+      "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+      "product_name": "",
+      "product_version": "",
+      "descendants": [
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-x86-64-openssl-perl",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=x86_64"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-x86-64-openssl-libs-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=x86_64"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-x86-64-openssl-libs",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=x86_64"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-x86-64-openssl-devel",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=x86_64"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-x86-64-openssl-debugsource",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=x86_64"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-x86-64-openssl-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=x86_64"
+          ],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-x86-64-openssl",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=x86_64"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-s390x-openssl-perl",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=s390x"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-s390x-openssl-libs-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=s390x"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-s390x-openssl-libs",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=s390x"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-s390x-openssl-devel",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=s390x"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-s390x-openssl-debugsource",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=s390x"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-s390x-openssl-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=s390x"
+          ],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-s390x-openssl",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=s390x"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-ppc64le-openssl-perl",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=ppc64le"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-ppc64le-openssl-libs-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=ppc64le"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-ppc64le-openssl-libs",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=ppc64le"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-ppc64le-openssl-devel",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=ppc64le"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-ppc64le-openssl-debugsource",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=ppc64le"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-ppc64le-openssl-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=ppc64le"
+          ],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-ppc64le-openssl",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=ppc64le"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-i686-openssl-perl",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-i686-openssl-libs-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=i686"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-i686-openssl-libs",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-i686-openssl-devel",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-i686-openssl-debugsource",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=i686"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-i686-openssl-debuginfo",
+          "purl": ["pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-i686-openssl",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-aarch64-openssl-perl",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=aarch64"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-aarch64-openssl-libs-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=aarch64"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-aarch64-openssl-libs",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=aarch64"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-aarch64-openssl-devel",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=aarch64"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-aarch64-openssl-debugsource",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=aarch64"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-aarch64-openssl-debuginfo",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=aarch64"
+          ],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-aarch64-openssl",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=aarch64"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "019638b2-2c56-71e1-b149-35cd1f1e84f3",
+          "node_id": "SPDXRef-Source0",
+          "purl": [
+            "pkg:generic/openssl@3.0.7?download_url=https://github.com/(RH%20openssl%20midstream%20repo)/archive/refs/tags/3.0.7.tar.gz"
+          ],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7",
+          "published": "2006-08-14 02:34:56+00",
+          "document_id": "https://www.redhat.com/openssl-3.0.7-18.el9_2.spdx.json",
+          "product_name": "",
+          "product_version": "",
+          "relationship": "contains",
+          "descendants": []
+        }
+      ]
+    },
+    {
+      "sbom_id": "0196389e-5cca-7311-8150-47724beccb34",
+      "node_id": "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src",
+      "purl": [
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-aarch64-baseos-eus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-s390x-baseos-eus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-ppc64le-baseos-eus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-i686-baseos-eus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-x86_64-baseos-eus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-aarch64-baseos-aus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-s390x-baseos-aus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-ppc64le-baseos-aus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-i686-baseos-aus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-x86_64-baseos-aus-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-aarch64-baseos-e4s-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-s390x-baseos-e4s-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-ppc64le-baseos-e4s-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-i686-baseos-e4s-source-rpms",
+        "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src&repository_id=rhel-9-for-x86_64-baseos-e4s-source-rpms"
+      ],
+      "cpe": [],
+      "name": "openssl",
+      "version": "3.0.7-18.el9_2",
+      "published": "2006-08-14 02:34:56+00",
+      "document_id": "urn:uuid:337d9115-4e7c-4e76-b389-51f7aed6eba8/1",
+      "product_name": "Red Hat Enterprise Linux",
+      "product_version": "9.2 EUS",
+      "descendants": []
+    },
+    {
+      "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+      "node_id": "845b2326-0ed3-4b56-a121-a3457bbb1251",
+      "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src"],
+      "cpe": [],
+      "name": "openssl",
+      "version": "3.0.7-18.el9_2",
+      "published": "2024-12-17 05:38:26.655298+00",
+      "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+      "product_name": "openssl",
+      "product_version": "3.0.7-18.el9_2",
+      "descendants": []
+    },
+    {
+      "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+      "node_id": "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src",
+      "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=src"],
+      "cpe": [],
+      "name": "openssl",
+      "version": "3.0.7-18.el9_2",
+      "published": "2024-12-17 05:38:26.655298+00",
+      "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+      "product_name": "openssl",
+      "product_version": "3.0.7-18.el9_2",
+      "descendants": [
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=s390x",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=s390x"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=s390x",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=s390x"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": [
+            {
+              "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+              "node_id": "pkg:generic/openssl@3.0.7?package-id=d4557c28c5c2e817",
+              "purl": ["pkg:generic/openssl@3.0.7"],
+              "cpe": [],
+              "name": "openssl",
+              "version": "3.0.7",
+              "published": "2024-12-17 05:38:26.655298+00",
+              "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+              "product_name": "openssl",
+              "product_version": "3.0.7-18.el9_2",
+              "relationship": "generates",
+              "descendants": []
+            }
+          ]
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=s390x",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=s390x"
+          ],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=s390x",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=s390x"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=s390x",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=s390x"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=s390x",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=s390x"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=s390x",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=s390x"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=x86_64",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=x86_64"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=x86_64",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=x86_64"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": [
+            {
+              "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+              "node_id": "pkg:generic/openssl@3.0.7?package-id=d4557c28c5c2e817",
+              "purl": ["pkg:generic/openssl@3.0.7"],
+              "cpe": [],
+              "name": "openssl",
+              "version": "3.0.7",
+              "published": "2024-12-17 05:38:26.655298+00",
+              "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+              "product_name": "openssl",
+              "product_version": "3.0.7-18.el9_2",
+              "relationship": "generates"
+            }
+          ]
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=x86_64",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=x86_64"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=x86_64",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=x86_64"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=x86_64",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=x86_64"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=x86_64",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=x86_64"
+          ],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=x86_64",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=x86_64"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=i686",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=i686",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": [
+            {
+              "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+              "node_id": "pkg:generic/openssl@3.0.7?package-id=d4557c28c5c2e817",
+              "purl": ["pkg:generic/openssl@3.0.7"],
+              "cpe": [],
+              "name": "openssl",
+              "version": "3.0.7",
+              "published": "2024-12-17 05:38:26.655298+00",
+              "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+              "product_name": "openssl",
+              "product_version": "3.0.7-18.el9_2",
+              "relationship": "generates"
+            }
+          ]
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=i686",
+          "purl": ["pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=i686",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=i686",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=i686"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=i686",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=i686"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=i686",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=i686"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=ppc64le",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=ppc64le"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=ppc64le",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=ppc64le"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=ppc64le",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=ppc64le"
+          ],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=ppc64le",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=ppc64le"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": [
+            {
+              "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+              "node_id": "pkg:generic/openssl@3.0.7?package-id=d4557c28c5c2e817",
+              "purl": ["pkg:generic/openssl@3.0.7"],
+              "cpe": [],
+              "name": "openssl",
+              "version": "3.0.7",
+              "published": "2024-12-17 05:38:26.655298+00",
+              "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+              "product_name": "openssl",
+              "product_version": "3.0.7-18.el9_2",
+              "relationship": "generates"
+            }
+          ]
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=ppc64le",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=ppc64le"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=ppc64le",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=ppc64le"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=ppc64le",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=ppc64le"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=aarch64",
+          "purl": ["pkg:rpm/redhat/openssl-devel@3.0.7-18.el9_2?arch=aarch64"],
+          "cpe": [],
+          "name": "openssl-devel",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=aarch64",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debugsource@3.0.7-18.el9_2?arch=aarch64"
+          ],
+          "cpe": [],
+          "name": "openssl-debugsource",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=aarch64",
+          "purl": ["pkg:rpm/redhat/openssl@3.0.7-18.el9_2?arch=aarch64"],
+          "cpe": [],
+          "name": "openssl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": [
+            {
+              "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+              "node_id": "pkg:generic/openssl@3.0.7?package-id=d4557c28c5c2e817",
+              "purl": ["pkg:generic/openssl@3.0.7"],
+              "cpe": [],
+              "name": "openssl",
+              "version": "3.0.7",
+              "published": "2024-12-17 05:38:26.655298+00",
+              "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+              "product_name": "openssl",
+              "product_version": "3.0.7-18.el9_2",
+              "relationship": "generates"
+            }
+          ]
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=aarch64",
+          "purl": [
+            "pkg:rpm/redhat/openssl-libs-debuginfo@3.0.7-18.el9_2?arch=aarch64"
+          ],
+          "cpe": [],
+          "name": "openssl-libs-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=aarch64",
+          "purl": ["pkg:rpm/redhat/openssl-libs@3.0.7-18.el9_2?arch=aarch64"],
+          "cpe": [],
+          "name": "openssl-libs",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=aarch64",
+          "purl": [
+            "pkg:rpm/redhat/openssl-debuginfo@3.0.7-18.el9_2?arch=aarch64"
+          ],
+          "cpe": [],
+          "name": "openssl-debuginfo",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        },
+        {
+          "sbom_id": "0196389e-5cde-7731-a430-b55d5f6554dd",
+          "node_id": "pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=aarch64",
+          "purl": ["pkg:rpm/redhat/openssl-perl@3.0.7-18.el9_2?arch=aarch64"],
+          "cpe": [],
+          "name": "openssl-perl",
+          "version": "3.0.7-18.el9_2",
+          "published": "2024-12-17 05:38:26.655298+00",
+          "document_id": "urn:uuid:a4f16b62-fea9-42c1-8365-d72d3cef37d1/1",
+          "product_name": "openssl",
+          "product_version": "3.0.7-18.el9_2",
+          "relationship": "generates",
+          "descendants": []
+        }
+      ]
+    }
+  ],
+  "total": 4
+}
