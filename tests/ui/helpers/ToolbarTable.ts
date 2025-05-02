@@ -1,4 +1,5 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
+import { fail } from "assert";
 export class ToolbarTable {
   private _page: Page;
   private _tableName: string;
@@ -59,16 +60,10 @@ export class ToolbarTable {
    * And bottom section `//div[@id="vulnerability-table-pagination-bottom"]`
    */
   async verifyPagination(parentElem: string) {
-    const section = this._page.locator(parentElem);
     const perPageValues = [10, 20, 50, 100];
     const totalRows = await this.getTotalRowsFromPagination(parentElem);
     for (const value of perPageValues) {
-      const firstPage = section.getByRole("button", {
-        name: "Go to first page",
-      });
-      if (await firstPage.isEnabled()) {
-        await firstPage.click();
-      }
+      await this.goToFirstPage(parentElem);
       let expectedPagecount = Math.trunc(totalRows / value);
       let remainingRows = totalRows % value;
       if (remainingRows > 0) {
@@ -113,16 +108,7 @@ export class ToolbarTable {
    * @returns total row count from pagination dropdown
    */
   async getTotalRowsFromPagination(parentElem: string): Promise<number> {
-    const tableError = this._page.locator(
-      `xpath=(//tbody[@aria-label="Table error"])[1]`
-    );
-    if (await tableError.isVisible()) {
-      await expect(tableError, "No Data available").not.toBeVisible();
-    }
-    const progressBar = this._page.getByRole("gridcell", {
-      name: "Loading...",
-    });
-    await progressBar.waitFor({ state: "hidden", timeout: 5000 });
+    await this.waitForTableContent();
     const pagination = this._page.locator(parentElem);
     const totalResultsText = await pagination
       .locator(`xpath=//button//b[not(contains (.,'-'))]`)
@@ -204,7 +190,8 @@ export class ToolbarTable {
   }
 
   /**
-   *
+   * Verifies the Pagination Row Count
+   * Example, in pagination counter `1-10 of 61` - it verifies the @param expMinCount equals to 1 and @param expMaxCount equals to 10
    * @param parentElem required to differentiate top and bottom pagination
    * @param expMinCount Expected Min count on the counter
    * @param expMaxCount Expected Max count on the counter
@@ -224,6 +211,141 @@ export class ToolbarTable {
       .map((value) => parseInt(value.trim()));
     await expect(min).toEqual(expMinCount);
     await expect(max).toEqual(expMaxCount);
+  }
+
+  /**
+   * Verifies the columnHeader given is visible
+   * @param columnHeader Table Column Header
+   */
+  async verifyTableHeaderContains(columnHeader: string) {
+    const table = this.getTable();
+    await table.getByRole("columnheader", { name: columnHeader }).isVisible();
+  }
+
+  /**
+   * Verifies the given Table header doesn't have sortable attribute
+   * @param columnHeader Table Column Header
+   */
+  async verifyColumnIsNotSortable(columnHeader: string) {
+    //const table = this.getTable();
+    const elem = await this._page.getByRole("columnheader", {
+      name: `${columnHeader}`,
+    });
+    await elem.click();
+    await expect(elem).not.toHaveAttribute("aria-label");
+  }
+
+  /**
+   * Navigate to the First page of the WebTable
+   * @param parentElem ParentElement to identify Pagination
+   */
+  async goToFirstPage(parentElem: string) {
+    const firstPage = this._page.locator(parentElem).getByRole("button", {
+      name: "Go to first page",
+    });
+    if (await firstPage.isEnabled()) {
+      await firstPage.click();
+    }
+  }
+
+  /**
+   * Wait for Table data - Check for Table Error not occurs and Wait for 5000ms
+   */
+  async waitForTableContent() {
+    const tableError = this._page.locator(
+      `xpath=(//tbody[@aria-label="Table error"])[1]`
+    );
+    if (await tableError.isVisible()) {
+      await expect(tableError, "No Data available").not.toBeVisible();
+    }
+    const progressBar = this._page.getByRole("gridcell", {
+      name: "Loading...",
+    });
+    await progressBar.waitFor({ state: "hidden", timeout: 10000 });
+  }
+
+  /**
+   * Retrieve Table header and Row values in array
+   * @param parentElem ParentElement of pagination
+   * @returns two dimensional string which contains the contents of table
+   */
+  async getTableRows(parentElem: string): Promise<string[][]> {
+    const nextPageElem = await this._page
+      .locator(parentElem)
+      .getByLabel("Go to next page");
+    let isNextPageEnabled = true;
+    const tableData: string[][] = [];
+    await this.goToFirstPage(parentElem);
+    while (isNextPageEnabled) {
+      const vuln_table = await this.getTable();
+      const allRows = await vuln_table.locator(`tr`).all();
+      for (const row of allRows) {
+        const rowData = await row.locator(`th, td`).allTextContents();
+        tableData.push(rowData);
+      }
+      isNextPageEnabled = await nextPageElem.isEnabled();
+    }
+    return tableData;
+  }
+
+  /**
+   * Sort table for the given column index and sorting order
+   * @param table Source table for Sorting
+   * @param header Target header to be sorted
+   * @param sorting sorting order
+   * @returns tow dimensional array containing sorted table based on the given column in given sorting order
+   */
+  async sortTable(
+    table: string[][],
+    header: string,
+    sorting: string = `ascending`
+  ): Promise<string[][]> {
+    console.log(`Order is ${sorting}`);
+    const headerRow = table[0];
+    const dataRow = table.slice(1);
+    const index = headerRow.indexOf(header);
+    if (index < 0) {
+      fail("Given header not found");
+    }
+    console.log(`Index value of ${header} is ${index}`);
+    const sortedRows = [...dataRow].sort((rowA, rowB) => {
+      const valueA = rowA[index];
+      const valueB = rowB[index];
+      let compare = valueA.localeCompare(valueB);
+      if (sorting == "descending") {
+        compare *= -1;
+      }
+      return compare;
+    });
+    return [headerRow, ...sortedRows];
+  }
+
+  /**
+   * Verifies Sorting of given Columns in Ascending and Descending orders
+   * @param parentElem ParentElement for Pagination
+   * @param columnHeaders List of column headers to be verified
+   */
+  async verifySorting(parentElem: string, columnHeaders: string[]) {
+    const perPageValue = "100";
+    await this.waitForTableContent();
+    await this.selectPerPage(parentElem, perPageValue);
+    for (let header of columnHeaders) {
+      for (let order of [`ascending`, `descending`]) {
+        const headerElem = await this._page.getByRole("columnheader", {
+          name: `${header}`,
+        });
+        const sort = await headerElem.getAttribute(`aria-sort`);
+        if (sort !== order) {
+          await headerElem.click();
+        }
+        let sourceData = await this.getTableRows(parentElem);
+        let sortedData = await this.sortTable(await sourceData, header, order);
+        await expect(
+          sourceData,
+          `Column ${header} sorting ${order} order`
+        ).toEqual(sortedData);
+      }
+    }
   }
 
   private getTable() {
