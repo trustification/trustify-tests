@@ -9,13 +9,10 @@ export const { Given, When, Then } = createBdd();
 const PACKAGE_TABLE_NAME = "Package table";
 const VULN_TABLE_NAME = "Vulnerability table";
 
-Given(
-  "An ingested {string} SBOM {string} is available",
-  async ({ page }, _sbomType, sbomName) => {
-    const searchPage = new SearchPage(page);
-    await searchPage.dedicatedSearch("SBOMs", sbomName);
-  }
-);
+Given("An ingested SBOM {string} is available", async ({ page }, sbomName) => {
+  const searchPage = new SearchPage(page, "SBOMs");
+  await searchPage.dedicatedSearch(sbomName);
+});
 
 When(
   "User visits SBOM details Page of {string}",
@@ -83,10 +80,10 @@ Then(
 );
 
 Given(
-  "An ingested {string} SBOM {string} containing Vulnerabilities",
-  async ({ page }, _sbomType, sbomName) => {
-    const searchPage = new SearchPage(page);
-    await searchPage.dedicatedSearch("SBOMs", sbomName);
+  "An ingested SBOM {string} containing Vulnerabilities",
+  async ({ page }, sbomName) => {
+    const searchPage = new SearchPage(page, "SBOMs");
+    await searchPage.dedicatedSearch(sbomName);
     const element = await page.locator(
       `xpath=(//tr[contains(.,'${sbomName}')]/td[@data-label='Vulnerabilities']/div)[1]`
     );
@@ -149,10 +146,10 @@ Then(
 );
 
 Then(
-  "List of related Vulnerabilities should be sorted by {string} in descending order",
+  "List of related Vulnerabilities should be sorted by {string} in ascending order",
   async ({ page }, columnName) => {
     const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
-    await toolbarTable.verifyTableIsSortedBy(columnName, false);
+    await toolbarTable.verifyTableIsSortedBy(columnName, true);
   }
 );
 
@@ -166,4 +163,27 @@ Then("Pagination of Packages list works", async ({ page }) => {
   const toolbarTable = new ToolbarTable(page, PACKAGE_TABLE_NAME);
   const vulnTableTopPagination = `xpath=//div[@id="package-table-pagination-top"]`;
   await toolbarTable.verifyPagination(vulnTableTopPagination);
+});
+
+Then(
+  "List of Vulnerabilities has column {string}",
+  async ({ page }, columnHeader) => {
+    const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
+    await toolbarTable.verifyTableHeaderContains(columnHeader);
+  }
+);
+
+Then(
+  "Table column {string} is not sortable",
+  async ({ page }, columnHeader) => {
+    const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
+    await toolbarTable.verifyColumnIsNotSortable(columnHeader);
+  }
+);
+
+Then("Sorting of {string} Columns Works", async ({ page }, columnHeaders) => {
+  const headers = columnHeaders.split(`,`).map((column) => column.trim());
+  const toolbarTable = new ToolbarTable(page, VULN_TABLE_NAME);
+  const vulnTableTopPagination = `xpath=//div[@id="vulnerability-table-pagination-top"]`;
+  await toolbarTable.verifySorting(vulnTableTopPagination, headers);
 });
