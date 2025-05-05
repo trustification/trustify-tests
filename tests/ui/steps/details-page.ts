@@ -3,9 +3,9 @@ import { DetailsPage } from "../helpers/DetailsPage";
 
 export const { Given, When, Then } = createBdd();
 
-Then("The page title is {string}", async ({ page }, sbomName) => {
+Then("The page title is {string}", async ({ page }, title) => {
   const pageWithTabs = new DetailsPage(page);
-  await pageWithTabs.verifyPageHeader(sbomName);
+  await pageWithTabs.verifyPageHeader(title);
 });
 
 Then("Tab {string} is selected", async ({ page }, tabName) => {
