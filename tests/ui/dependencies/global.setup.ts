@@ -32,9 +32,7 @@ const uploadSboms = async (page: Page, files: string[]) => {
   );
 
   await expect(
-    page.locator(
-      "#upload-sbom-tab-content .pf-v6-c-expandable-section__toggle"
-    )
+    page.locator("#upload-sbom-tab-content .pf-v6-c-expandable-section__toggle")
   ).toContainText(`${files.length} of ${files.length} files uploaded`, {
     timeout: 60_000,
   });
