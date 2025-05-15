@@ -8,16 +8,16 @@ export const { Given, When, Then } = createBdd();
 // const SBOM_TABLE_NAME = "Sbom table";
 // const ADVISORY_TABLE_NAME = "Advisory table";
 
-// Given(
-//   "User visits Vulnerability details Page of {string}",
-//   async ({ page }, vulnerabilityID) => {
-//     const searchPage = new SearchPage(page);
-//     await searchPage.dedicatedSearch("Vulnerabilities", vulnerabilityID);
-//     await page.getByRole("link", { name: vulnerabilityID }).click();
-//   }
-// );
+Given(
+  "User visits Advisory details Page of {string}",
+  async ({ page }, advisoryID) => {
+    const searchPage = new SearchPage(page);
+    await searchPage.dedicatedSearch("Advisories", advisoryID);
+    await page.getByRole("link", { name: advisoryID }).click();
+  }
+);
 
-// Vulnerability Search
+// Advisory Search
 When(
   "User searches for an advisory named {string} in the general search bar",
   async ({ page }, item) => {
@@ -43,50 +43,7 @@ Then(
   }
 );
 
-// // Vulnerability Explorer
-// Then(
-//   "The severity is {string} and the CVSS score is {string}",
-//   async ({ page }, severityDescription, severityScore) => {
-//     const severity = `${severityDescription}(${severityScore})`;
-//     await expect(page.getByText(severity).first()).toBeVisible();
-//   }
-// );
-
-// Then(
-//   "The description begins with {string}",
-//   async ({ page }, descriptionBeginsWith) => {
-//     await expect(
-//       page.getByRole("paragraph").filter({ hasText: descriptionBeginsWith })
-//     ).toBeVisible();
-//   }
-// );
-
-// Then(
-//   "The Reserved date is {string}, the Published date is {string} and Last modified date is {string}",
-//   async ({ page }, dateReserved, datePublished, dateLastModified) => {
-//     await expect(
-//       page
-//         .locator(".pf-v5-c-description-list > div:nth-child(1)")
-//         .filter({ hasText: "Reserved" })
-//         .filter({ hasText: dateReserved })
-//         .first()
-//     ).toBeVisible();
-//     await expect(
-//       page
-//         .locator(".pf-v5-c-description-list > div:nth-child(2)")
-//         .filter({ hasText: "Published date" })
-//         .filter({ hasText: datePublished })
-//         .first()
-//     ).toBeVisible();
-//     await expect(
-//       page
-//         .locator(".pf-v5-c-description-list > div:nth-child(3)")
-//         .filter({ hasText: "Last modified" })
-//         .filter({ hasText: dateLastModified })
-//         .first()
-//     ).toBeVisible();
-//   }
-// );
+// Advisory Explorer
 
 // // SBOMS
 

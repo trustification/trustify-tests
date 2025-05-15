@@ -19,3 +19,31 @@ Feature: Advisory Explorer
             | advisoryID      |
             | CVE-2023-1664   |
 
+    # Advisory Explorer
+    Scenario: Display an overview of an advisory
+        When User visits Advisory details Page of "<advisoryID>"
+        Then The page title is "<advisoryID>"
+        Then The "Download" button is visible
+
+        Examples:
+            | advisoryID      |
+            | CVE-2023-1664   |
+
+    Scenario: Download an advisory
+        When User visits Advisory details Page of "<advisoryID>"
+        And User clicks the "Download" button
+        Then File with the name "<fileName>" is downloaded
+
+        Examples:
+            | advisoryID      | fileName                                   |
+            | CVE-2023-1664   | https___www.redhat.com_#CVE-2023-1664.json |
+
+    Scenario: Display the Info tab
+        When User visits Advisory details Page of "<advisoryID>"
+        Then The "Overview" panel is visible
+        Then The "Publisher" panel is visible
+        Then The "Tracking" panel is visible
+
+        Examples:
+            | advisoryID      |
+            | CVE-2023-1664   |
