@@ -66,7 +66,7 @@ export const discoverTokenEndpoint = async (
     }),
   });
 
-  const matcher = indexPage.data.match(/window._env="([^"]+)"/);
+  const matcher = indexPage.data.match(/window._env\s*=\s*"([^"]+)"/);
   const serverConfig = matcher?.[1];
   if (!serverConfig) {
     return null;
