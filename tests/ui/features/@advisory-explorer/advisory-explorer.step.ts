@@ -5,8 +5,7 @@ import { expect } from "@playwright/test";
 
 export const { Given, When, Then } = createBdd();
 
-// const SBOM_TABLE_NAME = "Sbom table";
-// const ADVISORY_TABLE_NAME = "Advisory table";
+const VULNERABILITIES_TABLE_NAME = "vulnerability table";
 
 Given(
   "User visits Advisory details Page of {string}",
@@ -44,6 +43,27 @@ Then(
 );
 
 // Advisory Explorer
+Then("The vulnerabilities table is sorted by {string}", async ({ page }, columnName) => {
+  const toolbarTable = new ToolbarTable(page, VULNERABILITIES_TABLE_NAME);
+  await toolbarTable.verifyTableIsSortedBy(columnName);
+});
+
+Then(
+  "The vulnerabilities table total results is {int}",
+  async ({ page }, totalResults) => {
+    const toolbarTable = new ToolbarTable(page, VULNERABILITIES_TABLE_NAME);
+    await toolbarTable.verifyPaginationHasTotalResults(totalResults);
+  }
+);
+
+Then(
+  "The {string} column of the vulnerability table contains {string}",
+  async ({ page }, columnName, expectedValue) => {
+    const toolbarTable = new ToolbarTable(page, VULNERABILITIES_TABLE_NAME);
+    await toolbarTable.verifyColumnContainsText(columnName, expectedValue);
+  }
+);
+
 
 // // SBOMS
 
