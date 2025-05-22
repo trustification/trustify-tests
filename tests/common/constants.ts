@@ -67,4 +67,5 @@ export const ADVISORY_FILES = [
   "cve-2023-4853.json.bz2",
   "cve-2023-20860.json.bz2",
   "cve-2023-28867.json.bz2",
+  "cve-2024-26308.json.bz2",
 ];
