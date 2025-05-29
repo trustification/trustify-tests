@@ -17,6 +17,8 @@ export const logger = {
   },
 };
 
+export const SETUP_TIMEOUT = 240_000;
+
 export const SBOM_FILES = [
   "quarkus-bom-2.13.8.Final-redhat-00004.json.bz2",
   "ubi8_ubi-micro-8.8-7.1696517612.json.bz2",

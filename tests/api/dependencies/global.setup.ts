@@ -3,7 +3,11 @@ import path from "path";
 
 import { AxiosInstance } from "axios";
 
-import { ADVISORY_FILES, SBOM_FILES } from "../../common/constants";
+import {
+  ADVISORY_FILES,
+  SBOM_FILES,
+  SETUP_TIMEOUT,
+} from "../../common/constants";
 import { UploadSbomResponse } from "../client";
 import { test as setup } from "../fixtures";
 
@@ -14,7 +18,7 @@ setup.describe("Ingest initial data", () => {
   );
 
   setup("Upload files", async ({ axios }) => {
-    setup.setTimeout(120_000);
+    setup.setTimeout(SETUP_TIMEOUT);
     await uploadSboms(axios, SBOM_FILES);
     await uploadAdvisories(axios, ADVISORY_FILES);
   });

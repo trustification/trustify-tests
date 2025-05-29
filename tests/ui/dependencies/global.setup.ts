@@ -1,7 +1,11 @@
 import path from "path";
 import { expect, Page, test as setup } from "@playwright/test";
 import { login } from "../helpers/Auth";
-import { ADVISORY_FILES, SBOM_FILES } from "../../common/constants";
+import {
+  ADVISORY_FILES,
+  SBOM_FILES,
+  SETUP_TIMEOUT,
+} from "../../common/constants";
 
 setup.describe("Ingest initial data", () => {
   setup.skip(
@@ -15,7 +19,7 @@ setup.describe("Ingest initial data", () => {
     await page.goto(baseURL!);
     await page.getByRole("link", { name: "Upload" }).click();
 
-    setup.setTimeout(120_000);
+    setup.setTimeout(SETUP_TIMEOUT);
     await uploadSboms(page, SBOM_FILES);
     await uploadAdvisories(page, ADVISORY_FILES);
   });
@@ -34,7 +38,7 @@ const uploadSboms = async (page: Page, files: string[]) => {
   await expect(
     page.locator("#upload-sbom-tab-content .pf-v6-c-expandable-section__toggle")
   ).toContainText(`${files.length} of ${files.length} files uploaded`, {
-    timeout: 60_000,
+    timeout: SETUP_TIMEOUT / 2,
   });
 };
 
@@ -53,6 +57,6 @@ const uploadAdvisories = async (page: Page, files: string[]) => {
       "#upload-advisory-tab-content .pf-v6-c-expandable-section__toggle"
     )
   ).toContainText(`${files.length} of ${files.length} files uploaded`, {
-    timeout: 60_000,
+    timeout: SETUP_TIMEOUT / 2,
   });
 };
