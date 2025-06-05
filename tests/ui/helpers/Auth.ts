@@ -13,6 +13,6 @@ export const login = async (page: Page) => {
     await page.fill('input[name="password"]:visible', userPassword);
     await page.keyboard.press("Enter");
 
-    await page.waitForSelector("text=Your Dashboard"); // Ensure login was successful
+    await page.waitForSelector("text=Dashboard"); // Ensure login was successful
   }
 };
