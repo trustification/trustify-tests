@@ -315,18 +315,23 @@ export class ToolbarTable {
     }
     let isDate = this.isValidDate(dataRow[row][index]);
     let isCVSS = this.isCVSS(dataRow[row][index]);
+    let isCVE = this.isCVE(dataRow[row][index]);
     const sortedRows = [...dataRow].sort((rowA, rowB) => {
       let compare: any;
-      const valueA = rowA[index];
-      const valueB = rowB[index];
+      let valueA = rowA[index];
+      let valueB = rowB[index];
       if (isDate) {
-        const dateA = new Date(valueA);
-        const dateB = new Date(valueB);
+        let dateA = new Date(valueA);
+        let dateB = new Date(valueB);
         compare = dateA.getTime() - dateB.getTime();
       } else if (isCVSS) {
-        const cvssA = this.getCVSS(valueA);
-        const cvssB = this.getCVSS(valueB);
+        let cvssA = this.getCVSS(valueA);
+        let cvssB = this.getCVSS(valueB);
         compare = cvssA - cvssB;
+      } else if (isCVE) {
+        let [cveYA, cveIA] = this.getCVE(valueA);
+        let [cveYB, cveIB] = this.getCVE(valueB);
+        compare = cveYA !== cveYB ? cveYA - cveYB : cveIA - cveIB;
       } else {
         compare = valueA.localeCompare(valueB);
       }
@@ -360,6 +365,16 @@ export class ToolbarTable {
   }
 
   /**
+   * To verify the given string is in CVE format
+   * @param cve input CVSS value
+   * @returns true if the given input is in CVE format
+   */
+  isCVE(cve: string): boolean {
+    const cveRegex = /^CVE-(\d+?)-(\d+?)$/;
+    return cveRegex.test(cve) ? true : false;
+  }
+
+  /**
    * To retrieve CVSS score from the given string
    * @param cvssString input CVSS value
    * @returns CVSS score if the given input is in CVSS format
@@ -368,6 +383,17 @@ export class ToolbarTable {
     const cvssRegex = /^.+\((\d*\.*\d+?)\)$/;
     let cvssScore = cvssString.match(cvssRegex)!;
     return parseFloat(cvssScore[1]!);
+  }
+
+  /**
+   * To retrieve CVE year and ID from the given string
+   * @param cve input CVE value
+   * @returns CVE Year and ID if the given input is in CVE format
+   */
+  getCVE(cve: string): [number, number] {
+    const matchCVE = cve.match(/^CVE-(\d+)-(\d+)$/);
+    if (!matchCVE) throw new Error(`Invalid CVE format: ${cve}`);
+    return [Number(matchCVE[1]), Number(matchCVE[2])];
   }
 
   /**
@@ -385,7 +411,7 @@ export class ToolbarTable {
       if (sort === sortOrder) {
         return true;
       } else {
-        await headerElem.click();
+        await headerElem.getByRole("button").click();
       }
     }
     return false;
