@@ -6,10 +6,10 @@
   "scripts": {
     "openapi": "openapi-ts -f ./config/openapi-ts.config.ts",
     "codegen": "npx playwright codegen http://localhost:8080/",
-    "test": "npx bddgen && npx playwright test --project='chromium'",
-    "test:api": "npx bddgen && npx playwright test --project='api'",
+    "test": "npx bddgen && npx playwright test --project='api' --project='chromium'",
+    "test:api": "npx playwright test --project='api'",
     "test:ui": "npx bddgen && npx playwright test --project='chromium'",
-    "test:ui:trace": "npx bddgen && npx playwright test --trace on",
+    "test:ui:trace": "npx bddgen && npx playwright test --project='chromium' --trace on",
     "test:ui:host": "npx bddgen && npx playwright test --ui-host 127.0.0.1",
     "format:check": "prettier --check './**/*.{ts,js,json}'",
     "format:fix": "prettier --write './**/*.{ts,js,json}'"
