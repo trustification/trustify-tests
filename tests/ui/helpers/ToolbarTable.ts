@@ -229,4 +229,59 @@ export class ToolbarTable {
   private getTable() {
     return this._page.locator(`table[aria-label="${this._tableName}"]`);
   }
+
+  /**
+   * Verifies that typing a page number in the pagination input
+   * and pressing <Enter> navigates correctly – for EVERY per-page option.
+   *
+   * @param parentElem   XPath that points to the specific pagination block (top or bottom).
+   */
+    async verifyPageJumpWithInput(parentElem: string) {
+    const section = this._page.locator(parentElem);
+    const perPageValues = [10, 20, 50, 100];
+  
+    const totalRows = await this.getTotalRowsFromPagination(parentElem);
+  
+    for (const perPage of perPageValues) {
+      // make sure we start from the first page
+      const firstBtn = section.getByRole("button", { name: /go to first page/i });
+      if (await firstBtn.isEnabled()) await firstBtn.click();
+
+      await this.selectPerPage(parentElem, `${perPage} per page`);
+  
+      const progress = this._page.getByRole("gridcell", { name: "Loading..." });
+      await progress.waitFor({ state: "hidden", timeout: 5000 });
+
+      const expectedPages = Math.ceil(totalRows / perPage);
+      const actualPages = await this.getTotalPagesFromNavigation(parentElem);
+      await expect(actualPages, "Mismatch in total page count").toEqual(expectedPages);
+
+      const input = section.locator("input[type='number']");
+
+      for (let pageNum = 1; pageNum <= expectedPages; pageNum++) {
+        await input.fill(pageNum.toString());
+        await input.press("Enter");
+  
+        await progress.waitFor({ state: "hidden", timeout: 5000 });
+  
+        await expect(await input.inputValue())
+          .toEqual(pageNum.toString());
+  
+        const expectedRows =
+          pageNum === expectedPages && totalRows % perPage !== 0
+            ? totalRows % perPage         // last page – remainder rows
+            : perPage;                    // full page
+  
+        await this.verifyPerPageToRowCount(expectedRows);
+  
+        const start = (pageNum - 1) * perPage + 1;
+        const end = start + expectedRows - 1;
+  
+        await this.verifyRowsCounterPagination(parentElem, start, end);
+      }
+    }
+  }
 }
+
+
+

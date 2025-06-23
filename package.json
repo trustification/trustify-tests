@@ -18,10 +18,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "axios": "^1.8.2",
     "@hey-api/client-axios": "^0.6.2",
     "@hey-api/openapi-ts": "^0.64.10",
+    "@playwright/test": "^1.53.0",
     "@types/node": "^22.0.2",
+    "axios": "^1.8.2",
     "playwright-bdd": "^8.0.1",
     "prettier": "^3.3.3"
   }

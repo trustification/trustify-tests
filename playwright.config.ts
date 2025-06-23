@@ -1,27 +1,28 @@
-import { defineConfig, devices } from "@playwright/test";
-import { defineBddConfig } from "playwright-bdd";
-
-const testDir = defineBddConfig({
-  features: ["tests/**/features/@*/*.feature"],
-  steps: ["tests/**/features/**/*.step.ts", "tests/**/steps/**/*.ts"],
-});
+import { defineConfig, devices } from '@playwright/test';
+import { defineBddConfig } from 'playwright-bdd';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
 // import dotenv from 'dotenv';
+// import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
+const bddConfig = defineBddConfig({
+  paths: ['features/**/*.feature'], // Path to your Gherkin feature files
+  require: ['features/**/*.ts'],      // Path to your step definition files
+});
+
 
 const DESKTOP_CONFIG = {
-  viewport: { height: 961, width: 1920 },
-};
-
+  viewport: { width: 1920, height: 961 },
+}
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir,
+  testDir: './e2e',
+  testMatch: bddConfig,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -31,82 +32,58 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.TRUSTIFY_URL ?? "http://localhost:8080/",
+    // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
-
-    ignoreHTTPSErrors: true,
+    trace: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
-      use: {
-        ...devices["Desktop Chrome"],
-        ...DESKTOP_CONFIG,
-      },
-      dependencies: ["setup-ui-data"],
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
     },
 
     {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-        ...DESKTOP_CONFIG,
-      },
-      dependencies: ["setup-ui-data"],
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
     },
 
     {
-      name: "webkit",
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+    {
+      name: 'setup-ui-data',
+      testDir: '/tests/ui/dependencies',
+      testMatch: '*.setup.ts',
+      teardown: 'cleanup-ui-data',
       use: {
-        ...devices["Desktop Safari"],
-        ...DESKTOP_CONFIG,
-      },
-      dependencies: ["setup-ui-data"],
+        ...DESKTOP_CONFIG,}
+
     },
 
+
     {
-      name: "setup-ui-data",
-      testDir: "./tests/ui/dependencies",
-      testMatch: "*.setup.ts",
-      teardown: "cleanup-ui-data",
-      use: {
-        ...DESKTOP_CONFIG,
-      },
-    },
-    {
-      name: "cleanup-ui-data",
-      testDir: "./tests/ui/dependencies",
-      testMatch: "*.teardown.ts",
+      name: 'cleanup-ui-data',
+      testDir: '/tests/ui/dependencies',
+      testMatch: '*.teardown.ts',
       use: {
         ...DESKTOP_CONFIG,
       },
     },
 
     {
-      name: "api",
-      testDir: "./tests/api/features",
+      name: 'ui',
+      testDir: './tests/ui/features',
       testMatch: /.*\.ts/,
-      dependencies: ["setup-api-data"],
-    },
-    {
-      name: "setup-api-data",
-      testDir: "./tests/api/dependencies",
-      testMatch: "*.setup.ts",
-      teardown: "cleanup-api-data",
-    },
-    {
-      name: "cleanup-api-data",
-      testDir: "./tests/api/dependencies",
-      testMatch: "*.teardown.ts",
-    },
+      dependencies: ['setup-ui-data']
+    }
 
     /* Test against mobile viewports. */
     // {
@@ -132,7 +109,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
+  //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
 });

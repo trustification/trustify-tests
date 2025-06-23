@@ -1,6 +1,6 @@
 Feature: Importer Explorer - View and configure importers on importers details page
   Background:
-      Given: The user navigates to TPA URL and logs into the TPA application
+      Given: The user navigates                                 to TPA URL and logs into the TPA application
 
 Scenario: The user navigates to Importers Explore page
   Given the user navigates to TPA URL page successfully
