@@ -1,6 +1,6 @@
 Feature: SBOM Explorer - View SBOM details
-    # Background: Authentication
-    #     Given User is authenticated
+    Background: Authentication
+        Given User is authenticated
 
     Scenario Outline: View SBOM Overview
         Given An ingested "<sbomType>" SBOM "<sbomName>" is available

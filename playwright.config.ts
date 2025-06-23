@@ -1,16 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
-import { defineBddProject } from "playwright-bdd";
+import { defineBddConfig } from "playwright-bdd";
 
-const createBddProjectConfig = (name: string) => {
-  return defineBddProject({
-    name,
-    
-    featuresRoot: "tests/ui/features",
-    features: ["tests/**/features/@*/*.feature"],
-    steps: ["tests/**/features/**/*.step.ts", "tests/**/steps/**/*.ts"],
-    outputDir: "tests/.features-gen",
-  });
-};
+const testDir = defineBddConfig({
+  features: ["tests/**/features/@*/*.feature"],
+  steps: ["tests/**/features/**/*.step.ts", "tests/**/steps/**/*.ts"],
+});
 
 /**
  * Read environment variables from file.
@@ -27,9 +21,7 @@ const DESKTOP_CONFIG = {
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  // testDir,
-  testDir: "./tests",
-  testIgnore: ["*.setup.ts", "*.teardown.ts"],
+  testDir,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -54,17 +46,16 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      ...createBddProjectConfig("chromium"),
+      name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
         ...DESKTOP_CONFIG,
       },
       dependencies: ["setup-ui-data"],
-      testDir: "./tests/",
     },
 
     {
-      ...createBddProjectConfig("firefox"),
+      name: "firefox",
       use: {
         ...devices["Desktop Firefox"],
         ...DESKTOP_CONFIG,
@@ -73,12 +64,23 @@ export default defineConfig({
     },
 
     {
-      ...createBddProjectConfig("webkit"),
+      name: "webkit",
       use: {
         ...devices["Desktop Safari"],
         ...DESKTOP_CONFIG,
       },
       dependencies: ["setup-ui-data"],
+    },
+
+    {
+      name: "vanilla",
+      testDir: "./tests/ui/pages",
+      testMatch: "*.spec.ts",
+      dependencies: ["setup-ui-data"],
+      use: {
+        ...devices["Desktop Chrome"],
+        ...DESKTOP_CONFIG,
+      },
     },
 
     {
