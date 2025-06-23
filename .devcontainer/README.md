@@ -5,7 +5,8 @@ Use [Devcontainers](https://code.visualstudio.com/docs/devcontainers/containers)
 Generate the `devcontainer.json` executing:
 
 ```shell
-.devcontainer/generate_devcontainer.sh
+cd .devcontainer
+./generate_devcontainer.sh
 ```
 
 Now you should see the file `.devcontainer/devcontainer.json`. At this point you can use your favorite IDE to run Devcontainers

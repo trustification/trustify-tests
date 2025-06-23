@@ -1,5 +1,5 @@
 {
-  "name": "trustify-ui-tests",
+  "name": "trustify-tests",
   "build": {
     "dockerfile": "Dockerfile"
   },
@@ -25,20 +25,12 @@
       "label": "real vnc"
     }
   },
-  "onCreateCommand": "npx playwright install-deps && npx playwright install",
-  "postCreateCommand": "npm ci",
   "customizations": {
     "vscode": {
       "extensions": [
-        "k--kato.intellij-idea-keybindings",
-        "vadimcn.vscode-lldb",
         "ms-playwright.playwright",
         "alexkrechik.cucumberautocomplete",
-        "github.vscode-pull-request-github",
-        "GitHub.github-vscode-theme",
-        "esbenp.prettier-vscode",
-        "oderwat.indent-rainbow",
-        "eamodio.gitlens"
+        "esbenp.prettier-vscode"
       ]
     }
   }
