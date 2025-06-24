@@ -45,11 +45,32 @@ export class ToolbarTable {
     ).toHaveAttribute("aria-sort", asc ? "ascending" : "descending");
   }
 
+/**
+ * Check if specific table column contains the expected value 
+ * 
+ * @param columnName 
+ * @param expectedValue 
+ */
+
   async verifyColumnContainsText(columnName: any, expectedValue: any) {
     const table = this.getTable();
-    await expect(table.locator(`td[data-label="${columnName}"]`)).toContainText(
-      expectedValue
-    );
+    const matchingCells = table.locator(`td[data-label="${columnName}"]`).getByText(expectedValue);
+    
+    await expect(matchingCells.first()).toBeVisible({timeout: 60000});
+  }
+
+/**
+ * Check if specific table column does not contain the expected value
+ * 
+ * @param columnName 
+ * @param expectedValue 
+ */
+
+  async verifyColumnDoesNotContainText(columnName: any, expectedValue: any) {
+    const table = this.getTable();
+    const field = table.locator(`td[data-label="${columnName}"]`);
+
+    await expect(field.getByText(expectedValue)).toHaveCount(0);
   }
 
   /**
@@ -449,9 +470,16 @@ export class ToolbarTable {
     }
   }
 
+
+  /**
+   * Verifies the download link is available on the table
+   * @param type SBOMs or Advisories
+   */
   async verifyDownloadLink(type: string) {
     const table = this.getTable();
-    await table.locator('[aria-label="Kebab toggle"]').first().click();
+    const link = table.locator('[aria-label="Kebab toggle"]').first(); 
+    await expect(link).toBeVisible({timeout: 60000});
+    await link.click();
     if (type === "SBOMs") {
       await expect(table.locator("text=Download SBOM")).toBeVisible();
       await expect(table.locator("text=Download License Report")).toBeVisible();
@@ -460,10 +488,88 @@ export class ToolbarTable {
     }
   }
 
-
+  /**
+   * Verifies the table has up to the given number of rows
+   * @param rows Number of rows
+   */
   async verifyTableHasUpToRows(rows: number) {
     const table = this.getTable();
-    await expect(table.locator("tbody tr").count()).toBeLessThanOrEqual(rows);
+    await expect(await table.locator("tbody tr").count()).toBeLessThanOrEqual(rows);
+  }
+
+  /**
+   * Verifies the table is visible
+   */
+  async verifyTableIsVisible() {
+    const table = this.getTable();
+    await expect(table).toBeVisible({ timeout: 60000 });
+  }
+
+  /**
+   * Fills the date filter with the given date range
+   * @param from Start date in MM/DD/YYYY format
+   * @param to End date in MM/DD/YYYY format
+   */
+  async filterByDate(from: string, to: string) {
+    const fromDate = this._page.locator('input[aria-label="Interval start"]');
+    const toDate = this._page.locator('input[aria-label="Interval end"]');
+    await fromDate.fill(from);
+    await toDate.fill(to);
+  }
+
+  /**
+   * Clicks on the filter button to delete filters
+   */
+  async clearFilter() {
+    this._page.getByText("Clear all filters").click();
+  }
+
+  async openDetailsPage(name: string,columnName: string = "Name") {
+    const table = this.getTable();
+    await table.locator(`td[data-label="${columnName}"]`).getByText(name).first().click();
+  }
+
+  /**
+   * Clicks on the table header to sort the column
+   * @param columnName Name of the column to sort
+   */
+  async sortByColumn(columnName: string, order:string = "ascending") {
+    const table = this.getTable();
+    const column = table.locator(`th`, { hasText: columnName });
+    if ((order === "ascending") && (await column.getAttribute('aria-sort') !== "ascending")) {
+      await column.click();
+    } else {
+      for (let i = 0; i < 2; i++) {
+        if (await column.getAttribute('aria-sort') !== "descending") {
+          await column.click();
+        }
+        else {
+          break;
+        }
+      }
+    }
+  }
+
+  async isColumnSorted(columnName: string, order: string) {
+    const table = this.getTable();
+    const column = table.locator(`th`, { hasText: columnName });
+    const sorted = await column.getAttribute('aria-sort');
+
+    return sorted === order;
+  }
+
+  async switchToPage(page:number){
+    const table = this.getTable();
+    const input = table.locator('input[aria-label="Current page"]');
+    await input.fill(page.toString());
+    await input.press("Enter");
+  }
+
+  async verifyColumnContainsLink(columnName: string) {
+    const table = this.getTable();
+    const field = table.locator(`td[data-label="${columnName}"]`);
+    const link = field.locator("a");
+    await expect(link).toBeVisible();
   }
 
   private getTable() {
