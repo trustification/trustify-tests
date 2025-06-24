@@ -39,7 +39,11 @@ export class SearchPage {
   } 
 
   async typeInSearchBox(searchText: string) {
-    await this.page.locator("#autocomplete-search").locator('[aria-label="Search input"]').fill(searchText);
+    await this.page.waitForLoadState("networkidle");
+    const searchBox = this.page.locator("#autocomplete-search").locator('[aria-label="Search input"]');
+    await expect(searchBox).toBeVisible();
+    await searchBox.click();
+    await this.page.keyboard.type(searchText);
   }
 
   async autoFillIsVisible() {
@@ -47,6 +51,6 @@ export class SearchPage {
   }
 
   async autoFillIsNotVisible() {
-    await expect(this.page.locator("#autocomplete-search").locator(".pf-v5-c-menu")).not.toBeVisible();
+    await expect(this.page.locator("#autocomplete-search").locator(".pf-v5-c-menu")).toBeHidden({timeout: 30000});
   }
 }

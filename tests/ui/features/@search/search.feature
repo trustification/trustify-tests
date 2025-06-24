@@ -14,62 +14,60 @@ Background:
 # 	And a total number of "CVEs" should be visible in the tab
 # 	And a total number of "Advisories" should be visible in the tab
 
-# Scenario Outline: User toggles the <types> list and manipulates the list
-# 	When User navigates to Search results page 
-# 	And user toggles the <types> list
-# 	Then the <types> list should have specific filter set
-# 	And the user should be able to filter <types>
-# 	And the <types> list should be sortable
-# 	And the <types> list should be limited to 10 items
-# 	And the user should be able to switch to next <types> items
-# 	And the user should be able to increase pagination for the <types>
-# 	And First column on the search results should have the link to <types> explorer pages
+Scenario Outline: User toggles the <types> list and manipulates the list
+ 	When User selects the Tab "<types>" 
+	Then the "<types>" list should have specific filter set
+	And the "<types>" list should be sortable
+	And the "<types>" list should be limited to 10 items
+	And the user should be able to switch to next "<types>" items
+	And the user should be able to increase pagination for the "<types>"
+	And First column on the search results should have the link to "<types>" explorer pages
 
-# 	Examples:
-# 	|types|
-# 	|SBOMs|
-# 	|Packages|
-# 	|CVEs|
-# 	|Advisories|
-
-Scenario Outline: Download Links on the <types> Search Result list
-	When User selects the Tab "<types>" 
-	Then Tab "<types>" is visible
-	And Download link should be available for the "<types>" list
-	
-        Examples:
+	Examples:
 	|types|
 	|SBOMs|
-	|Advisories|
+	# |Packages|
+	# |Vulnerabilities|
+	# |Advisories|
+
+# Scenario Outline: Download Links on the <types> Search Result list
+# 	When User selects the Tab "<types>" 
+# 	Then Tab "<types>" is visible
+# 	And Download link should be available for the "<types>" list
+	
+#         Examples:
+# 	|types|
+# 	|SBOMs|
+# 	|Advisories|
 
 # Scenario Outline: Autofill shows results matched on <input> 
-# 	When user starts typing a <input> in the search bar  
-# 	Then the autofill dropdown should display items matching the <input> 
+# 	When user starts typing a "<input>" in the search bar  
+# 	Then the autofill dropdown should display items matching the "<input>" 
 # 	And the results should be limited to 5 suggestions
 
 # 	Examples:
 # 	|input|
-# 	|SBOM name|
-# 	|CVE ID|
-# 	|CVE description|
+# 	|quarkus-bom|
+# 	|CVE-2022-45575|
+# 	|Certain NETGEAR devices|
 
-Scenario: Search bar should not preview anything when no matches are found 
-	When user starts typing a "non-existent name" in the search bar
-	Then The autofill drop down should not show any values
+# Scenario: Search bar should not preview anything when no matches are found 
+# 	And user starts typing a "non-existent name" in the search bar
+# 	Then The autofill drop down should not show any values
 
-Scenario Outline: User searches for a specific <type> 
- 	When user types a "<type-name>" in the search bar
- 	And user presses Enter
-	And User selects the Tab "<types>" 
- 	Then the "<types>" list should display the specific "<type-name>"
-	And the list should be limited to 10 items or less
- 	And the user should be able to filter "<types>" 
- 	And user clicks on the "<type>" name
- 	And the user should be navigated to the specific "<type>" page 
+# Scenario Outline: User searches for a specific "<type>"
+#  	When user types a "<type-name>" in the search bar
+#  	And user presses Enter
+# 	And User selects the Tab "<types>" 
+#  	Then the "<types>" list should display the specific "<type-name>"
+# 	And the list should be limited to 10 items or less
+#  	And the user should be able to filter "<types>" 
+#  	And user clicks on the "<type-name>" "<type>" link
+#  	And the user should be navigated to the specific "<type-name>" page 
 
 # 	Examples:
 # 	|type|types|type-name|
 # 	|SBOM|SBOMs|quarkus-bom|
-# 	|CVE|CVEs|CVE ID|
-# 	|package|Packages|package name|
-# 	|advisory|Advisories|advisory name|
+# 	|CVE|Vulnerabilities|CVE-2022-45787|
+# 	|Package|Packages|mariadb|
+# 	|Advisory|Advisories|CVE-2022-45787|

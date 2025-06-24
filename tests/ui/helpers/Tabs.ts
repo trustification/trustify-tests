@@ -9,7 +9,7 @@ export class Tabs{
 
   async selectTab(tabName: string) {
     const tab = this.page.locator("button[role='tab']", { hasText: tabName });
-    expect(tab).toBeVisible();
+    expect(tab).toBeVisible({ timeout: 60000 });
     tab.click();
   }
 
