@@ -25,11 +25,8 @@ export class Toolbar {
    * @param filterName the name of the filter as rendered in the UI
    */
   async selectFilter(filterName: string) {
-    await this._toolbar.locator("[aria-label='filter-toggle']").click();
-    await this._page
-      .locator("[aria-label='filter-menu']")
-      .getByText(filterName)
-      .click();
+    await this._toolbar.locator(".pf-m-toggle-group button.pf-v6-c-menu-toggle").click();
+    await this._page.getByRole("menuitem", { name: filterName }).click();
   }
 
   private async assertFilterHasLabels(
