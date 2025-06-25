@@ -11,12 +11,12 @@ export class Table {
 
   /**
    * @param page
-   * @param toolbarAriaLabel the unique aria-label that correspont to the DOM element that contains the Table. E.g. <table aria-label="identifier"></table>
+   * @param tableAriaLabel the unique aria-label that correspont to the DOM element that contains the Table. E.g. <table aria-label="identifier"></table>
    * @returns a new instance of a Toolbar
    */
   static async build(page: Page, tableAriaLabel: string) {
     const table = page.locator(`table[aria-label="${tableAriaLabel}"]`);
-    await expect(table).toBeVisible({ timeout: 5000 });
+    await expect(table).toBeVisible();
     return new Table(page, table);
   }
 

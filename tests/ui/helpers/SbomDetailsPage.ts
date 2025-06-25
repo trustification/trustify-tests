@@ -58,7 +58,7 @@ export class SbomDetailsPage {
     let vulnLabelCount = {};
     for (let element of elements) {
       let innerText = await element.textContent();
-      let labelArr = await innerText!.split(delimiter);
+      let labelArr = innerText!.split(delimiter);
       vulnLabelCount[labelArr[0].trim().toString()] = parseInt(
         labelArr[1].trim(),
         10
@@ -82,15 +82,15 @@ export class SbomDetailsPage {
       High: 0,
       Critical: 0,
     };
-    const nextButton = await this.page.locator(
+    const nextButton = this.page.locator(
       `xpath=(//section[@id='refVulnerabilitiesSection']//button[@data-action='next'])[1]`
     );
 
-    const noOfRows = await this.page.locator(
+    const noOfRows = this.page.locator(
       `xpath=//section[@id="refVulnerabilitiesSection"]//button[@id="pagination-id-top-toggle"]`
     );
     if (await noOfRows.isEnabled()) {
-      noOfRows.click();
+      await noOfRows.click();
       await this.page.getByRole("menuitem", { name: "100 per page" }).click();
     }
 
@@ -99,7 +99,7 @@ export class SbomDetailsPage {
         let cvssLocator = await this.page
           .locator(`xpath=//td[@data-label='CVSS']//div[.='${cvssType}']`)
           .all();
-        counts[cvssType] += await cvssLocator.length;
+        counts[cvssType] += cvssLocator.length;
       }
       nextPage = await nextButton.isEnabled();
       if (nextPage) {

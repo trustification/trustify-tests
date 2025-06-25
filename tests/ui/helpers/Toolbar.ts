@@ -26,7 +26,7 @@ export class Toolbar {
    */
   async selectFilter(filterName: string) {
     await this._toolbar.locator("[aria-label='filter-toggle']").click();
-    this._page
+    await this._page
       .locator("[aria-label='filter-menu']")
       .getByText(filterName)
       .click();

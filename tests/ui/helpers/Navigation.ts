@@ -1,10 +1,13 @@
 import { Page } from "playwright-core";
 
+/**
+ * Used to navigate to different pages
+ */
 export class Navigation {
-  page: Page;
+  private _page: Page;
 
   private constructor(page: Page) {
-    this.page = page;
+    this._page = page;
   }
 
   static async build(page: Page) {
@@ -22,7 +25,9 @@ export class Navigation {
       | "Importers"
       | "Upload"
   ) {
-    await this.page.goto("/upload");
-    await this.page.getByRole("link", { name: menu }).click();
+    // By default we do not initialize navigation at "/"" where the Dashboard is located
+    // This should help us to save some time loading pages as the Dashboard fetches too much data
+    await this._page.goto("/upload");
+    await this._page.getByRole("link", { name: menu }).click();
   }
 }
