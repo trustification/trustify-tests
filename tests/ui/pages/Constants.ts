@@ -22,11 +22,13 @@ export const SBOMListPage = {
 
 export const VulnerabilityListPage = {
   toolbarAriaLabel: "vulnerability-toolbar",
-  tableAriaLabel: "vulnerability-table",
+  tableAriaLabel: "Vulnerability table",
   paginationIdTop: "vulnerability-table-pagination-top",
   paginationIdBottom: "vulnerability-table-pagination-bottom",
   filters: {
     filterText: "Filter text",
+    severity: "CVSS",
+    createdOn: "Created on",
   },
 };
 

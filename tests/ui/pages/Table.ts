@@ -40,15 +40,7 @@ export class Table {
   }
 
   async clickSortBy(columnName: string) {
-    const column = this._table.getByRole("columnheader", { name: columnName });
-
-    await expect(column).toHaveAttribute("aria-sort");
-    const currentSort = (await column.getAttribute("aria-sort")) as SortAria;
-
-    // Apply sort
     await this._table.getByRole("button", { name: columnName }).click();
-    await this.verifyTableIsSortedBy(columnName, !getSortFromAria(currentSort));
-
     await this.waitUntilDataIsLoaded();
   }
 

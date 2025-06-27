@@ -73,6 +73,24 @@ export class Toolbar {
     await this.assertFilterHasLabels(filterName, [fromDate, toDate]);
   }
 
+  async applyMultiSelectFilter(filterName: string, selections: string[]) {
+    await this.selectFilter(filterName);
+
+    for (const option of selections) {
+      const inputText = this._toolbar.locator(
+        "input[aria-label='Type to filter']"
+      );
+      await inputText.clear();
+      await inputText.fill(option);
+
+      const dropdownOption = this._page.getByRole("menuitem", { name: option });
+      await expect(dropdownOption).toBeVisible();
+      await dropdownOption.click();
+    }
+
+    await this.assertFilterHasLabels(filterName, selections);
+  }
+
   async applyLabelsFilter(filterName: string, labels: string[]) {
     await this.selectFilter(filterName);
 
