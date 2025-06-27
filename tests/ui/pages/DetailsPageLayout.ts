@@ -1,10 +1,16 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
-export class DetailsPage {
+export class DetailsPageLayout {
   private _page: Page;
+  _detailsPage: Locator;
 
-  constructor(page: Page) {
+  private constructor(page: Page) {
     this._page = page;
+  }
+
+  static async build(page: Page) {
+    await expect(page.locator("nav[aria-label='Breadcrumb']")).toBeVisible();
+    return new DetailsPageLayout(page);
   }
 
   async selectTab(tabName: string) {

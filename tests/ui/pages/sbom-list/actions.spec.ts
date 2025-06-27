@@ -6,6 +6,7 @@ import { login } from "../../helpers/Auth";
 import { SBOMListPage } from "../Constants";
 import { Navigation } from "../Navigation";
 import { Table } from "../Table";
+import { LabelsModal } from "../LabelsModal";
 
 test.describe("Action validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
@@ -49,25 +50,11 @@ test.describe("Action validations", { tag: "@tier1" }, () => {
     const table = await Table.build(page, SBOMListPage.tableAriaLabel);
     await table.clickAction("Edit labels", 0);
 
-    // Verify Modal is open
-    const dialog = page.getByRole("dialog");
-    expect(dialog).toBeVisible();
-
-    const saveLabels = async () => {
-      await dialog.locator("button[aria-label='submit']").click();
-      await expect(dialog).not.toBeVisible();
-    };
+    let labelsModal = await LabelsModal.build(page);
 
     // Add labels
-    const inputText = dialog.getByPlaceholder("Add label");
-
-    for (const label of labels) {
-      await inputText.click();
-      await inputText.fill(label);
-      await inputText.press("Enter");
-    }
-
-    await saveLabels();
+    await labelsModal.addLabels(labels);
+    await labelsModal.clickSave();
 
     // Verify labels were added
     await table.waitUntilDataIsLoaded();
@@ -83,18 +70,11 @@ test.describe("Action validations", { tag: "@tier1" }, () => {
     // Clean labels added previously
     await table.clickAction("Edit labels", 0);
 
-    for (const label of labels) {
-      await dialog
-        .locator(".pf-v6-c-label-group__list-item", {
-          hasText: label,
-        })
-        .locator("button")
-        .click();
-    }
+    labelsModal = await LabelsModal.build(page);
+    await labelsModal.removeLabels(labels);
+    await labelsModal.clickSave();
 
-    await saveLabels();
     await table.waitUntilDataIsLoaded();
-
     for (const label of labels) {
       await expect(
         table._table
