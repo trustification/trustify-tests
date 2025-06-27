@@ -44,6 +44,18 @@ export const PackageListPage = {
   },
 };
 
+export const AdvisoryListPage = {
+  toolbarAriaLabel: "advisory-toolbar",
+  tableAriaLabel: "advisory-table",
+  paginationIdTop: "advisory-table-pagination-top",
+  paginationIdBottom: "advisory-table-pagination-bottom",
+  filters: {
+    filterText: "Filter text",
+    revision: "Revision",
+    label: "Label",
+  },
+};
+
 export const isSorted = (arr: string[], asc: boolean) => {
   let sorted = [...arr].sort((a, b) => a.localeCompare(b));
   if (!asc) {
