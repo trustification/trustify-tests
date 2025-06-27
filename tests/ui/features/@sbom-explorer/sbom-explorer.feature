@@ -1,7 +1,7 @@
 Feature: SBOM Explorer - View SBOM details
     Background: Authentication
         Given User is authenticated
-    
+
     Scenario Outline: View SBOM Overview
         Given An ingested "<sbomType>" SBOM "<sbomName>" is available
         When User visits SBOM details Page of "<sbomName>"
@@ -14,7 +14,7 @@ Feature: SBOM Explorer - View SBOM details
         Examples:
             | sbomName    |
             | quarkus-bom |
-    
+
     Scenario Outline: View SBOM Info (Metadata)
         Given An ingested "<sbomType>" SBOM "<sbomName>" is available
         When User visits SBOM details Page of "<sbomName>"
@@ -28,7 +28,7 @@ Feature: SBOM Explorer - View SBOM details
         Examples:
             | sbomName    |
             | quarkus-bom |
-
+    
     Scenario Outline: Downloading SBOM file
         Given An ingested "<sbomType>" SBOM "<sbomName>" is available
         When User visits SBOM details Page of "<sbomName>"
@@ -56,7 +56,7 @@ Feature: SBOM Explorer - View SBOM details
         Then The Package table total results is 0
 
         When User clear all filters
-        Then The Package table total results is greater than 1
+        Then The Package table total results is greather than 1
 
         Examples:
             | sbomType | sbomName    | packageName |

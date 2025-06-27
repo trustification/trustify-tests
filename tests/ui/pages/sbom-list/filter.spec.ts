@@ -3,25 +3,26 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { SBOMListPage } from "../../helpers/Constants";
-import { Navigation } from "../../helpers/Navigation";
-import { Table } from "../../helpers/Table";
-import { Toolbar } from "../../helpers/Toolbar";
+import { SBOMListPage } from "../Constants";
+import { Navigation } from "../Navigation";
+import { Table } from "../Table";
+import { Toolbar } from "../Toolbar";
 
 test.describe("Filter validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
+
+    const navigation = await Navigation.build(page);
+    await navigation.goToSidebar("SBOMs");
   });
 
   test("Filters", async ({ page }) => {
-    const navigation = await Navigation.build(page);
-    await navigation.goToSidebar("SBOMs");
-
     const toolbar = await Toolbar.build(page, SBOMListPage.toolbarAriaLabel);
     const table = await Table.build(page, SBOMListPage.tableAriaLabel);
 
     // Full search
     await toolbar.applyTextFilter(SBOMListPage.filters.filterText, "quarkus");
+    await table.waitUntilDataIsLoaded();
     await table.verifyColumnContainsText("Name", "quarkus-bom");
 
     // Date filter
@@ -30,10 +31,12 @@ test.describe("Filter validations", { tag: "@tier1" }, () => {
       "11/21/2023",
       "11/23/2023"
     );
+    await table.waitUntilDataIsLoaded();
     await table.verifyColumnContainsText("Name", "quarkus-bom");
 
     // Labels filter
     await toolbar.applyLabelsFilter(SBOMListPage.filters.label, ["type=spdx"]);
+    await table.waitUntilDataIsLoaded();
     await table.verifyColumnContainsText("Name", "quarkus-bom");
   });
 });

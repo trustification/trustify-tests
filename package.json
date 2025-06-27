@@ -11,6 +11,8 @@
     "test:ui": "npx bddgen && npx playwright test --project='chromium'",
     "test:ui:trace": "npx bddgen && npx playwright test --project='chromium' --trace on",
     "test:ui:host": "npx bddgen && npx playwright test --ui-host 127.0.0.1",
+    "test:playwright": "npx playwright test --project='playwright'",
+    "test:playwright:trace": "npx playwright test --project='playwright' --trace on",
     "format:check": "prettier --check './**/*.{ts,js,json}'",
     "format:fix": "prettier --write './**/*.{ts,js,json}'"
   },

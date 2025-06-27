@@ -73,14 +73,17 @@ export default defineConfig({
     },
 
     {
-      name: "vanilla",
+      name: "playwright",
       testDir: "./tests/ui/pages",
       testMatch: "*.spec.ts",
-      dependencies: ["setup-ui-data"],
       use: {
         ...devices["Desktop Chrome"],
         ...DESKTOP_CONFIG,
       },
+      // timeout: 120_000,
+      // expect: {
+      //   timeout: 20_000,
+      // },
     },
 
     {
