@@ -40,7 +40,9 @@ export class Table {
   }
 
   async clickSortBy(columnName: string) {
-    await this._table.getByRole("button", { name: columnName }).click();
+    await this._table
+      .getByRole("button", { name: columnName, exact: true })
+      .click();
     await this.waitUntilDataIsLoaded();
   }
 

@@ -32,6 +32,18 @@ export const VulnerabilityListPage = {
   },
 };
 
+export const PackageListPage = {
+  toolbarAriaLabel: "package-toolbar",
+  tableAriaLabel: "Package table",
+  paginationIdTop: "package-table-pagination-top",
+  paginationIdBottom: "package-table-pagination-bottom",
+  filters: {
+    filterText: "Filter text",
+    type: "Type",
+    architecture: "Architecture",
+  },
+};
+
 export const isSorted = (arr: string[], asc: boolean) => {
   let sorted = [...arr].sort((a, b) => a.localeCompare(b));
   if (!asc) {
