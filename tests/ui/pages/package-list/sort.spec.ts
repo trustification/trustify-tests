@@ -3,8 +3,8 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
+import { isSorted, ListPage_Package } from "../Constants";
 import { Navigation } from "../Navigation";
-import { isSorted, PackageListPage } from "../Constants";
 import { Table } from "../Table";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {
@@ -16,7 +16,7 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
   });
 
   test("Sort", async ({ page }) => {
-    const table = await Table.build(page, PackageListPage.tableAriaLabel);
+    const table = await Table.build(page, ListPage_Package.tableAriaLabel);
     const columnNameSelector = table._table.locator(`td[data-label="ID"]`);
 
     // ID Asc

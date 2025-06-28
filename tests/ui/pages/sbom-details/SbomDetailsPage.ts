@@ -1,5 +1,5 @@
 import { expect, Page } from "@playwright/test";
-import { SBOMListPage } from "../Constants";
+import { ListPage_SBOM } from "../Constants";
 import { DetailsPageLayout } from "../DetailsPageLayout";
 import { Navigation } from "../Navigation";
 import { Table } from "../Table";
@@ -18,10 +18,10 @@ export class SbomDetailsPage {
     const navigation = await Navigation.build(page);
     await navigation.goToSidebar("SBOMs");
 
-    const toolbar = await Toolbar.build(page, SBOMListPage.toolbarAriaLabel);
-    const table = await Table.build(page, SBOMListPage.tableAriaLabel);
+    const toolbar = await Toolbar.build(page, ListPage_SBOM.toolbarAriaLabel);
+    const table = await Table.build(page, ListPage_SBOM.tableAriaLabel);
 
-    await toolbar.applyTextFilter(SBOMListPage.filters.filterText, sbomName);
+    await toolbar.applyTextFilter(ListPage_SBOM.filters.filterText, sbomName);
     await table.waitUntilDataIsLoaded();
     await table.verifyColumnContainsText("Name", sbomName);
 

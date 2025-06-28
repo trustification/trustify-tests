@@ -8,7 +8,7 @@ export type SidebarMenu =
   | "Importers"
   | "Upload";
 
-export const SBOMListPage = {
+export const ListPage_SBOM = {
   toolbarAriaLabel: "sbom-toolbar",
   tableAriaLabel: "sbom-table",
   paginationIdTop: "sbom-table-pagination-top",
@@ -20,7 +20,7 @@ export const SBOMListPage = {
   },
 };
 
-export const VulnerabilityListPage = {
+export const ListPage_Vulnerability = {
   toolbarAriaLabel: "vulnerability-toolbar",
   tableAriaLabel: "Vulnerability table",
   paginationIdTop: "vulnerability-table-pagination-top",
@@ -32,7 +32,7 @@ export const VulnerabilityListPage = {
   },
 };
 
-export const PackageListPage = {
+export const ListPage_Package = {
   toolbarAriaLabel: "package-toolbar",
   tableAriaLabel: "Package table",
   paginationIdTop: "package-table-pagination-top",
@@ -44,7 +44,7 @@ export const PackageListPage = {
   },
 };
 
-export const AdvisoryListPage = {
+export const ListPage_Advisory = {
   toolbarAriaLabel: "advisory-toolbar",
   tableAriaLabel: "advisory-table",
   paginationIdTop: "advisory-table-pagination-top",
@@ -53,6 +53,19 @@ export const AdvisoryListPage = {
     filterText: "Filter text",
     revision: "Revision",
     label: "Label",
+  },
+};
+
+export const DetailsPage_SBOM = {
+  packagesTab: {
+    toolbarAriaLabel: "Package toolbar",
+    tableAriaLabel: "Package table",
+    paginationIdTop: "package-table-pagination-top",
+    paginationIdBottom: "package-table-pagination-bottom",
+    filters: {
+      filterText: "Filter text",
+      license: "License",
+    },
   },
 };
 

@@ -3,8 +3,8 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
+import { isSorted, ListPage_Advisory } from "../Constants";
 import { Navigation } from "../Navigation";
-import { isSorted, AdvisoryListPage } from "../Constants";
 import { Table } from "../Table";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {
@@ -17,7 +17,7 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
 
   // skipped until it is fixed in the backend. It is bug, fix it
   test.skip("Sort", async ({ page }) => {
-    const table = await Table.build(page, AdvisoryListPage.tableAriaLabel);
+    const table = await Table.build(page, ListPage_Advisory.tableAriaLabel);
     const columnNameSelector = table._table.locator(`td[data-label="ID"]`);
 
     // ID Asc

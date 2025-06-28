@@ -3,7 +3,7 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { SBOMListPage } from "../Constants";
+import { ListPage_SBOM } from "../Constants";
 import { Navigation } from "../Navigation";
 import { Table } from "../Table";
 import { LabelsModal } from "../LabelsModal";
@@ -17,7 +17,7 @@ test.describe("Action validations", { tag: "@tier1" }, () => {
   });
 
   test("Actions - Download SBOM", async ({ page }) => {
-    const table = await Table.build(page, SBOMListPage.tableAriaLabel);
+    const table = await Table.build(page, ListPage_SBOM.tableAriaLabel);
 
     const sbomNames = await table._table
       .locator(`td[data-label="Name"]`)
@@ -31,7 +31,7 @@ test.describe("Action validations", { tag: "@tier1" }, () => {
   });
 
   test("Actions - Download License Report", async ({ page }) => {
-    const table = await Table.build(page, SBOMListPage.tableAriaLabel);
+    const table = await Table.build(page, ListPage_SBOM.tableAriaLabel);
 
     const sbomNames = await table._table
       .locator(`td[data-label="Name"]`)
@@ -47,7 +47,7 @@ test.describe("Action validations", { tag: "@tier1" }, () => {
   test("Actions - Edit Labels", async ({ page }) => {
     const labels = ["color=red", "production"];
 
-    const table = await Table.build(page, SBOMListPage.tableAriaLabel);
+    const table = await Table.build(page, ListPage_SBOM.tableAriaLabel);
     await table.clickAction("Edit labels", 0);
 
     let labelsModal = await LabelsModal.build(page);

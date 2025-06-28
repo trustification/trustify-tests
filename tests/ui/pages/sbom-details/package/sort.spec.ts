@@ -2,21 +2,24 @@
 
 import { expect, test } from "@playwright/test";
 
-import { login } from "../../helpers/Auth";
-import { Navigation } from "../Navigation";
-import { isSorted, ListPage_SBOM } from "../Constants";
-import { Table } from "../Table";
+import { login } from "../../../helpers/Auth";
+import { DetailsPage_SBOM, isSorted } from "../../Constants";
+import { Table } from "../../Table";
+import { SbomDetailsPage } from "../SbomDetailsPage";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
-
-    const navigation = await Navigation.build(page);
-    await navigation.goToSidebar("SBOMs");
   });
 
   test("Sort", async ({ page }) => {
-    const table = await Table.build(page, ListPage_SBOM.tableAriaLabel);
+    const detailsPage = await SbomDetailsPage.build(page, "quarkus-bom");
+    await detailsPage._layout.selectTab("Packages");
+
+    const table = await Table.build(
+      page,
+      DetailsPage_SBOM.packagesTab.tableAriaLabel
+    );
     const columnNameSelector = table._table.locator(`td[data-label="Name"]`);
 
     const namesAsc = await columnNameSelector.allInnerTexts();

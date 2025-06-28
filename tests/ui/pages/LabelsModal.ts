@@ -1,9 +1,6 @@
 import { Locator, Page } from "playwright-core";
 import { expect } from "playwright/test";
 
-/**
- * Used to navigate to different pages
- */
 export class LabelsModal {
   private _page: Page;
   private _dialog: Locator;
@@ -15,7 +12,7 @@ export class LabelsModal {
 
   static async build(page: Page) {
     const dialog = page.getByRole("dialog");
-    expect(dialog).toBeVisible();
+    await expect(dialog).toBeVisible();
     return new LabelsModal(page, dialog);
   }
 

@@ -3,7 +3,7 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { AdvisoryListPage } from "../Constants";
+import { ListPage_Advisory } from "../Constants";
 import { Navigation } from "../Navigation";
 import { Table } from "../Table";
 import { Toolbar } from "../Toolbar";
@@ -19,13 +19,13 @@ test.describe("Columns validations", { tag: "@tier1" }, () => {
   test("Columns", async ({ page }) => {
     const toolbar = await Toolbar.build(
       page,
-      AdvisoryListPage.toolbarAriaLabel
+      ListPage_Advisory.toolbarAriaLabel
     );
-    const table = await Table.build(page, AdvisoryListPage.tableAriaLabel);
+    const table = await Table.build(page, ListPage_Advisory.tableAriaLabel);
 
     // Full search
     await toolbar.applyTextFilter(
-      AdvisoryListPage.filters.filterText,
+      ListPage_Advisory.filters.filterText,
       "CVE-2024-26308"
     );
     await table.waitUntilDataIsLoaded();

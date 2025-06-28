@@ -3,7 +3,7 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { PackageListPage } from "../Constants";
+import { ListPage_Package } from "../Constants";
 import { Navigation } from "../Navigation";
 import { Pagination } from "../Pagination";
 import { Table } from "../Table";
@@ -19,7 +19,7 @@ test.describe("Pagination validations", { tag: "@tier1" }, () => {
   test("Navigation button validations", async ({ page }) => {
     const pagination = await Pagination.build(
       page,
-      PackageListPage.paginationIdTop
+      ListPage_Package.paginationIdTop
     );
     await pagination.validatePagination();
   });
@@ -27,10 +27,10 @@ test.describe("Pagination validations", { tag: "@tier1" }, () => {
   test("Items per page validations", async ({ page }) => {
     const pagination = await Pagination.build(
       page,
-      PackageListPage.paginationIdTop
+      ListPage_Package.paginationIdTop
     );
 
-    const table = await Table.build(page, PackageListPage.tableAriaLabel);
+    const table = await Table.build(page, ListPage_Package.tableAriaLabel);
     await pagination.validateItemsPerPage("Name", table);
   });
 });

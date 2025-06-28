@@ -1,8 +1,7 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 export class DetailsPageLayout {
   private _page: Page;
-  _detailsPage: Locator;
 
   private constructor(page: Page) {
     this._page = page;

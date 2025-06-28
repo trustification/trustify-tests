@@ -3,7 +3,7 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { PackageListPage } from "../Constants";
+import { ListPage_Package } from "../Constants";
 import { Navigation } from "../Navigation";
 import { Table } from "../Table";
 import { Toolbar } from "../Toolbar";
@@ -17,12 +17,15 @@ test.describe("Columns validations", { tag: "@tier1" }, () => {
   });
 
   test("Columns", async ({ page }) => {
-    const toolbar = await Toolbar.build(page, PackageListPage.toolbarAriaLabel);
-    const table = await Table.build(page, PackageListPage.tableAriaLabel);
+    const toolbar = await Toolbar.build(
+      page,
+      ListPage_Package.toolbarAriaLabel
+    );
+    const table = await Table.build(page, ListPage_Package.tableAriaLabel);
 
     // Full search
     await toolbar.applyTextFilter(
-      PackageListPage.filters.filterText,
+      ListPage_Package.filters.filterText,
       "keycloak-core"
     );
     await table.waitUntilDataIsLoaded();

@@ -3,7 +3,7 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { AdvisoryListPage } from "../Constants";
+import { ListPage_Advisory } from "../Constants";
 import { Navigation } from "../Navigation";
 import { Table } from "../Table";
 import { Toolbar } from "../Toolbar";
@@ -19,13 +19,13 @@ test.describe("Filter validations", { tag: "@tier1" }, () => {
   test("Filters", async ({ page }) => {
     const toolbar = await Toolbar.build(
       page,
-      AdvisoryListPage.toolbarAriaLabel
+      ListPage_Advisory.toolbarAriaLabel
     );
-    const table = await Table.build(page, AdvisoryListPage.tableAriaLabel);
+    const table = await Table.build(page, ListPage_Advisory.tableAriaLabel);
 
     // Full search
     await toolbar.applyTextFilter(
-      AdvisoryListPage.filters.filterText,
+      ListPage_Advisory.filters.filterText,
       "CVE-2024-26308"
     );
     await table.waitUntilDataIsLoaded();
@@ -33,7 +33,7 @@ test.describe("Filter validations", { tag: "@tier1" }, () => {
 
     // Date filter
     await toolbar.applyDateRangeFilter(
-      AdvisoryListPage.filters.revision,
+      ListPage_Advisory.filters.revision,
       "08/01/2024",
       "08/03/2024"
     );
@@ -41,7 +41,7 @@ test.describe("Filter validations", { tag: "@tier1" }, () => {
     await table.verifyColumnContainsText("ID", "CVE-2024-26308");
 
     // Labels filter
-    await toolbar.applyLabelsFilter(AdvisoryListPage.filters.label, [
+    await toolbar.applyLabelsFilter(ListPage_Advisory.filters.label, [
       "type=cve",
     ]);
     await table.waitUntilDataIsLoaded();

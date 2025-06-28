@@ -1,11 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
 
-type SortAria = "ascending" | "descending";
-
-const getSortFromAria = (value: SortAria): boolean => {
-  return value === "ascending" ? true : false;
-};
-
 export class Table {
   private _page: Page;
   _table: Locator;
