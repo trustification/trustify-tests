@@ -10,7 +10,7 @@ test.describe("Info Tab validations", { tag: "@tier1" }, () => {
     await login(page);
   });
 
-  test("Labels", async ({ page }) => {
+  test("Info", async ({ page }) => {
     await PackageDetailsPage.build(page, "keycloak-core");
     // Verify
   });

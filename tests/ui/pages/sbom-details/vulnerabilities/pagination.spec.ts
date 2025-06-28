@@ -11,7 +11,10 @@ test.describe("Pagination validations", { tag: "@tier1" }, () => {
   });
 
   test("Navigation button validations", async ({ page }) => {
-    const vulnerabilityTab = await VulnerabilitiesTab.build(page, "quarkus-bom");
+    const vulnerabilityTab = await VulnerabilitiesTab.build(
+      page,
+      "quarkus-bom"
+    );
     const pagination = await vulnerabilityTab.getPagination();
 
     await pagination.validatePagination();

@@ -12,7 +12,10 @@ test.describe("Filter validations", { tag: "@tier1" }, () => {
 
   // Currently tab has no filters
   test.skip("Filters", async ({ page }) => {
-    const vulnerabilityTab = await VulnerabilitiesTab.build(page, "quarkus-bom");
+    const vulnerabilityTab = await VulnerabilitiesTab.build(
+      page,
+      "quarkus-bom"
+    );
 
     const toolbar = await vulnerabilityTab.getToolbar();
     const table = await vulnerabilityTab.getTable();

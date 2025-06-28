@@ -12,19 +12,19 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
   });
 
   test("Sort", async ({ page }) => {
-    const vulnerabilityTab = await VulnerabilitiesTab.build(
+    const vulnerabilitiesTab = await VulnerabilitiesTab.build(
       page,
-      "quarkus-bom"
+      "CVE-2024-26308"
     );
-    const table = await vulnerabilityTab.getTable();
+    const table = await vulnerabilitiesTab.getTable();
 
-    const columnNameSelector = table._table.locator(`td[data-label="Id"]`);
+    const columnNameSelector = table._table.locator(`td[data-label="ID"]`);
 
     const ascList = await columnNameSelector.allInnerTexts();
     expectSort(ascList, true);
 
     // Reverse sorting
-    await table.clickSortBy("Id");
+    await table.clickSortBy("ID");
     const descList = await columnNameSelector.allInnerTexts();
     expectSort(descList, false);
   });

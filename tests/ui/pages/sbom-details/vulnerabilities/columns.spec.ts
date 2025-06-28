@@ -11,7 +11,10 @@ test.describe("Columns validations", { tag: "@tier1" }, () => {
   });
 
   test("Columns", async ({ page }) => {
-    const vulnerabilityTab = await VulnerabilitiesTab.build(page, "quarkus-bom");
+    const vulnerabilityTab = await VulnerabilitiesTab.build(
+      page,
+      "quarkus-bom"
+    );
 
     const table = await vulnerabilityTab.getTable();
 

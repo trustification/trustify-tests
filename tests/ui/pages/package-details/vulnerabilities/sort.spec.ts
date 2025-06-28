@@ -12,7 +12,10 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
   });
 
   test("Sort", async ({ page }) => {
-    const vulnerabilitiesTab = await VulnerabilitiesTab.build(page, "keycloak-core");
+    const vulnerabilitiesTab = await VulnerabilitiesTab.build(
+      page,
+      "keycloak-core"
+    );
     const table = await vulnerabilitiesTab.getTable();
 
     const columnNameSelector = table._table.locator(`td[data-label="ID"]`);
