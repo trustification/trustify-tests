@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 
 export class Toolbar {
-  private _page: Page;
+  private readonly _page: Page;
   _toolbar: Locator;
 
   private constructor(page: Page, toolbar: Locator) {

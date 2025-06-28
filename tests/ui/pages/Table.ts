@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 
 export class Table {
-  private _page: Page;
+  private readonly _page: Page;
   _table: Locator;
 
   private constructor(page: Page, table: Locator) {

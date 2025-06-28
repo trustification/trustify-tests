@@ -2,7 +2,7 @@ import { Locator, Page } from "playwright-core";
 import { expect } from "playwright/test";
 
 export class LabelsModal {
-  private _page: Page;
+  private readonly _page: Page;
   private _dialog: Locator;
 
   private constructor(page: Page, dialog: Locator) {

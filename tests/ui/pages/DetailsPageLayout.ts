@@ -1,7 +1,7 @@
 import { expect, Page } from "@playwright/test";
 
 export class DetailsPageLayout {
-  private _page: Page;
+  private readonly _page: Page;
 
   private constructor(page: Page) {
     this._page = page;

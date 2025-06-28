@@ -4,7 +4,7 @@ import { Page } from "playwright-core";
  * Used to navigate to different pages
  */
 export class Navigation {
-  private _page: Page;
+  private readonly _page: Page;
 
   private constructor(page: Page) {
     this._page = page;
