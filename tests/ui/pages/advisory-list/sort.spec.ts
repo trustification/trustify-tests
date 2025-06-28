@@ -3,21 +3,19 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { isSorted, ListPage_Advisory } from "../Constants";
-import { Navigation } from "../Navigation";
-import { Table } from "../Table";
+import { isSorted } from "../Constants";
+import { AdvisoryListPage } from "./AdvisoryListPage";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
-
-    const navigation = await Navigation.build(page);
-    await navigation.goToSidebar("Advisories");
   });
 
   // skipped until it is fixed in the backend. It is bug, fix it
   test.skip("Sort", async ({ page }) => {
-    const table = await Table.build(page, ListPage_Advisory.tableAriaLabel);
+    const listPage = await AdvisoryListPage.build(page);
+    const table = await listPage.getTable();
+
     const columnNameSelector = table._table.locator(`td[data-label="ID"]`);
 
     // ID Asc

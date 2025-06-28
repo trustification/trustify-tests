@@ -4,7 +4,7 @@ import { Toolbar } from "../Toolbar";
 import { Table } from "../Table";
 import { Pagination } from "../Pagination";
 
-export class AdvisoryListPage {
+export class SbomListPage {
   private readonly _page: Page;
 
   private constructor(page: Page) {
@@ -13,23 +13,23 @@ export class AdvisoryListPage {
 
   static async build(page: Page) {
     const navigation = await Navigation.build(page);
-    await navigation.goToSidebar("Advisories");
+    await navigation.goToSidebar("SBOMs");
 
-    return new AdvisoryListPage(page);
+    return new SbomListPage(page);
   }
 
   async getToolbar() {
-    return await Toolbar.build(this._page, "advisory-toolbar");
+    return await Toolbar.build(this._page, "sbom-toolbar");
   }
 
   async getTable() {
-    return await Table.build(this._page, "advisory-table");
+    return await Table.build(this._page, "sbom-table");
   }
 
   async getPagination(top: boolean = true) {
     return await Pagination.build(
       this._page,
-      `advisory-table-pagination-${top ? "top" : "bottom"}`
+      `sbom-table-pagination-${top ? "top" : "bottom"}`
     );
   }
 }

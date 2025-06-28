@@ -3,28 +3,21 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { ListPage_SBOM } from "../Constants";
-import { Navigation } from "../Navigation";
-import { Table } from "../Table";
-import { Toolbar } from "../Toolbar";
+import { SbomListPage } from "./SbomListPage";
 
 test.describe("Columns validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
-
-    const navigation = await Navigation.build(page);
-    await navigation.goToSidebar("SBOMs");
   });
 
   test("Vulnerabilities", async ({ page }) => {
-    const toolbar = await Toolbar.build(page, ListPage_SBOM.toolbarAriaLabel);
-    const table = await Table.build(page, ListPage_SBOM.tableAriaLabel);
+    const listPage = await SbomListPage.build(page);
+
+    const toolbar = await listPage.getToolbar();
+    const table = await listPage.getTable();
 
     // Full search
-    await toolbar.applyTextFilter(
-      ListPage_SBOM.filters.filterText,
-      "quarkus-bom"
-    );
+    await toolbar.applyTextFilter("Filter text", "quarkus-bom");
     await table.waitUntilDataIsLoaded();
     await table.verifyColumnContainsText("Name", "quarkus-bom");
 

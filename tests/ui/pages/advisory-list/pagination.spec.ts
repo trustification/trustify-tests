@@ -3,34 +3,26 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { ListPage_Advisory } from "../Constants";
-import { Navigation } from "../Navigation";
-import { Pagination } from "../Pagination";
-import { Table } from "../Table";
+import { AdvisoryListPage } from "./AdvisoryListPage";
 
 test.describe("Pagination validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
-
-    const navigation = await Navigation.build(page);
-    await navigation.goToSidebar("Advisories");
   });
 
   test("Navigation button validations", async ({ page }) => {
-    const pagination = await Pagination.build(
-      page,
-      ListPage_Advisory.paginationIdTop
-    );
+    const listPage = await AdvisoryListPage.build(page);
+
+    const pagination = await listPage.getPagination();
     await pagination.validatePagination();
   });
 
   test("Items per page validations", async ({ page }) => {
-    const pagination = await Pagination.build(
-      page,
-      ListPage_Advisory.paginationIdTop
-    );
+    const listPage = await AdvisoryListPage.build(page);
 
-    const table = await Table.build(page, ListPage_Advisory.tableAriaLabel);
+    const pagination = await listPage.getPagination();
+    const table = await listPage.getTable();
+
     await pagination.validateItemsPerPage("ID", table);
   });
 });

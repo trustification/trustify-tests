@@ -3,46 +3,40 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { ListPage_Package } from "../Constants";
-import { Navigation } from "../Navigation";
-import { Table } from "../Table";
-import { Toolbar } from "../Toolbar";
+import { PackageListPage } from "./PackageListPage";
 
 test.describe("Columns validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
-
-    const navigation = await Navigation.build(page);
-    await navigation.goToSidebar("Packages");
   });
 
   test("Columns", async ({ page }) => {
-    const toolbar = await Toolbar.build(
-      page,
-      ListPage_Package.toolbarAriaLabel
-    );
-    const table = await Table.build(page, ListPage_Package.tableAriaLabel);
+    const listPage = await PackageListPage.build(page);
+
+    const toolbar = await listPage.getToolbar();
+    const table = await listPage.getTable();
 
     // Full search
-    await toolbar.applyTextFilter(
-      ListPage_Package.filters.filterText,
-      "keycloak-core"
-    );
+    await toolbar.applyTextFilter("Filter text", "keycloak-core");
     await table.waitUntilDataIsLoaded();
     await table.verifyColumnContainsText("Name", "keycloak-core");
 
+    // Namespace
     await expect(
       table._table.locator(`td[data-label="Namespace"]`)
     ).toContainText("org.keycloak");
 
+    // Version
     await expect(
       table._table.locator(`td[data-label="Version"]`)
     ).toContainText("18.0.6.redhat-00001");
 
+    // Type
     await expect(table._table.locator(`td[data-label="Type"]`)).toContainText(
       "maven"
     );
 
+    // Qualifiers
     await expect(
       table._table.locator(`td[data-label="Qualifiers"]`)
     ).toContainText("type=jar");

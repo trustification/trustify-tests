@@ -4,7 +4,6 @@ import { test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
 import { DetailsPage_SBOM } from "../../Constants";
-import { Navigation } from "../../Navigation";
 import { Table } from "../../Table";
 import { Toolbar } from "../../Toolbar";
 import { SbomDetailsPage } from "../SbomDetailsPage";
