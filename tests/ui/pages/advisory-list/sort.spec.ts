@@ -1,9 +1,9 @@
 // @ts-check
 
-import { expect, test } from "@playwright/test";
+import { test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { isSorted } from "../Constants";
+import { expectSort } from "../Constants";
 import { AdvisoryListPage } from "./AdvisoryListPage";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {
@@ -11,7 +11,7 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
     await login(page);
   });
 
-  // skipped until it is fixed in the backend. It is bug, fix it
+  // TODO
   test.skip("Sort", async ({ page }) => {
     const listPage = await AdvisoryListPage.build(page);
     const table = await listPage.getTable();
@@ -20,12 +20,12 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
 
     // ID Asc
     await table.clickSortBy("ID");
-    const namesAsc = await columnNameSelector.allInnerTexts();
-    expect(isSorted(namesAsc, true), "").toBe(true);
+    const ascList = await columnNameSelector.allInnerTexts();
+    expectSort(ascList, true);
 
     // ID Desc
     await table.clickSortBy("ID");
-    const namesDesc = await columnNameSelector.allInnerTexts();
-    expect(isSorted(namesDesc, false)).toBe(true);
+    const descList = await columnNameSelector.allInnerTexts();
+    expectSort(descList, false);
   });
 });

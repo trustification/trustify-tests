@@ -1,9 +1,9 @@
 // @ts-check
 
-import { expect, test } from "@playwright/test";
+import { test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { isSorted } from "../Constants";
+import { expectSort } from "../Constants";
 import { SbomListPage } from "./SbomListPage";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {
@@ -17,13 +17,12 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
 
     const columnNameSelector = table._table.locator(`td[data-label="Name"]`);
 
-    const namesAsc = await columnNameSelector.allInnerTexts();
-    expect(isSorted(namesAsc, true)).toBe(true);
+    const ascList = await columnNameSelector.allInnerTexts();
+    expectSort(ascList, true);
 
     // Reverse sorting
     await table.clickSortBy("Name");
-    const namesDesc = await columnNameSelector.allInnerTexts();
-
-    expect(isSorted(namesDesc, false)).toBe(true);
+    const desList = await columnNameSelector.allInnerTexts();
+    expectSort(desList, false);
   });
 });
