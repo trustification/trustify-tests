@@ -24,7 +24,7 @@ export class SbomDetailsPage {
     await table.waitUntilDataIsLoaded();
     await table.verifyColumnContainsText("Name", sbomName);
 
-    await page.getByRole("link", { name: "quarkus-bom", exact: true }).click();
+    await page.getByRole("link", { name: sbomName, exact: true }).click();
 
     const layout = await DetailsPageLayout.build(page);
     await expect(page.getByRole("heading", { name: sbomName })).toBeVisible();

@@ -4,7 +4,7 @@ import { Toolbar } from "../../Toolbar";
 import { Table } from "../../Table";
 import { Pagination } from "../../Pagination";
 
-export class PackageTab {
+export class PackagesTab {
   private readonly _page: Page;
   _detailsPage: SbomDetailsPage;
 
@@ -17,7 +17,7 @@ export class PackageTab {
     const detailsPage = await SbomDetailsPage.build(page, sbomName);
     await detailsPage._layout.selectTab("Packages");
 
-    return new PackageTab(page, detailsPage);
+    return new PackagesTab(page, detailsPage);
   }
 
   async getToolbar() {

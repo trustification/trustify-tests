@@ -4,7 +4,7 @@ import { Toolbar } from "../../Toolbar";
 import { Table } from "../../Table";
 import { Pagination } from "../../Pagination";
 
-export class VulnerabilityTab {
+export class VulnerabilitiesTab {
   private readonly _page: Page;
   _detailsPage: SbomDetailsPage;
 
@@ -17,7 +17,7 @@ export class VulnerabilityTab {
     const detailsPage = await SbomDetailsPage.build(page, sbomName);
     await detailsPage._layout.selectTab("Vulnerabilities");
 
-    return new VulnerabilityTab(page, detailsPage);
+    return new VulnerabilitiesTab(page, detailsPage);
   }
 
   async getToolbar() {

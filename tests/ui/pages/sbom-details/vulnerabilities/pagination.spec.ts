@@ -3,7 +3,7 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
-import { VulnerabilityTab } from "./VulnerabilityTab";
+import { VulnerabilitiesTab } from "./VulnerabilitiesTab";
 
 test.describe("Pagination validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
@@ -11,14 +11,14 @@ test.describe("Pagination validations", { tag: "@tier1" }, () => {
   });
 
   test("Navigation button validations", async ({ page }) => {
-    const vulnerabilityTab = await VulnerabilityTab.build(page, "quarkus-bom");
+    const vulnerabilityTab = await VulnerabilitiesTab.build(page, "quarkus-bom");
     const pagination = await vulnerabilityTab.getPagination();
 
     await pagination.validatePagination();
   });
 
   test("Items per page validations", async ({ page }) => {
-    const packageTab = await VulnerabilityTab.build(page, "quarkus-bom");
+    const packageTab = await VulnerabilitiesTab.build(page, "quarkus-bom");
 
     const pagination = await packageTab.getPagination();
     const table = await packageTab.getTable();

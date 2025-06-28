@@ -3,7 +3,7 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
-import { VulnerabilityTab } from "./VulnerabilityTab";
+import { VulnerabilitiesTab } from "./VulnerabilitiesTab";
 
 test.describe("DonutChart validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
@@ -11,7 +11,7 @@ test.describe("DonutChart validations", { tag: "@tier1" }, () => {
   });
 
   test("Vulnerabilities", async ({ page }) => {
-    await VulnerabilityTab.build(page, "quarkus-bom");
+    await VulnerabilitiesTab.build(page, "quarkus-bom");
 
     await expect(page.locator("#legend-labels-0")).toContainText("Critical: 0");
     await expect(page.locator("#legend-labels-1")).toContainText("High: 1");

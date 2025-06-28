@@ -3,7 +3,7 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
-import { VulnerabilityTab } from "./VulnerabilityTab";
+import { VulnerabilitiesTab } from "./VulnerabilitiesTab";
 
 test.describe("Columns validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
@@ -11,7 +11,7 @@ test.describe("Columns validations", { tag: "@tier1" }, () => {
   });
 
   test("Columns", async ({ page }) => {
-    const vulnerabilityTab = await VulnerabilityTab.build(page, "quarkus-bom");
+    const vulnerabilityTab = await VulnerabilitiesTab.build(page, "quarkus-bom");
 
     const table = await vulnerabilityTab.getTable();
 

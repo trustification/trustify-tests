@@ -3,15 +3,15 @@
 import { expect, test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
-import { PackageTab } from "./PackageTab";
+import { PackagesTab } from "./PackagesTab";
 
 test.describe("Columns validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
   });
 
-  test("Vulnerabilities", async ({ page }) => {
-    const packageTab = await PackageTab.build(page, "quarkus-bom");
+  test("Columns", async ({ page }) => {
+    const packageTab = await PackagesTab.build(page, "quarkus-bom");
 
     const toolbar = await packageTab.getToolbar();
     const table = await packageTab.getTable();

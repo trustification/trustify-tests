@@ -3,7 +3,7 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
-import { VulnerabilityTab } from "./VulnerabilityTab";
+import { VulnerabilitiesTab } from "./VulnerabilitiesTab";
 
 test.describe("Filter validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
@@ -12,7 +12,7 @@ test.describe("Filter validations", { tag: "@tier1" }, () => {
 
   // Currently tab has no filters
   test.skip("Filters", async ({ page }) => {
-    const vulnerabilityTab = await VulnerabilityTab.build(page, "quarkus-bom");
+    const vulnerabilityTab = await VulnerabilitiesTab.build(page, "quarkus-bom");
 
     const toolbar = await vulnerabilityTab.getToolbar();
     const table = await vulnerabilityTab.getTable();

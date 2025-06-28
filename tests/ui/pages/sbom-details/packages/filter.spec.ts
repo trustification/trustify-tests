@@ -3,7 +3,7 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
-import { PackageTab } from "./PackageTab";
+import { PackagesTab } from "./PackagesTab";
 
 test.describe("Filter validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
@@ -11,7 +11,7 @@ test.describe("Filter validations", { tag: "@tier1" }, () => {
   });
 
   test("Filters", async ({ page }) => {
-    const packageTab = await PackageTab.build(page, "quarkus-bom");
+    const packageTab = await PackagesTab.build(page, "quarkus-bom");
 
     const toolbar = await packageTab.getToolbar();
     const table = await packageTab.getTable();

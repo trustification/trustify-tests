@@ -3,7 +3,7 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
-import { VulnerabilityTab } from "./VulnerabilityTab";
+import { VulnerabilitiesTab } from "./VulnerabilitiesTab";
 import { expectSort } from "../../Constants";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {
@@ -12,7 +12,7 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
   });
 
   test("Sort", async ({ page }) => {
-    const vulnerabilityTab = await VulnerabilityTab.build(page, "quarkus-bom");
+    const vulnerabilityTab = await VulnerabilitiesTab.build(page, "quarkus-bom");
     const table = await vulnerabilityTab.getTable();
 
     const columnNameSelector = table._table.locator(`td[data-label="Id"]`);
