@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
 export class ToolbarTable {
-  private _page: Page;
+  private readonly _page: Page;
   private _tableName: string;
 
   constructor(page: Page, tableName: string) {
