@@ -5,7 +5,7 @@ import { test } from "@playwright/test";
 import { login } from "../../../helpers/Auth";
 import { VulnerabilitiesTab } from "./VulnerabilitiesTab";
 
-// Tables does not have filters
+// Table does not have filters
 test.describe.skip("Filter validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);

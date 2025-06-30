@@ -27,7 +27,7 @@ export class AdvisoryDetailsPage {
     await page.getByRole("link", { name: advisoryID, exact: true }).click();
 
     const layout = await DetailsPageLayout.build(page);
-    await expect(page.getByRole("heading", { name: advisoryID })).toBeVisible();
+    await layout.verifyPageHeader(advisoryID);
 
     return new AdvisoryDetailsPage(page, layout);
   }

@@ -11,8 +11,8 @@ test.describe("Sort validations", { tag: "@tier1" }, () => {
     await login(page);
   });
 
-  // TODO
-  test.skip("Sort", async ({ page }) => {
+  // TODO: enable after https://github.com/trustification/trustify/issues/1810 is fixed
+  test("Sort", async ({ page }) => {
     const listPage = await AdvisoryListPage.build(page);
     const table = await listPage.getTable();
 

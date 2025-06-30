@@ -11,7 +11,7 @@ export class Toolbar {
 
   /**
    * @param page
-   * @param toolbarAriaLabel the unique aria-label that correspont to the DOM element that contains the Toobar. E.g. <div aria-label="identifier"></div>
+   * @param toolbarAriaLabel the unique aria-label that corresponds to the DOM element that contains the Toolbar. E.g. <div aria-label="identifier"></div>
    * @returns a new instance of a Toolbar
    */
   static async build(page: Page, toolbarAriaLabel: string) {

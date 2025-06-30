@@ -28,9 +28,7 @@ export class PackageDetailsPage {
     await page.getByRole("link", { name: packageName, exact: true }).click();
 
     const layout = await DetailsPageLayout.build(page);
-    await expect(
-      page.getByRole("heading", { name: packageName })
-    ).toBeVisible();
+    await layout.verifyPageHeader(packageName);
 
     return new PackageDetailsPage(page, layout);
   }

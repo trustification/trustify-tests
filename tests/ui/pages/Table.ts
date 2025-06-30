@@ -11,7 +11,7 @@ export class Table {
 
   /**
    * @param page
-   * @param tableAriaLabel the unique aria-label that correspont to the DOM element that contains the Table. E.g. <table aria-label="identifier"></table>
+   * @param tableAriaLabel the unique aria-label that corresponds to the DOM element that contains the Table. E.g. <table aria-label="identifier"></table>
    * @returns a new instance of a Toolbar
    */
   static async build(page: Page, tableAriaLabel: string) {

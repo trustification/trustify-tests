@@ -5,12 +5,12 @@ import { test } from "@playwright/test";
 import { login } from "../../../helpers/Auth";
 import { VulnerabilitiesTab } from "./VulnerabilitiesTab";
 
-test.describe("Filter validations", { tag: "@tier1" }, () => {
+// Table has no filters
+test.describe.skip("Filter validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
   });
 
-  // Currently tab has no filters
   test.skip("Filters", async ({ page }) => {
     const vulnerabilityTab = await VulnerabilitiesTab.build(
       page,

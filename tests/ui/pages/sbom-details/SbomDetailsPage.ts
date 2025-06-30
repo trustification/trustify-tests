@@ -27,7 +27,7 @@ export class SbomDetailsPage {
     await page.getByRole("link", { name: sbomName, exact: true }).click();
 
     const layout = await DetailsPageLayout.build(page);
-    await expect(page.getByRole("heading", { name: sbomName })).toBeVisible();
+    await layout.verifyPageHeader(sbomName);
 
     return new SbomDetailsPage(page, layout);
   }
