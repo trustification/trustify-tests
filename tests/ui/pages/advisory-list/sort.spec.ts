@@ -3,7 +3,7 @@
 import { test } from "@playwright/test";
 
 import { login } from "../../helpers/Auth";
-import { expectSort } from "../Constants";
+import { expectSort } from "../Helpers";
 import { AdvisoryListPage } from "./AdvisoryListPage";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {

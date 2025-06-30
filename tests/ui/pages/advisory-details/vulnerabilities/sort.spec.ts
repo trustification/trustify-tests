@@ -4,7 +4,7 @@ import { test } from "@playwright/test";
 
 import { login } from "../../../helpers/Auth";
 import { VulnerabilitiesTab } from "./VulnerabilitiesTab";
-import { expectSort } from "../../Constants";
+import { expectSort } from "../../Helpers";
 
 test.describe("Sort validations", { tag: "@tier1" }, () => {
   test.beforeEach(async ({ page }) => {
