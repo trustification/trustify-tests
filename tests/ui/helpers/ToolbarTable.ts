@@ -277,8 +277,8 @@ export class ToolbarTable {
     const tableData: string[][] = [];
     await this.goToFirstPage(parentElem);
     while (isNextPageEnabled) {
-      const vuln_table = await this.getTable();
-      const allRows = await vuln_table.locator(`tr`).all();
+      const table_data = await this.getTable();
+      const allRows = await table_data.locator(`tr`).all();
       for (const row of allRows) {
         const rowData = await row.locator(`th, td`).allTextContents();
         tableData.push(rowData);
@@ -422,10 +422,9 @@ export class ToolbarTable {
    * @param parentElem ParentElement for Pagination
    * @param columnHeaders List of column headers to be verified
    */
-  async verifySorting(parentElem: string, columnHeaders: string[]) {
-    const perPageValue = "100";
+  async verifySorting(parentElem: string, columnHeaders: string[], perPageCount: string = "100") {
     await this.waitForTableContent();
-    await this.selectPerPage(parentElem, perPageValue);
+    await this.selectPerPage(parentElem, perPageCount);
     for (let header of columnHeaders) {
       for (let order of [`ascending`, `descending`]) {
         const sorted = await this.sortColumn(header, order);

@@ -59,10 +59,10 @@ Feature: SBOM Explorer - View SBOM details
         Then The Package table total results is greather than 1
 
         Examples:
-            | sbomType | sbomName    | packageName |
-            | SPDX | quarkus-bom | jdom        |
+            | sbomName    | packageName |
+            | quarkus-bom | jdom        |
 
-    Scenario Outline: View <sbomType> SBOM Vulnerabilities
+    Scenario Outline: View SBOM Vulnerabilities
         Given An ingested SBOM "<sbomName>" containing Vulnerabilities
         When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Vulnerabilities"
@@ -76,30 +76,30 @@ Feature: SBOM Explorer - View SBOM details
         Then List of related Vulnerabilities should be sorted by "Id" in ascending order
 
         Examples:
-        | sbomType | sbomName |
-        | SPDX | quarkus-bom |
+        | sbomName |
+        | quarkus-bom |
 
     @slow
-    Scenario Outline: Pagination of <sbomType> SBOM Vulnerabilities
+    Scenario Outline: Pagination of SBOM Vulnerabilities table
         Given An ingested SBOM "<sbomName>" containing Vulnerabilities
         When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Vulnerabilities"
         Then Pagination of Vulnerabilities list works
         Examples:
-        | sbomType | sbomName |
-        | SPDX | quarkus-bom |
+        | sbomName |
+        | quarkus-bom |
 
     @slow
-    Scenario Outline: View paginated list of <sbomType> SBOM Packages
+    Scenario Outline: View paginated list of SBOM Packages
         Given An ingested SBOM "<sbomName>" is available
         When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Packages"
         Then Pagination of Packages list works
         Examples:
-        | sbomType | sbomName |
-        | SPDX | quarkus-bom |
+        | sbomName |
+        | quarkus-bom |
 
-    Scenario Outline: Columns in list of SBOM Vulnerabilities
+    Scenario Outline: Check Column Headers of SBOM Explorer Vulnerabilities table
         Given An ingested SBOM "<sbomName>" containing Vulnerabilities
         When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Vulnerabilities"
@@ -110,11 +110,11 @@ Feature: SBOM Explorer - View SBOM details
         Then List of Vulnerabilities has column "Published"
         Then List of Vulnerabilities has column "Updated"
         Examples:
-        | sbomType | sbomName |
-        | SPDX | quarkus-bom |
+        | sbomName |
+        | quarkus-bom |
 
     @slow
-    Scenario Outline: Sorting <sbomType> SBOM Vulnerabilities
+    Scenario Outline: Sorting SBOM Vulnerabilities
         Given An ingested SBOM "<sbomName>" containing Vulnerabilities
         When User visits SBOM details Page of "<sbomName>"
         When User selects the Tab "Vulnerabilities"
@@ -123,5 +123,5 @@ Feature: SBOM Explorer - View SBOM details
         #Then Sorting of "CVSS" Columns works
         # Bug: https://issues.redhat.com/browse/TC-2598
         Examples:
-        | sbomType | sbomName |
-        | SPDX | quarkus-bom |
+        | sbomName |
+        | quarkus-bom |
