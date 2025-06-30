@@ -422,7 +422,11 @@ export class ToolbarTable {
    * @param parentElem ParentElement for Pagination
    * @param columnHeaders List of column headers to be verified
    */
-  async verifySorting(parentElem: string, columnHeaders: string[], perPageCount: string = "100") {
+  async verifySorting(
+    parentElem: string,
+    columnHeaders: string[],
+    perPageCount: string = "100"
+  ) {
     await this.waitForTableContent();
     await this.selectPerPage(parentElem, perPageCount);
     for (let header of columnHeaders) {
