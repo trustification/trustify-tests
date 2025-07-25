@@ -8,3 +8,4 @@ node_modules/
 
 .devcontainer/devcontainer.json
 .features-gen/
+/.nyc_output/
