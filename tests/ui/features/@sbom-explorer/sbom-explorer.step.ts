@@ -3,8 +3,9 @@ import { expect } from "playwright/test";
 import { DetailsPage } from "../../helpers/DetailsPage";
 import { ToolbarTable } from "../../helpers/ToolbarTable";
 import { SearchPage } from "../../helpers/SearchPage";
+import { test } from "../../fixtures";
 
-export const { Given, When, Then } = createBdd();
+export const { Given, When, Then } = createBdd(test);
 
 const PACKAGE_TABLE_NAME = "Package table";
 const VULN_TABLE_NAME = "Vulnerability table";
