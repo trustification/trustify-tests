@@ -22,13 +22,19 @@ export class SearchPage {
     await detailsPage.waitForData();
     await detailsPage.verifyDataAvailable();
     await this.page
-      .getByPlaceholder("Search for an SBOM, Package, or Vulnerability")
+      .getByPlaceholder(
+        "Search for an SBOM, Package, Advisory, or Vulnerability"
+      )
       .click();
     await this.page
-      .getByPlaceholder("Search for an SBOM, Package, or Vulnerability")
+      .getByPlaceholder(
+        "Search for an SBOM, Package, Advisory, or Vulnerability"
+      )
       .fill(data);
     await this.page
-      .getByPlaceholder("Search for an SBOM, Package, or Vulnerability")
+      .getByPlaceholder(
+        "Search for an SBOM, Package, Advisory, or Vulnerability"
+      )
       .press("Enter");
     await detailsPage.selectTab(type);
   }
