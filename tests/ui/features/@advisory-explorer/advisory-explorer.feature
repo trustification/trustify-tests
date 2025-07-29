@@ -64,7 +64,7 @@ Feature: Advisory Explorer
         And User selects the Tab "Vulnerabilities"
 
         Then The vulnerabilities table is sorted by "ID"
-        And The vulnerabilites table total results is 1
+        And The vulnerabilities table total results is 1
         And The "ID" column of the vulnerability table contains "<vulnerabilityID>"
         And The "Title" column of the vulnerability table contains "vulnerabilityTitle"
         And The "Discovery" column of the vulnerability table contains "<vulnerabilityDiscovery>"

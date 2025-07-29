@@ -34,12 +34,15 @@ Then("Tab {string} is not visible", async ({ page }, tabName) => {
   await pageWithTabs.verifyTabIsNotVisible(tabName);
 });
 
-Then("File with the name {string} is downloaded", async ({ page }, expectedFilename) => {
-  const downloadPromise = page.waitForEvent("download");
-  const download = await downloadPromise;
-  const actualFilename = download.suggestedFilename();
-  expect(actualFilename).toEqual(expectedFilename);
-});
+Then(
+  "File with the name {string} is downloaded",
+  async ({ page }, expectedFilename) => {
+    const downloadPromise = page.waitForEvent("download");
+    const download = await downloadPromise;
+    const actualFilename = download.suggestedFilename();
+    expect(actualFilename).toEqual(expectedFilename);
+  }
+);
 
 When("User selects the Tab {string}", async ({ page }, tabName) => {
   const detailsPage = new DetailsPage(page);
