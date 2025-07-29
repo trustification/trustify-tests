@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 export const login = async (page: Page) => {
   let shouldLogin = process.env.TRUSTIFY_AUTH_ENABLED;
@@ -7,12 +7,12 @@ export const login = async (page: Page) => {
     let userName = process.env.TRUSTIFY_AUTH_USER ?? "admin";
     let userPassword = process.env.TRUSTIFY_AUTH_PASSWORD ?? "admin";
 
-    await page.goto("/");
+    await page.goto("/upload");
 
     await page.fill('input[name="username"]:visible', userName);
     await page.fill('input[name="password"]:visible', userPassword);
     await page.keyboard.press("Enter");
 
-    await page.waitForSelector("text=Dashboard"); // Ensure login was successful
+    await expect(page.getByRole("heading", { name: "Upload" })).toHaveCount(1); // Ensure login was successful
   }
 };
