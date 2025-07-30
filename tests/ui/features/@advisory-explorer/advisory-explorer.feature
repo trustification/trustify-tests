@@ -11,7 +11,7 @@ Feature: Advisory Explorer
 
         Examples:
             | advisoryID      |
-            | CVE-2023-1664   |
+            | CVE-2024-26308  |
     
     Scenario: Search for an advisory using the dedicated search bar
 
@@ -21,7 +21,7 @@ Feature: Advisory Explorer
 
         Examples:
             | advisoryID      |
-            | CVE-2023-1664   |
+            | CVE-2024-26308  |
 
     # Advisory Explorer
     Scenario: Display an overview of an advisory
@@ -33,7 +33,7 @@ Feature: Advisory Explorer
 
         Examples:
             | advisoryID      |
-            | CVE-2023-1664   |
+            | CVE-2024-26308  |
 
     Scenario: Download an advisory
 
@@ -43,8 +43,8 @@ Feature: Advisory Explorer
         Then File with the name "<fileName>" is downloaded
 
         Examples:
-            | advisoryID      | fileName                                   |
-            | CVE-2023-1664   | https___www.redhat.com_#CVE-2023-1664.json |
+            | advisoryID      | fileName            |
+            | CVE-2024-26308  | CVE-2024-26308.json |
 
     Scenario: Display the Info tab
 
@@ -56,7 +56,7 @@ Feature: Advisory Explorer
 
         Examples:
             | advisoryID      |
-            | CVE-2023-1664   |
+            | CVE-2024-26308  |
 
     Scenario: Display the Vulnerabilities tab
         
@@ -66,12 +66,12 @@ Feature: Advisory Explorer
         Then The vulnerabilities table is sorted by "ID"
         And The vulnerabilities table total results is 1
         And The "ID" column of the vulnerability table contains "<vulnerabilityID>"
-        And The "Title" column of the vulnerability table contains "vulnerabilityTitle"
+        And The "Title" column of the vulnerability table contains "<vulnerabilityTitle>"
         And The "Discovery" column of the vulnerability table contains "<vulnerabilityDiscovery>"
         And The "Release" column of the vulnerability table contains "<vulnerabilityRelease>"
         And The "Score" column of the vulnerability table contains "<vulnerabilityScore>"
         And The "CWE" column of the vulnerability table contains "<vulnerabilityCWE>"
 
         Examples:
-            | vulnerabilityID | vulnerabilityTitle              | vulnerabilityDiscovery    | vulnerabilityRelease  | vulnerabilityScore | vulnerabilityCWE |
-            | CVE-2023-1664   | A flaw was found in Keycloak.   |                           |                       | Medium (6.5)       | CWE-295          |
+            | advisoryID    | vulnerabilityID | vulnerabilityTitle                                          | vulnerabilityDiscovery    | vulnerabilityRelease  | vulnerabilityScore | vulnerabilityCWE |
+            | CVE-2023-3223 | CVE-2023-3223   | undertow: OutOfMemoryError due to @MultipartConfig handling | May 24, 2023              | Aug 07, 2023          |                    | CWE-789          |
