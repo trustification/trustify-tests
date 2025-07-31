@@ -64,17 +64,17 @@ Scenario: Display notes about a single advisory
 Scenario: Display vulnerabilities tied to a single advisory
     Given User is on the Home page
     When User navigates to the Advisory Explorer page
-    And User navigates to the Vulnerabilites tab on the Advisory Overview page
+    Then User visits Advisory details Page of "<advisoryName>"
+    Then User navigates to the Vulnerabilites tab on the Advisory Overview page
     Then A list of all active vulnerabilites tied to the advisory should display
     And The ID, Title, Discovery, Release, Score and CWE information should be visible for each vulnerability
     And The vulnerabilities should be sorted by ID by default
-    And Each vulnerability should be expandable
+    And User visits Vulnerability details Page of "<vulnerabilityID>" by clicking it
 
-Scenario: Display detailed information about a single vulnerability tied to a single advisory
+Scenario: Pagination of Vulnerabilities
     Given User is on the Home page
     When User navigates to the Advisory Explorer page
     And User navigates to the Vulnerabilites tab on the Advisory Overview page
-    And User expands the row of a selected vulnerability
-    Then A list of all affected products, separated by status, should display
-    And Each product should display a link to a remediation
-    And All notes on a vulnerability should be displayed underneath the list of products
+    Then Pagination of Vulnerabilities list works
+
+
