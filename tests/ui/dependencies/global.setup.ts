@@ -16,7 +16,7 @@ setup.describe("Ingest initial data", () => {
   setup("Upload files", async ({ page, baseURL }) => {
     await login(page);
 
-    await page.goto(baseURL!);    
+    await page.goto(baseURL!);
 
     setup.setTimeout(SETUP_TIMEOUT);
     await uploadSboms(page, SBOM_FILES);
