@@ -8,8 +8,6 @@ export const { Given, When, Then } = createBdd();
 const VULN_TABLE_NAME = "vulnerability table";
 const COLUMN_LABELS = ["ID", "Title", "Discovery", "Release", "Score", "CWE"];
 
-
-
 Given(
   "User visits Advisory details Page of {string}",
   async ({ page }, advisoryName) => {
@@ -40,7 +38,7 @@ Then(
         "#vulnerability-table-pagination-top .pf-v6-c-pagination__page-menu"
       )
       .first();
-    
+
     await expect(totalItemsLocator).toBeVisible();
 
     const totalText = await totalItemsLocator.textContent();
@@ -92,4 +90,3 @@ Then(
     ).toBeVisible();
   }
 );
-

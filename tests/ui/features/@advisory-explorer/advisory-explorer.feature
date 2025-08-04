@@ -13,5 +13,5 @@ Scenario: Display vulnerabilities tied to a single advisory
 
     Examples:
         | advisoryName    | vulnerabilityID | 
-        | GHSA-526j-mv3p-f4vv | CVE-2025-54379   | 
+        | cve-2022-45787 | cve-2022-45787  | 
 
