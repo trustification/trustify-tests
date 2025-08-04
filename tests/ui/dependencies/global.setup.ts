@@ -16,8 +16,7 @@ setup.describe("Ingest initial data", () => {
   setup("Upload files", async ({ page, baseURL }) => {
     await login(page);
 
-    await page.goto(baseURL!);
-    await page.getByRole("link", { name: "Upload" }).click();
+    await page.goto(baseURL!);    
 
     setup.setTimeout(SETUP_TIMEOUT);
     await uploadSboms(page, SBOM_FILES);
@@ -26,7 +25,8 @@ setup.describe("Ingest initial data", () => {
 });
 
 const uploadSboms = async (page: Page, files: string[]) => {
-  await page.getByRole("tab", { name: "SBOM" }).click();
+  await page.getByRole("link", { name: "SBOMs" }).click();
+  await page.getByRole("button", { name: "Upload SBOM" }).click();
 
   const fileChooserPromise = page.waitForEvent("filechooser");
   await page.getByRole("button", { name: "Upload", exact: true }).click();
@@ -43,7 +43,8 @@ const uploadSboms = async (page: Page, files: string[]) => {
 };
 
 const uploadAdvisories = async (page: Page, files: string[]) => {
-  await page.getByRole("tab", { name: "Advisory" }).click();
+  await page.getByRole("link", { name: "Advisories" }).click();
+  await page.getByRole("button", { name: "Upload Advisory" }).click();
 
   const fileChooserPromise = page.waitForEvent("filechooser");
   await page.getByRole("button", { name: "Upload", exact: true }).click();
