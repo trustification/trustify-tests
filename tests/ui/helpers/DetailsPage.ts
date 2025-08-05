@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 
 /**
  * Describes the Details of an Entity. E.g. SBOM Details Page.
@@ -152,5 +152,64 @@ export class DetailsPage {
       }
     }
     return counts;
+  }
+
+  /**
+   * To click on Edit labels button on Details page
+   */
+  async editLabelsDetailsPage() {
+    await this.selectTab(`Info`);
+    await this.page.getByRole("button", { name: "Edit" }).click();
+  }
+
+  /**
+   * To add labels to edit model window
+   * @param labels List of labels to add to the entity
+   */
+  async addLabels(labelList: string) {
+    let labels = labelList.split(",").map((label) => label.trim());
+    await this.page.getByText("Edit labels").isVisible();
+    for (let label of labels) {
+      await this.page.getByPlaceholder("Add label").fill(label);
+      await this.page.getByPlaceholder("Add label").press("Enter");
+    }
+    await this.page.getByLabel("submit").click();
+  }
+
+  /**
+   * To verify the given labels exist with the Entity
+   * @param labels List of expected labels
+   * @param entity Entity name to which the Labels needs to be verified
+   * @param parentElem Parent element to identify the Labels element - Defaults to List page table rows
+   */
+  async verifyLabels(
+    labelList: string,
+    entity: string = "",
+    parentElem: Locator | undefined = undefined
+  ) {
+    let labels = labelList.split(",").map((label) => label.trim());
+    if (!parentElem) {
+      parentElem = this.page.locator(`xpath=//td[.='${entity}']/parent::tr/td`);
+    }
+    //Waiting for Edit label modal window to close
+    let editLabels = await this.page.getByText("Edit labels");
+    await editLabels.waitFor({ state: "hidden", timeout: 5000 });
+    let moreElem = await parentElem.getByRole("button", { name: "more" });
+    if (await moreElem.isVisible()) {
+      await moreElem.click();
+    }
+    let labelText = `xpath=//ul[@aria-label='Label group category']/li`;
+    let labelElement0 = await parentElem.locator(
+      `xpath=//ul[@aria-label='Label group category']/li[.="${labels[0]}"]`
+    );
+    await labelElement0.waitFor({ state: "visible", timeout: 5000 });
+    let labelElements = await parentElem.locator(labelText).all();
+    for (let elem of labelElements) {
+      let labelUI = await elem.innerText();
+      labels = labels.filter((label) => label !== labelUI);
+    }
+    expect(labels.length, `Labels missing from the given list ${labels}`).toBe(
+      0
+    );
   }
 }
