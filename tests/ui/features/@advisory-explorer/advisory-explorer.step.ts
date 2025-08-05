@@ -13,7 +13,7 @@ Given(
   async ({ page }, advisoryName) => {
     const searchPage = new SearchPage(page, "Advisories");
     await searchPage.dedicatedSearch(advisoryName);
-    await page.getByRole("link", { name: advisoryName, exact: true }).click();
+    await page.getByRole("link", { name: advisoryName }).click();
   }
 );
 

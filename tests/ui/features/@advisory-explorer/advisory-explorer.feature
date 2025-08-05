@@ -13,5 +13,5 @@ Scenario: Display vulnerabilities tied to a single advisory
 
     Examples:
         | advisoryName    | vulnerabilityID | 
-        | cve-2022-45787 | cve-2022-45787  | 
+        | CVE-2023-3223 | CVE-2023-3223  | 
 
