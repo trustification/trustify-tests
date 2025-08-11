@@ -92,7 +92,7 @@ Then('the user should be able to filter {string}', async ({page}, arg: string) =
     await table.verifyColumnDoesNotContainText("Name","quarkus-bom");
     await table.clearFilter();
     await table.verifyColumnContainsText("Name","quarkus-bom");
-  }else if (arg === "Vulnerabilities" || arg === "Advisories"){
+  }else if (arg === "Vulnerabilities"){
     await page.getByLabel('Critical').check();
     await table.verifyColumnDoesNotContainText("ID","CVE-2022-45787");
     await table.clearFilter();
@@ -102,6 +102,11 @@ Then('the user should be able to filter {string}', async ({page}, arg: string) =
     await table.verifyColumnDoesNotContainText("Name","mariadb");
     await table.clearFilter();
     await table.verifyColumnContainsText("Name","mariadb");
+  }else if (arg === "Advisories"){
+    await table.filterByDate("12/22/2022","12/22/2025");
+    await table.verifyColumnDoesNotContainText("ID","CVE-2022-45787");
+    await table.clearFilter();
+    await table.verifyColumnContainsText("ID","CVE-2022-45787");
   }
 });
 
@@ -141,9 +146,11 @@ Then('the {string} list should be sortable', async ({page}, arg: string) => {
 
   for (const column of columns) {
     console.log(`Sorting by column: ${column}`);
-    await table.sortByColumn(column,"ascending");
+    await table.sortTable() 
     expect(await table.isColumnSorted(column,"ascending")).toEqual(true);
+    await page.screenshot({path: `./screenshots/sort-ascending.png`});
     await table.sortByColumn(column,"descending");
+    await page.screenshot({path: `./screenshots/sort-descending.png`});
     expect(await table.isColumnSorted(column,"descending")).toEqual(true);
   }
 });

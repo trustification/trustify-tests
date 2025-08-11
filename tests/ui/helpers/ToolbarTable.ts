@@ -481,10 +481,10 @@ export class ToolbarTable {
     await expect(link).toBeVisible({timeout: 60000});
     await link.click();
     if (type === "SBOMs") {
-      await expect(table.locator("text=Download SBOM")).toBeVisible();
-      await expect(table.locator("text=Download License Report")).toBeVisible();
+      await expect(this._page.locator("text=Download SBOM")).toBeVisible();
+      await expect(this._page.locator("text=Download License Report")).toBeVisible();
     }else {
-      await expect(table.locator("text=Download")).toBeVisible();
+      await expect(this._page.locator("text=Download")).toBeVisible();
     }
   }
 
@@ -529,34 +529,6 @@ export class ToolbarTable {
     await table.locator(`td[data-label="${columnName}"]`).getByText(name).first().click();
   }
 
-  /**
-   * Clicks on the table header to sort the column
-   * @param columnName Name of the column to sort
-   */
-  async sortByColumn(columnName: string, order:string = "ascending") {
-    const table = this.getTable();
-    const column = table.locator(`th`, { hasText: columnName });
-    if ((order === "ascending") && (await column.getAttribute('aria-sort') !== "ascending")) {
-      await column.click();
-    } else {
-      for (let i = 0; i < 2; i++) {
-        if (await column.getAttribute('aria-sort') !== "descending") {
-          await column.click();
-        }
-        else {
-          break;
-        }
-      }
-    }
-  }
-
-  async isColumnSorted(columnName: string, order: string) {
-    const table = this.getTable();
-    const column = table.locator(`th`, { hasText: columnName });
-    const sorted = await column.getAttribute('aria-sort');
-
-    return sorted === order;
-  }
 
   async switchToPage(page:number){
     const table = this.getTable();

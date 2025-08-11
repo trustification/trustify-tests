@@ -30,15 +30,15 @@ Scenario Outline: User toggles the <types> list and manipulates the list
 	# |Vulnerabilities|
 	# |Advisories|
 
-# Scenario Outline: Download Links on the <types> Search Result list
-# 	When User selects the Tab "<types>" 
-# 	Then Tab "<types>" is visible
-# 	And Download link should be available for the "<types>" list
+Scenario Outline: Download Links on the <types> Search Result list
+	When User selects the Tab "<types>" 
+	Then Tab "<types>" is visible
+	And Download link should be available for the "<types>" list
 	
-#         Examples:
-# 	|types|
-# 	|SBOMs|
-# 	|Advisories|
+        Examples:
+	|types|
+	|SBOMs|
+	|Advisories|
 
 # Scenario Outline: Autofill shows results matched on <input> 
 # 	When user starts typing a "<input>" in the search bar  
@@ -51,23 +51,23 @@ Scenario Outline: User toggles the <types> list and manipulates the list
 # 	|CVE-2022-45575|
 # 	|Certain NETGEAR devices|
 
-# Scenario: Search bar should not preview anything when no matches are found 
-# 	And user starts typing a "non-existent name" in the search bar
-# 	Then The autofill drop down should not show any values
+Scenario: Search bar should not preview anything when no matches are found 
+	And user starts typing a "non-existent name" in the search bar
+	Then The autofill drop down should not show any values
 
-# Scenario Outline: User searches for a specific "<type>"
-#  	When user types a "<type-name>" in the search bar
-#  	And user presses Enter
-# 	And User selects the Tab "<types>" 
-#  	Then the "<types>" list should display the specific "<type-name>"
-# 	And the list should be limited to 10 items or less
-#  	And the user should be able to filter "<types>" 
-#  	And user clicks on the "<type-name>" "<type>" link
-#  	And the user should be navigated to the specific "<type-name>" page 
+Scenario Outline: User searches for a specific "<type>"
+ 	When user types a "<type-name>" in the search bar
+ 	And user presses Enter
+	And User selects the Tab "<types>" 
+ 	Then the "<types>" list should display the specific "<type-name>"
+	And the list should be limited to 10 items or less
+ 	And the user should be able to filter "<types>" 
+ 	And user clicks on the "<type-name>" "<type>" link
+ 	And the user should be navigated to the specific "<type-name>" page 
 
-# 	Examples:
-# 	|type|types|type-name|
-# 	|SBOM|SBOMs|quarkus-bom|
-# 	|CVE|Vulnerabilities|CVE-2022-45787|
-# 	|Package|Packages|mariadb|
-# 	|Advisory|Advisories|CVE-2022-45787|
+	Examples:
+	|type|types|type-name|
+	|SBOM|SBOMs|quarkus-bom|
+	|CVE|Vulnerabilities|CVE-2022-45787|
+	|Package|Packages|mariadb|
+	|Advisory|Advisories|CVE-2022-45787|
