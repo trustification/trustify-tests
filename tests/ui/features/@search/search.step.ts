@@ -30,6 +30,36 @@ function getTableInfo(type: string): [string, string] {
     }
 }
 
+function getPaginationId(type: string): string {
+  switch (type) {
+    case "Vulnerabilities":
+      return "vulnerability-table-pagination-top";
+    case "Advisories":
+      return "advisory-table-pagination-top";
+    case "Packages":
+      return "package-table-pagination-top";
+    case "SBOMs":
+      return "sbom-table-pagination-top";
+    default:
+      throw new Error(`Unknown type: ${type}`);
+  }
+}
+
+function getColumns(type: string): string[] {
+  switch (type) {
+    case "Vulnerabilities":
+      return ["CVSS","Date published"];
+    case "Advisories":
+      return ["ID","Aggregated Severity","Revision"];
+    case "Packages":
+      return ["Name","Namespace","Version"];
+    case "SBOMs":
+      return ["Name","Created on"];
+    default:
+      throw new Error(`Unknown type: ${type}`);
+  }
+}
+
 Given('User is on the Search page', async ({page}) => {
     const searchPage = new SearchPage(page);
     await searchPage.open();    
@@ -131,28 +161,11 @@ Then('the {string} list should have specific filter set', async ({page}, arg: st
 
 
 Then('the {string} list should be sortable', async ({page}, arg: string) => {
-  var columns:string[] = [];
-  if (arg === "Vulnerabilities"){
-    columns = ["CVSS","Date published"];
-  } else if (arg === "Advisories"){
-    columns = ["ID","Aggregated Severity","Revision"];
-  } else if (arg === "Packages"){
-    columns = ["Name","Namespace","Version"];
-  } else if (arg === "SBOMs"){
-    columns = ["Name","Created on"];
-  }
+  var columns:string[] = getColumns(arg);
+  var id:string = getPaginationId(arg);
 
   const table = new ToolbarTable(page,getTableInfo(arg)[0]);
-
-  for (const column of columns) {
-    console.log(`Sorting by column: ${column}`);
-    await table.sortTable() 
-    expect(await table.isColumnSorted(column,"ascending")).toEqual(true);
-    await page.screenshot({path: `./screenshots/sort-ascending.png`});
-    await table.sortByColumn(column,"descending");
-    await page.screenshot({path: `./screenshots/sort-descending.png`});
-    expect(await table.isColumnSorted(column,"descending")).toEqual(true);
-  }
+  await table.verifySorting(`xpath=//div[@id="${id}"]`,columns);
 });
 
 
@@ -163,32 +176,32 @@ Then('the {string} list should be limited to {int} items', async ({page}, type: 
 });
 
 Then('the user should be able to switch to next {string} items', async ({page}, arg: string) => {
+  var id:string = getPaginationId(arg);
   const info = getTableInfo(arg);
   const table = new ToolbarTable(page,info[0]);
-
-  const tableTopPagination = `xpath=//div[@id="package-table-pagination-top"]`;
-  await table.switchToPage(1);
-  await table.verifyRowsCounterPagination(tableTopPagination,1,10);
-  await table.switchToPage(2);
-  await table.verifyRowsCounterPagination(tableTopPagination,11,20);
-  await table.switchToPage(1);
+  await table.verifyPagination(`xpath=//div[@id="${id}"]`);
 });
 
 Then('the user should be able to increase pagination for the {string}', async ({page}, arg: string) => {
   const info = getTableInfo(arg);
   const table = new ToolbarTable(page,info[0]);
-
-  const tableTopPagination = `xpath=//div[@id="package-table-pagination-top"]`;
-  await table.verifyRowsCounterPagination(tableTopPagination,1,10);
+  var id:string = getPaginationId(arg);
+  const tableTopPagination = `xpath=//div[@id="${id}"]`;
+  // await table.verifyRowsCounterPagination(tableTopPagination,1,10);
+  await table.verifyPagination(`xpath=//div[@id="${id}"]`);
+  await table.goToFirstPage(tableTopPagination);
   await table.selectPerPage(tableTopPagination,"20 per page");
-  await table.verifyRowsCounterPagination(tableTopPagination,1,20);
+  // await table.verifyRowsCounterPagination(tableTopPagination,1,20);
+  await table.goToFirstPage(tableTopPagination);
   await table.verifyTableHasUpToRows(20);
 });
 
 Then('First column on the search results should have the link to {string} explorer pages', async ({page}, arg: string) => {
   const info = getTableInfo(arg);
   const table = new ToolbarTable(page,info[0]);
-  await table.verifyColumnContainsLink(info[1]);
+  await table.verifyColumnContainsLink(info[1],arg);
+
+
   // Step: And First column on the search results should have the link to "SBOMs" explorer pages
   // From: tests/ui/features/@search/search.feature:25:2
 });

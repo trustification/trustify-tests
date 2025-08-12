@@ -328,19 +328,23 @@ export class ToolbarTable {
     if (index < 0) {
       fail("Given header not found");
     }
-    for (const data of dataRow) {
-      if (data[index] !== ``) {
-        row += 1;
-        break;
-      }
+    // Find the first row that has a non-empty value in the target column
+    const firstNonEmptyRowIndex = dataRow.findIndex(
+      (r) => r && r[index] !== undefined && r[index] !== ""
+    );
+    if (firstNonEmptyRowIndex !== -1) {
+      row = firstNonEmptyRowIndex;
     }
-    let isDate = this.isValidDate(dataRow[row][index]);
-    let isCVSS = this.isCVSS(dataRow[row][index]);
-    let isCVE = this.isCVE(dataRow[row][index]);
+    // Safely detect the type from the discovered row (if any)
+    const sampleValue = dataRow[row] ? dataRow[row][index] : "";
+    let isDate = this.isValidDate(sampleValue);
+    let isCVSS = this.isCVSS(sampleValue);
+    let isCVE = this.isCVE(sampleValue);
     const sortedRows = [...dataRow].sort((rowA, rowB) => {
       let compare: any;
-      let valueA = rowA[index];
-      let valueB = rowB[index];
+      // Guard against missing cells; default to empty string for safe comparisons
+      let valueA = rowA[index] ?? "";
+      let valueB = rowB[index] ?? "";
       if (isDate) {
         let dateA = new Date(valueA);
         let dateB = new Date(valueB);
@@ -494,7 +498,7 @@ export class ToolbarTable {
    */
   async verifyTableHasUpToRows(rows: number) {
     const table = this.getTable();
-    await expect(await table.locator("tbody tr").count()).toBeLessThanOrEqual(rows);
+    expect(await table.locator("tbody tr").count()).toBeLessThanOrEqual(rows);
   }
 
   /**
@@ -530,17 +534,20 @@ export class ToolbarTable {
   }
 
 
-  async switchToPage(page:number){
-    const table = this.getTable();
-    const input = table.locator('input[aria-label="Current page"]');
-    await input.fill(page.toString());
-    await input.press("Enter");
+  async goToNextPage() {
+    const nextPage = this._page.locator('button[aria-label="Go to next page"]');
+    await nextPage.click();
   }
 
-  async verifyColumnContainsLink(columnName: string) {
+  async goToPreviousPage() {
+    const previousPage = this._page.locator('button[aria-label="Go to previous page"]');
+    await previousPage.click();
+  }
+
+  async verifyColumnContainsLink(columnName: string, keyword: string) {
     const table = this.getTable();
-    const field = table.locator(`td[data-label="${columnName}"]`);
-    const link = field.locator("a");
+    const field = table.locator(`td[data-label="${columnName}"]`).first();
+    const link = field.locator(`a[href*="${keyword.toLowerCase()}"]`);
     await expect(link).toBeVisible();
   }
 
