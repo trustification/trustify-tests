@@ -97,7 +97,7 @@ Feature: SBOM Explorer - View SBOM details
         Then Pagination of Packages list works
         Examples:
         | sbomName |
-        | quarkus-bom |
+        | ubi9-minimal-container |
 
     Scenario Outline: Check Column Headers of SBOM Explorer Vulnerabilities table
         Given An ingested SBOM "<sbomName>" containing Vulnerabilities
