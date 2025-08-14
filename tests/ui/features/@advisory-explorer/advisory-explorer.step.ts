@@ -6,7 +6,6 @@ import { SearchPage } from "../../helpers/SearchPage";
 export const { Given, When, Then } = createBdd();
 
 const VULN_TABLE_NAME = "vulnerability table";
-const COLUMN_LABELS = ["ID", "Title", "Discovery", "Release", "Score", "CWE"];
 
 Given(
   "User visits Advisory details Page of {string}",
@@ -51,9 +50,10 @@ Then(
 );
 
 Then(
-  "The ID, Title, Discovery, Release, Score and CWE information should be visible for each vulnerability",
-  async ({ page }) => {
-    for (const label of COLUMN_LABELS) {
+  "The {string} information should be visible for each vulnerability",
+  async ({ page }, headers) => {
+    const headersArr = headers.split(`,`).map((column) => column.trim());
+    for (const label of headersArr) {
       const header = page.getByRole("columnheader", { name: label });
       if (await header.count()) {
         await expect(header).toBeVisible();
