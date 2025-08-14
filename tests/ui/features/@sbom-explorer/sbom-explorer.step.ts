@@ -8,6 +8,7 @@ export const { Given, When, Then } = createBdd();
 
 const PACKAGE_TABLE_NAME = "Package table";
 const VULN_TABLE_NAME = "Vulnerability table";
+const SBOM_TABLE_NAME = "sbom-table";
 
 Given("An ingested SBOM {string} is available", async ({ page }, sbomName) => {
   const searchPage = new SearchPage(page, "SBOMs");
@@ -187,3 +188,40 @@ Then("Sorting of {string} Columns Works", async ({ page }, columnHeaders) => {
   const vulnTableTopPagination = `xpath=//div[@id="vulnerability-table-pagination-top"]`;
   await toolbarTable.verifySorting(vulnTableTopPagination, headers);
 });
+
+When(
+  "User Adds Labels {string} to {string} SBOM from List Page",
+  async ({ page }, labelList, sbomName) => {
+    const toolbarTable = new ToolbarTable(page, SBOM_TABLE_NAME);
+    await toolbarTable.editLabelsListPage(sbomName);
+    const detailsPage = new DetailsPage(page);
+    await detailsPage.addLabels(labelList);
+  }
+);
+
+Then(
+  "The Label list {string} added to the SBOM {string} on List Page",
+  async ({ page }, labelList, sbomName) => {
+    const detailsPage = new DetailsPage(page);
+    await detailsPage.verifyLabels(labelList, sbomName);
+  }
+);
+
+When(
+  "User Adds Labels {string} to {string} SBOM from Explorer Page",
+  async ({ page }, labelList, sbomName) => {
+    const detailsPage = new DetailsPage(page);
+    await detailsPage.editLabelsDetailsPage();
+    await detailsPage.addLabels(labelList);
+  }
+);
+
+Then(
+  "The Label list {string} added to the SBOM {string} on Explorer Page",
+  async ({ page }, labelList, sbomName) => {
+    const detailsPage = new DetailsPage(page);
+    await detailsPage.selectTab(`Info`);
+    let infoSection = page.locator("#refTabInfoSection");
+    detailsPage.verifyLabels(labelList, sbomName, infoSection);
+  }
+);

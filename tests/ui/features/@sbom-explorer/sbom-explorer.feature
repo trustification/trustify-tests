@@ -97,7 +97,7 @@ Feature: SBOM Explorer - View SBOM details
         Then Pagination of Packages list works
         Examples:
         | sbomName |
-        | quarkus-bom |
+        | ubi9-minimal-container |
 
     Scenario Outline: Check Column Headers of SBOM Explorer Vulnerabilities table
         Given An ingested SBOM "<sbomName>" containing Vulnerabilities
@@ -125,3 +125,20 @@ Feature: SBOM Explorer - View SBOM details
         Examples:
         | sbomName |
         | quarkus-bom |
+
+    Scenario Outline: Add Labels to SBOM from SBOM List Page
+        Given An ingested SBOM "<sbomName>" is available
+        When User Adds Labels "<Labels>" to "<sbomName>" SBOM from List Page
+        Then The Label list "<Labels>" added to the SBOM "<sbomName>" on List Page
+        Examples:
+        | sbomName | Labels |
+        | quarkus-bom | env=test, list_page, qe_sbom_test |
+
+    Scenario Outline: Add Labels to SBOM from SBOM Explorer Page
+        Given An ingested SBOM "<sbomName>" is available
+        When User visits SBOM details Page of "<sbomName>"
+        When User Adds Labels "<Labels>" to "<sbomName>" SBOM from Explorer Page
+        Then The Label list "<Labels>" added to the SBOM "<sbomName>" on Explorer Page
+        Examples:
+        | sbomName | Labels |
+        | quarkus-bom | env1=test1, explorer_page, qe_sbom_test1 |
