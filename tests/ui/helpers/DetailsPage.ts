@@ -193,7 +193,7 @@ export class DetailsPage {
     }
     //Waiting for Edit label modal window to close
     let editLabels = await this.page.getByText("Edit labels");
-    if (await editLabels.isVisible()){
+    if (await editLabels.isVisible()) {
       await editLabels.waitFor({ state: "hidden", timeout: 5000 });
     }
     let moreElem = await parentElem.getByRole("button", { name: "more" });
