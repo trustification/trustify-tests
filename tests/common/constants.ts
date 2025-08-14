@@ -94,8 +94,8 @@ export const ADVISORY_FILES = [
   "cve-2023-34454.json.bz2",
   "CVE-2023-34455-cve.json.bz2",
   "cve-2023-34455.json.bz2",
-  "CVE-2023-44487-cve.json.bz2",
-  "cve-2023-44487.json.bz2",
+  // "CVE-2023-44487-cve.json.bz2", Payload too large error
+  // "cve-2023-44487.json.bz2",
   "CVE-2023-4853-cve.json.bz2",
   "cve-2023-4853.json.bz2",
   "CVE-2024-26308-cve.json.bz2",
