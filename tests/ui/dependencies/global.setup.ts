@@ -17,7 +17,6 @@ setup.describe("Ingest initial data", () => {
     await login(page);
 
     await page.goto(baseURL!);
-    await page.getByRole("link", { name: "Upload" }).click();
 
     setup.setTimeout(SETUP_TIMEOUT);
     await uploadSboms(page, SBOM_FILES);
@@ -26,7 +25,8 @@ setup.describe("Ingest initial data", () => {
 });
 
 const uploadSboms = async (page: Page, files: string[]) => {
-  await page.getByRole("tab", { name: "SBOM" }).click();
+  await page.getByRole("link", { name: "SBOMs" }).click();
+  await page.getByRole("button", { name: "Upload SBOM" }).click();
 
   const fileChooserPromise = page.waitForEvent("filechooser");
   await page.getByRole("button", { name: "Upload", exact: true }).click();
@@ -36,14 +36,15 @@ const uploadSboms = async (page: Page, files: string[]) => {
   );
 
   await expect(
-    page.locator("#upload-sbom-tab-content .pf-v6-c-expandable-section__toggle")
+    page.locator(".pf-v6-c-expandable-section__toggle")
   ).toContainText(`${files.length} of ${files.length} files uploaded`, {
     timeout: SETUP_TIMEOUT / 2,
   });
 };
 
 const uploadAdvisories = async (page: Page, files: string[]) => {
-  await page.getByRole("tab", { name: "Advisory" }).click();
+  await page.getByRole("link", { name: "Advisories" }).click();
+  await page.getByRole("button", { name: "Upload Advisory" }).click();
 
   const fileChooserPromise = page.waitForEvent("filechooser");
   await page.getByRole("button", { name: "Upload", exact: true }).click();
@@ -53,9 +54,7 @@ const uploadAdvisories = async (page: Page, files: string[]) => {
   );
 
   await expect(
-    page.locator(
-      "#upload-advisory-tab-content .pf-v6-c-expandable-section__toggle"
-    )
+    page.locator(".pf-v6-c-expandable-section__toggle")
   ).toContainText(`${files.length} of ${files.length} files uploaded`, {
     timeout: SETUP_TIMEOUT / 2,
   });
