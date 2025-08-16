@@ -45,11 +45,32 @@ export class ToolbarTable {
     ).toHaveAttribute("aria-sort", asc ? "ascending" : "descending");
   }
 
+/**
+ * Check if specific table column contains the expected value 
+ * 
+ * @param columnName 
+ * @param expectedValue 
+ */
+
   async verifyColumnContainsText(columnName: any, expectedValue: any) {
     const table = this.getTable();
-    await expect(table.locator(`td[data-label="${columnName}"]`)).toContainText(
-      expectedValue
-    );
+    const matchingCells = table.locator(`td[data-label="${columnName}"]`).getByText(expectedValue);
+    
+    await expect(matchingCells.first()).toBeVisible({timeout: 60000});
+  }
+
+/**
+ * Check if specific table column does not contain the expected value
+ * 
+ * @param columnName 
+ * @param expectedValue 
+ */
+
+  async verifyColumnDoesNotContainText(columnName: any, expectedValue: any) {
+    const table = this.getTable();
+    const field = table.locator(`td[data-label="${columnName}"]`);
+
+    await expect(field.getByText(expectedValue)).toHaveCount(0);
   }
 
   /**
@@ -307,19 +328,23 @@ export class ToolbarTable {
     if (index < 0) {
       fail("Given header not found");
     }
-    for (const data of dataRow) {
-      if (data[index] !== ``) {
-        row += 1;
-        break;
-      }
+    // Find the first row that has a non-empty value in the target column
+    const firstNonEmptyRowIndex = dataRow.findIndex(
+      (r) => r && r[index] !== undefined && r[index] !== ""
+    );
+    if (firstNonEmptyRowIndex !== -1) {
+      row = firstNonEmptyRowIndex;
     }
-    let isDate = this.isValidDate(dataRow[row][index]);
-    let isCVSS = this.isCVSS(dataRow[row][index]);
-    let isCVE = this.isCVE(dataRow[row][index]);
+    // Safely detect the type from the discovered row (if any)
+    const sampleValue = dataRow[row] ? dataRow[row][index] : "";
+    let isDate = this.isValidDate(sampleValue);
+    let isCVSS = this.isCVSS(sampleValue);
+    let isCVE = this.isCVE(sampleValue);
     const sortedRows = [...dataRow].sort((rowA, rowB) => {
       let compare: any;
-      let valueA = rowA[index];
-      let valueB = rowB[index];
+      // Guard against missing cells; default to empty string for safe comparisons
+      let valueA = rowA[index] ?? "";
+      let valueB = rowB[index] ?? "";
       if (isDate) {
         let dateA = new Date(valueA);
         let dateB = new Date(valueB);
@@ -447,6 +472,83 @@ export class ToolbarTable {
         ).toEqual(sortedData);
       }
     }
+  }
+
+
+  /**
+   * Verifies the download link is available on the table
+   * @param type SBOMs or Advisories
+   */
+  async verifyDownloadLink(type: string) {
+    const table = this.getTable();
+    const link = table.locator('[aria-label="Kebab toggle"]').first(); 
+    await expect(link).toBeVisible({timeout: 60000});
+    await link.click();
+    if (type === "SBOMs") {
+      await expect(this._page.locator("text=Download SBOM")).toBeVisible();
+      await expect(this._page.locator("text=Download License Report")).toBeVisible();
+    }else {
+      await expect(this._page.locator("text=Download")).toBeVisible();
+    }
+  }
+
+  /**
+   * Verifies the table has up to the given number of rows
+   * @param rows Number of rows
+   */
+  async verifyTableHasUpToRows(rows: number) {
+    const table = this.getTable();
+    expect(await table.locator("tbody tr").count()).toBeLessThanOrEqual(rows);
+  }
+
+  /**
+   * Verifies the table is visible
+   */
+  async verifyTableIsVisible() {
+    const table = this.getTable();
+    await expect(table).toBeVisible({ timeout: 60000 });
+  }
+
+  /**
+   * Fills the date filter with the given date range
+   * @param from Start date in MM/DD/YYYY format
+   * @param to End date in MM/DD/YYYY format
+   */
+  async filterByDate(from: string, to: string) {
+    const fromDate = this._page.locator('input[aria-label="Interval start"]');
+    const toDate = this._page.locator('input[aria-label="Interval end"]');
+    await fromDate.fill(from);
+    await toDate.fill(to);
+  }
+
+  /**
+   * Clicks on the filter button to delete filters
+   */
+  async clearFilter() {
+    this._page.getByText("Clear all filters").click();
+  }
+
+  async openDetailsPage(name: string,columnName: string = "Name") {
+    const table = this.getTable();
+    await table.locator(`td[data-label="${columnName}"]`).getByText(name).first().click();
+  }
+
+
+  async goToNextPage() {
+    const nextPage = this._page.locator('button[aria-label="Go to next page"]');
+    await nextPage.click();
+  }
+
+  async goToPreviousPage() {
+    const previousPage = this._page.locator('button[aria-label="Go to previous page"]');
+    await previousPage.click();
+  }
+
+  async verifyColumnContainsLink(columnName: string, keyword: string) {
+    const table = this.getTable();
+    const field = table.locator(`td[data-label="${columnName}"]`).first();
+    const link = field.locator(`a[href*="${keyword.toLowerCase()}"]`);
+    await expect(link).toBeVisible();
   }
 
   private getTable() {

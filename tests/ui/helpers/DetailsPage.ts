@@ -23,7 +23,7 @@ export class DetailsPage {
   }
 
   async verifyPageHeader(header: string) {
-    await expect(this.page.getByRole("heading")).toContainText(header);
+    await expect(this.page.locator('h1')).toContainText(header);
   }
 
   async verifyTabIsSelected(tabName: string) {
