@@ -41,7 +41,7 @@ Scenario: Verify the files on downloaded SPDX SBOM license ZIP
 Scenario: Verify the headers on SPDX SBOM package License CSV file
 	Given User extracted the SPDX SBOM license compressed file
 	When User Opens the package license information file
-	Then The file should have the following headers - SBOM name, SBOM id, package name, package group, package version, package purl, package cpe and license
+	Then The file should have the following headers - SBOM name, SBOM id, package name, package group, package version, package purl, package cpe, license and license type
 
 Scenario: Verify the headers on SPDX SBOM License reference CSV file
 	Given User extracted the SPDX SBOM license compressed file
@@ -85,3 +85,25 @@ Scenario: Verify the contents on SPDX SBOM license reference CSV file
 	Given User is on license reference file
 	When User selects a license from the list of licenses
 	Then Values hasExtractedLicensingInfos section of the SPDX SBOM json should be listed under the Reference CSV file
+
+Scenario: Verify the license type for a package with single Declarared license
+	Given User is on SBOM license information file
+	When User selects a package that contains only licenseDeclared
+	Then "license type" column should be "Declared"
+
+Scenario: Verify the license type for a package with single Concluded license
+	Given User is on SBOM license information file
+	When User selects a package that contains only licenseConcluded
+	Then "license type" column should be "Concluded"
+
+Scenario: Verify two rows are exported for a package with both Declared and Concluded Licenses	
+	Given User is on SBOM license information file
+	When User selects a package that contains both licenseDeclared and licenseConcluded
+	Then Exactly two rows should exist for that package
+	And One row should have "license type" = "Declared"
+	And The other row should have "license type" = "Concluded"
+
+Scenario: Verify license type column is blank for CycloneDX SBOM export
+	Given User has downloaded the CycloneDX SBOM license CSV 
+	When User opens the package license information file
+	Then Every row in the "license type" column should be empty
