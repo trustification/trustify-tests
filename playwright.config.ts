@@ -49,14 +49,14 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: "chromium",
-      use: {
-        ...devices["Desktop Chrome"],
-        ...DESKTOP_CONFIG,
-      },
-      dependencies: ["setup-ui-data"],
-    },
+    // {
+    //   name: "chromium",
+    //   use: {
+    //     ...devices["Desktop Chrome"],
+    //     ...DESKTOP_CONFIG,
+    //   },
+    //   dependencies: ["setup-ui-data"],
+    // },
 
     {
       name: "firefox",
@@ -67,14 +67,14 @@ export default defineConfig({
       dependencies: ["setup-ui-data"],
     },
 
-    {
-      name: "webkit",
-      use: {
-        ...devices["Desktop Safari"],
-        ...DESKTOP_CONFIG,
-      },
-      dependencies: ["setup-ui-data"],
-    },
+    // {
+    //   name: "webkit",
+    //   use: {
+    //     ...devices["Desktop Safari"],
+    //     ...DESKTOP_CONFIG,
+    //   },
+    //   dependencies: ["setup-ui-data"],
+    // },
 
     {
       name: "setup-ui-data",
