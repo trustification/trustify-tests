@@ -77,6 +77,16 @@ export default defineConfig({
     },
 
     {
+      name: "playwright",
+      testDir: "./tests/ui/pages",
+      testMatch: "*.spec.ts",
+      use: {
+        ...devices["Desktop Chrome"],
+        ...DESKTOP_CONFIG,
+      },
+    },
+
+    {
       name: "setup-ui-data",
       testDir: "./tests/ui/dependencies",
       testMatch: "*.setup.ts",
